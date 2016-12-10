@@ -1,20 +1,21 @@
 @extends('layouts.app')
+@section('css')
+<style>
+  .menu_active{
+    background-color: #f60d2b;
+    border-bottom: 1px solid transparent;
+  }
+  li.menu_active a{
+    color: #fff;
+  }
+</style>
+@endsection
 @section('content')
-<section class="block-inner">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                <h1>Fashion News</h1>
-                <div class="breadcrumbs">
-                    <ul>
-                        <li><i class="pe-7s-home"></i> <a href="home-style-one.htm" title="">Home</a></li>
-                        <li><a href="#" title="">Fashion</a></li>
-                    </ul>
-                </div>
-            </div>
+            &nbsp;
         </div>
     </div>
-</section>
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
@@ -35,7 +36,7 @@
                     <button type="button" class="btn btn-style">Reade more</button>
                 </div>
             </div>
-            
+
         </div>
         <aside class="col-sm-4 left-padding">
             <div class="input-group search-area">
@@ -263,4 +264,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('javascript')
+<script>
+  $(document).ready(function(){
+    $('#menu_{{$menu->id}}').addClass('menu_active');
+  });
+</script>
 @endsection

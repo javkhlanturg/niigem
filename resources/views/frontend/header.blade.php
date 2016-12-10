@@ -124,9 +124,9 @@
         <nav class="navbar">
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                  
+
                   @foreach($menus as $item)
-                    <li><a href="{{$item->url}}" class="category04">{{$item->title}}</a> </li>
+                    <li id="menu_{{$item->id}}"><a href="{{$item->url}}" class="category04">{{$item->title}}</a> </li>
                     @endforeach
                 </ul>
             </div>

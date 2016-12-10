@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="\assets\css\flaticon.css">
     <!-- custom css -->
     <link rel="stylesheet" href="\assets\css\style.css">
+    @yield('css')
 </head>
 
 <body>
@@ -37,6 +38,7 @@
     @include('frontend.header', ['menus'=>$menus])
     @yield('content')
     @include('frontend.footer')
+
     <script type="text/javascript" src="\assets\js\jquery.min.js"></script>
     <script type="text/javascript" src="\assets\js\bootstrap.min.js"></script>
     <script type="text/javascript" src="\assets\js\metisMenu.min.js"></script>
@@ -49,6 +51,7 @@
     <script type="text/javascript" src="\assets\js\jquery-ui.js"></script>
     <script type="text/javascript" src="\assets\js\form-classie.js"></script>
     <script type="text/javascript" src="\assets\js\custom.js"></script>
+    @yield('javascript')
 </body>
 
 </html>
