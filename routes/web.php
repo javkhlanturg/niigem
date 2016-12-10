@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('/frontend/index');
+    $menus = TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get();
+    return view('/frontend/index', ['menus'=>$menus]);
 });
 
 

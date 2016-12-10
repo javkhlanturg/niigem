@@ -15,82 +15,10 @@
                         </div>
                         <!-- /input-group -->
                     </li>
-                    <li><a href="index.html">Home</a></li>
-                    <li>
-                        <a href="#">All pages<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Home <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a href="home-style-one.htm">Home style one</a> </li>
-                                    <li><a href="home-style-two.htm">Home style two</a></li>
-                                    <li><a href="home-style-three.htm">Home style three</a></li>
-                                    <li><a href="home-style-four.htm">Home style four</a></li>
-                                    <li><a href="home-style-five.htm">Home style five</a></li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            <li>
-                                <a href="#">Categories <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a href="category-style-one.htm">Category style one</a> </li>
-                                    <li><a href="category-style-two.htm">Category style two</a></li>
-                                    <li><a href="category-style-three.htm">Category style three</a></li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            <li>
-                                <a href="#">Archive <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a href="archive-one.htm">Archive style one</a> </li>
-                                    <li><a href="archive-two.htm">Archive style two</a></li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            <li>
-                                <a href="#">News <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a href="details-style-one.htm">News post one</a> </li>
-                                    <li><a href="details-style-two.htm">News post two</a></li>
-                                    <li><a href="details-style-three.htm">News post three</a></li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            <li>
-                                <a href="#">Contact <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a href="contact-style-one.htm">Contact style one</a> </li>
-                                    <li><a href="contact-style-two.htm">Contact style two</a></li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            <li><a href="login&registration.htm">Login & Registration</a></li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li><a href="#">International</a></li>
-                    <li><a href="#">Fashion</a></li>
-                    <li><a href="#">Travel</a></li>
-                    <li><a href="#">Food</a></li>
-                    <li><a href="#">Technology</a></li>
-                    <li><a href="#">Lifestyle</a></li>
-                    <li>
-                        <a href="#">Contact<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="contact-style-one.htm">Contact style one</a> </li>
-                            <li><a href="contact-style-two.htm">Contact style two</a></li>
-                        </ul>
-                    </li>
-                    <!-- social icon -->
-                    <li>
-                        <div class="social">
-                            <ul>
-                                <li><a href="#" class="facebook"><i class="fa  fa-facebook"></i> </a></li>
-                                <li><a href="#" class="twitter"><i class="fa  fa-twitter"></i></a></li>
-                                <li><a href="#" class="google"><i class="fa  fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    @foreach($menus as $item)
+                      <li><a href="{{$item->url}}">{{$item->title}}</a> </li>
+                      @endforeach
+
                 </ul>
             </div>
         </nav>
@@ -196,15 +124,9 @@
         <nav class="navbar">
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="home-style-one.htm" class="category01">HOME</a></li>
-                    <li><a href="#">ALL PAGES </a></li>
-                    <li><a href="#">INTERNATIONAL</a></li>
-                    <li><a href="category-style-two.htm" class="category04">FASHION</a></li>
-                    <li><a href="category-style-one.htm" class="category05">TRAVEL</a></li>
-                    <li><a href="#" class="category06">FOOD</a></li>
-                    <li><a href="#" class="category07">TECHNOLOGY</a></li>
-                    <li><a href="#" class="category08">LIFESTYLE</a></li>
-                    <li><a href="#">CONTACT</a></li>
+                  @foreach($menus as $item)
+                    <li><a href="{{$item->url}}" class="category04">{{$item->title}}</a> </li>
+                    @endforeach
                 </ul>
             </div>
             <!-- navbar-collapse -->
