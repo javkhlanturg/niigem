@@ -4,7 +4,7 @@
     <h1 class="page-title">
         <i class="voyager-list-add"></i> {{ $dataType->display_name_plural }}
         <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
-            <i class="voyager-plus"></i> Add New
+            <i class="voyager-plus"></i> шинээр нэмэх
         </a>
     </h1>
 @stop
@@ -16,8 +16,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="alert alert-info">
-            <strong>How To Use:</strong>
-            <p>You can output a menu anywhere on your site by calling <code>Menu::display('name')</code></p>
+            <strong>Хэрхэн ашиглах вэ:</strong>
+            <p>Хөгжүүлэгч дараах кодыг ашиглана уу <code>Menu::display('name')</code></p>
         </div>
     </div>
 
@@ -32,7 +32,7 @@
                                 @foreach($dataType->browseRows as $rows)
                                 <th>{{ $rows->display_name }}</th>
                                 @endforeach
-                                <th class="actions">Actions</th>
+                                <th class="actions">Үйлдлүүд</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,13 +49,13 @@
                                     @endforeach
                                     <td class="no-sort no-click">
                                         <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}">
-                                            <i class="voyager-trash"></i> Delete
+                                            <i class="voyager-trash"></i> Устгах
                                         </div>
                                         <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit">
-                                            <i class="voyager-edit"></i> Edit
+                                            <i class="voyager-edit"></i> Засах
                                         </a>
                                         <a href="{{ route('voyager.'.$dataType->slug.'.builder', $data->id) }}" class="btn-sm btn-success pull-right">
-                                            <i class="voyager-list"></i> Builder
+                                            <i class="voyager-list"></i> Угсрах
                                         </a>
                                     </td>
                                 </tr>
@@ -83,9 +83,9 @@
                     <form action="{{ route('voyager.'.$dataType->slug.'.index') }}" id="delete_form" method="POST">
                         {{ method_field("DELETE") }}
                         {{ csrf_field() }}
-                        <input type="submit" class="btn btn-danger pull-right delete-confirm" value="Yes, Delete This {{ $dataType->display_name_singular }}">
+                        <input type="submit" class="btn btn-danger pull-right delete-confirm" value="Тийм,  {{ $dataType->display_name_singular }} устгана">
                     </form>
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Болих</button>
                 </div>
             </div>
         </div>

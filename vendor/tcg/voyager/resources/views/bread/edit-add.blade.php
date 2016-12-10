@@ -6,7 +6,7 @@
 
 @section('page_header')
     <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i> @if(isset($dataTypeContent->id)){{ 'Edit' }}@else{{ 'New' }}@endif {{ $dataType->display_name_singular }}
+        <i class="{{ $dataType->icon }}"></i> @if(isset($dataTypeContent->id)){{ 'засах' }}@else{{ 'шинэ' }}@endif {{ $dataType->display_name_singular }}
     </h1>
 @stop
 
@@ -18,7 +18,7 @@
                 <div class="panel panel-bordered">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title">@if(isset($dataTypeContent->id)){{ 'Edit' }}@else{{ 'Add New' }}@endif {{ $dataType->display_name_singular }}</h3>
+                        <h3 class="panel-title">{{ $dataType->display_name_singular }} @if(isset($dataTypeContent->id)){{ 'засах' }}@else{{ 'шинээр нэмэх' }}@endif </h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -85,7 +85,7 @@
                                         @if(isset($options->relationship))
                                             {{-- If this is a relationship and the method does not exist, show a warning message --}}
                                             @if( !method_exists( $dataType->model_name, $row->field ) )
-                                                <p class="label label-warning"><i class="voyager-warning"></i> Make sure to setup the appropriate relationship in the {{ $row->field . '()' }} method of the {{ $dataType->model_name }} class.</p>   
+                                                <p class="label label-warning"><i class="voyager-warning"></i> Make sure to setup the appropriate relationship in the {{ $row->field . '()' }} method of the {{ $dataType->model_name }} class.</p>
                                             @endif
 
                                             @if( method_exists( $dataType->model_name, $row->field ) )
@@ -116,9 +116,9 @@
                                         <?php $options = json_decode($row->details); ?>
                                         {{-- If this is a relationship and the method does not exist, show a warning message --}}
                                         @if(isset($options->relationship) && !method_exists( $dataType->model_name, $row->field ) )
-                                            <p class="label label-warning"><i class="voyager-warning"></i> Make sure to setup the appropriate relationship in the {{ $row->field . '()' }} method of the {{ $dataType->model_name }} class.</p>   
+                                            <p class="label label-warning"><i class="voyager-warning"></i> Make sure to setup the appropriate relationship in the {{ $row->field . '()' }} method of the {{ $dataType->model_name }} class.</p>
                                         @endif
-                                        
+
                                         <select class="form-control select2" name="{{ $row->field }}[]" multiple>
                                             @if(isset($options->relationship))
                                                 <!-- Check that the method relationship exists -->
@@ -176,7 +176,7 @@
                         </div><!-- panel-body -->
 
                         <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Илгээх</button>
                         </div>
                     </form>
 

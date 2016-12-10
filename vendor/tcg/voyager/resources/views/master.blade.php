@@ -71,10 +71,10 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
 
                     <ol class="breadcrumb">
                         @if(count(Request::segments()) == 1)
-                            <li class="active"><i class="voyager-boat"></i> Dashboard</li>
+                            <li class="active"><i class="voyager-boat"></i> Нүүр </li>
                         @else
                             <li class="active">
-                                <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> Dashboard</a>
+                                <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> Нүүр </a>
                             </li>
                         @endif
                         <?php $breadcrumb_url = ''; ?>
@@ -119,10 +119,10 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> Profile</a>
+                                <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> Профайл</a>
                             </li>
                             <li>
-                                <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> Logout</a>
+                                <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> Гарах</a>
                             </li>
                         </ul>
                     </li>

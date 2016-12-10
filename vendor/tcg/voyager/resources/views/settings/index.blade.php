@@ -162,7 +162,7 @@
 
 @section('page_header')
     <h1 class="page-title">
-        <i class="voyager-settings"></i> Settings
+        <i class="voyager-settings"></i> Тохиргоо
     </h1>
 @stop
 
@@ -170,8 +170,8 @@
 
     <div class="container-fluid">
         <div class="alert alert-info">
-            <strong>How To Use:</strong>
-            <p>You can get the value of each setting anywhere on your site by calling <code>Voyager::setting('key')</code></p>
+            <strong>Хэрхэн ашиглах ва:</strong>
+            <p>Та нэр болон түлхүүр үгийг оруулна. Хөгжүүлэгч ашиглахдаа дараах жишээг харна уу <code>Voyager::setting('key')</code></p>
         </div>
     </div>
 
