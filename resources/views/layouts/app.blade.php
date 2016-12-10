@@ -33,7 +33,8 @@
 
 <body>
     <div class="se-pre-con"></div>
-    @include('frontend.header')
+    <? $menus = TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get(); ?>
+    @include('frontend.header', ['menus'=>$menus])
     @yield('content')
     @include('frontend.footer')
     <script type="text/javascript" src="\assets\js\jquery.min.js"></script>
