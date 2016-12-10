@@ -1,6 +1,6 @@
 *
-!public
-!pages
-!posts
-!users
+!public/
+!pages/*
+!posts/*
+!users/*
 !.gitignore
