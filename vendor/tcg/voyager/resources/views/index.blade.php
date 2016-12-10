@@ -13,9 +13,9 @@
                 <div class="panel-content">
                     <i class="voyager-group"></i>
                     <?php $user_count = TCG\Voyager\Models\User::count(); ?>
-                    <h4>{{ $user_count }} Users</h4>
-                    <p>You have {{ $user_count }} active users registered. Click on 'View All Users' to view all your current users.</p>
-                    <a href="{{ route('voyager.users.index') }}" class="btn btn-primary">View All Users</a>
+                    <h4>{{ $user_count }} хэрэглэгч</h4>
+                    <p>Нийт {{ $user_count }} бүртгэлтэй хэрэглэгч байна. Дэлгэрэнгүй дарж хэрэглэгчийн жагсаалтыг харна уу.</p>
+                    <a href="{{ route('voyager.users.index') }}" class="btn btn-primary">Дэлгэрэнгүй</a>
                 </div>
             </div>
             <?php } ?>
@@ -25,9 +25,9 @@
                 <div class="panel-content">
                     <i class="voyager-news"></i>
                     <?php $post_count = TCG\Voyager\Models\Post::count(); ?>
-                    <h4>{{ $post_count }} Post(s)</h4>
-                    <p>You have {{ $post_count }} Posts in your database. Click on 'View All Posts' below to view all posts.</p>
-                    <a href="{{ route('voyager.posts.index') }}" class="btn btn-primary">View All Posts</a>
+                    <h4>{{ $post_count }} мэдээ</h4>
+                    <p>Нийт {{ $post_count }} мэдээ бүртгэгдсэн байна. Дэлгэрэнгүй дарж мэдээний жагсаалтыг харна уу.</p>
+                    <a href="{{ route('voyager.posts.index') }}" class="btn btn-primary">Дэлгэрэнгүй</a>
                 </div>
             </div>
             <?php } ?>
@@ -37,14 +37,15 @@
                 <div class="panel-content">
                     <i class="voyager-file-text"></i>
                     <?php $page_count = TCG\Voyager\Models\Page::count(); ?>
-                    <h4>{{ $page_count }} Page(s)</h4>
-                    <p>You have {{ $page_count }} Pages in your database. Click on 'View All Pages' below to view all pages.</p>
-                    <a href="{{ route('voyager.pages.index') }}" class="btn btn-primary">View All Pages</a>
+                    <h4>{{ $page_count }} хуудас</h4>
+                    <p>Нийт {{ $page_count }} хуудас бүртгэгдсэн байна. Дэлгэрэнгүй дарж хуудасны жагсаалтыг харна уу.</p>
+                    <a href="{{ route('voyager.pages.index') }}" class="btn btn-primary">Дэлгэрэнгүй</a>
                 </div>
             </div>
             <?php } ?>
         </div>
         <div style="clear:both"></div>
+        @if(1 === 0)
         <div style="padding:15px;">
             <?php $google_analytics_client_id = Voyager::setting("google_analytics_client_id"); ?>
             @if (isset($google_analytics_client_id) && !empty($google_analytics_client_id))
@@ -117,6 +118,7 @@
                 </ul>
             </div>
         </div>
+        @endif
     </div>
 @stop
 

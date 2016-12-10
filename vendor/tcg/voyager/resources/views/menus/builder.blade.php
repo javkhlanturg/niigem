@@ -6,8 +6,8 @@
 
 @section('page_header')
     <h1 class="page-title">
-        <i class="voyager-list"></i>Menu Builder ({{ $menu->name }})
-        <div class="btn btn-success add_item"><i class="voyager-plus"></i> New Menu Item</div>
+        <i class="voyager-list"></i>Цэс угсрах ({{ $menu->name }})
+        <div class="btn btn-success add_item"><i class="voyager-plus"></i> Шинэ цэс нэмэх</div>
     </h1>
 
 @stop
@@ -50,8 +50,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-trash"></i> Are you sure you want to delete this menu
-                        item?</h4>
+                    <h4 class="modal-title"><i class="voyager-trash"></i> Та энэ цэс устгах даа итгэлтэй байна уу?</h4>
                 </div>
                 <div class="modal-footer">
                     <form action="{{ route('voyager.menus.item.destroy', ['menu' => $menu->id, 'id' => '__id']) }}" id="delete_form"
@@ -59,9 +58,9 @@
                         {{ method_field("DELETE") }}
                         {{ csrf_field() }}
                         <input type="submit" class="btn btn-danger pull-right delete-confirm"
-                               value="Yes, Delete This Menu Item">
+                               value="Тийм, энэ цэсийг устгана">
                     </form>
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Болих</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -74,13 +73,13 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-plus"></i> Create a New Menu Item</h4>
+                    <h4 class="modal-title"><i class="voyager-plus"></i> Шинэ цэс нэмэх</h4>
                 </div>
                 <form action="{{ route('voyager.menus.item.add', ['menu' => $menu->id]) }}" id="delete_form" method="POST">
                     <div class="modal-body">
-                        <label for="name">Title of the Menu Item</label>
+                        <label for="name">Цэсний дэлгэцэнд харагдах хэсэг</label>
                         <input type="text" class="form-control" name="title" placeholder="Title"><br>
-                        <label for="url">URL for the Menu Item</label>
+                        <label for="url">Хандах хаяг</label>
                         <input type="text" class="form-control" name="url" placeholder="URL"><br>
                         <label for="icon_class">Font Icon class for the Menu Item (Use a <a
                                     href="{{ config('voyager.assets_path') . '/fonts/voyager/icons-reference.html' }}"
@@ -90,7 +89,7 @@
                         <label for="color">Color in RGB or hex (optional)</label>
                         <input type="color" class="form-control" name="color"
                                placeholder="Color (ex. #ffffff or rgb(255, 255, 255)"><br>
-                        <label for="target">Open In</label>
+                        <label for="target">Нээгдэх байдал</label>
                         <select id="edit_target" class="form-control" name="target">
                             <option value="_self">Same Tab/Window</option>
                             <option value="_blank">New Tab/Window</option>
@@ -100,8 +99,8 @@
                     {{ csrf_field() }}
 
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-success pull-right delete-confirm" value="Add New Item">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-success pull-right delete-confirm" value="Шинэ цэс нэмэх">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Болих</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -114,15 +113,15 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-edit"></i> Edit Menu Item</h4>
+                    <h4 class="modal-title"><i class="voyager-edit"></i> Цэс засах</h4>
                 </div>
                 <form action="{{ route('voyager.menus.item.update', ['menu' => $menu->id]) }}" id="edit_form" method="POST">
                     {{ method_field("PUT") }}
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        <label for="name">Title of the Menu Item</label>
+                        <label for="name">Цэсний дэлгэцэнд харагдах хэсэг</label>
                         <input type="text" class="form-control" id="edit_title" name="title" placeholder="Title"><br>
-                        <label for="url">URL for the Menu Item</label>
+                        <label for="url">Хандах хаяг</label>
                         <input type="text" class="form-control" id="edit_url" name="url" placeholder="URL"><br>
                         <label for="icon_class">Font Icon class for the Menu Item</label>
                         <input type="text" class="form-control" id="edit_icon_class" name="icon_class"
@@ -130,7 +129,7 @@
                         <label for="color">Color in RGB or hex (optional)</label>
                         <input type="color" class="form-control" id="edit_color" name="color"
                                placeholder="Color (ex. #ffffff or rgb(255, 255, 255)"><br>
-                        <label for="target">Open In</label>
+                        <label for="target">Нээгдэх байдал</label>
                         <select id="edit_target" class="form-control" name="target">
                             <option value="_self" selected="selected">Same Tab/Window</option>
                             <option value="_blank">New Tab/Window</option>
@@ -139,8 +138,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-success pull-right delete-confirm" value="Update">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-success pull-right delete-confirm" value="Засах">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Болих</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->

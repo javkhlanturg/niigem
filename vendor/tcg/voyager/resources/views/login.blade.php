@@ -206,23 +206,23 @@
 
     <div id="login_section">
         <div class="content">
-            <h2>Sign In</h2>
-            <p>Sign in below:</p>
+            <h2>Нэвтрэх хэсэгт</h2>
+            <p>Доорх талбарыг бөглөнө үү:</p>
             <div style="clear:both"></div>
             <form action="{{ route('voyager.login') }}" method="POST" id="login">
                 {{ csrf_field() }}
-                <input type="text" class="form-control" name="email" placeholder="email address" value="{{ old('email') }}">
-                <input type="password" class="form-control" name="password" placeholder="password">
+                <input type="text" class="form-control" name="email" placeholder="Имэйл хаяг" value="{{ old('email') }}">
+                <input type="password" class="form-control" name="password" placeholder="Нууц үг">
                 <button class="btn btn-primary btn-login" id="voyager-login-btn">
-                    <span class="login_text"><i class="voyager-lock"></i> Login</span>
+                    <span class="login_text"><i class="voyager-lock"></i> Нэвтрэх</span>
                     <span class="login_loader">
-                        <img class="btn-loading" src="{{ config('voyager.assets_path') }}/images/logo-icon-light.png"> Logging in
+                        <img class="btn-loading" src="{{ config('voyager.assets_path') }}/images/logo-icon-light.png"> Нэвтэрж байна
                     </span>
                 </button>
             </form>
             @if (count($errors))
                 <div class="error-login">
-                    The given credentials don't match with an user registered.
+                    Нэвтрэх нэр эсвэл нууц үг буруу байна
                 </div>
             @endif
         </div>
