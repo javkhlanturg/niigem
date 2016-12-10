@@ -20,25 +20,84 @@
     <div class="row">
         <div class="col-sm-8">
             <!--Post list-->
-            @foreach($posts as $item)
-            <div class="post-style2 wow fadeIn" data-wow-duration="1s">
-                <a href="#"><img src="/storage/{{$item->image}}" style="max-width:250px" alt=""></a>
-                <div class="post-style2-detail">
-                    <h3><a href="{{$menu->url}}/{{$item->id}}" title="">{{$item->title}}</a></h3>
-                    <div class="date">
+            <div class="row">
+              <article class="content">
+                <div class="post-thumb">
+                    <img src="/storage/{{$post->image}}" class="img-responsive post-image" alt="">
+                    @if(1=== 0)
+                    <div class="social">
                         <ul>
-                            <li><img src="\assets\images\comment-01.jpg" class="img-responsive" alt=""></li>
-                            <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
-                            <li><a title="" href="#">{{date('Y.m.d', strtotime($item->created_at))}}</a> --</li>
-                            <li><a title="" href="#"><span>275 Comments</span></a></li>
+                            <li><a href="#" class="facebook"><i class="fa  fa-facebook"></i><span>3987</span> </a></li>
+                            <li><a href="#" class="twitter"><i class="fa  fa-twitter"></i><span>3987</span></a></li>
+                            <li><a href="#" class="google"><i class="fa  fa-google-plus"></i><span>3987</span></a></li>
+                            <li><a href="#" class="flickr"><i class="fa fa-flickr"></i><span>3987</span> </a></li>
                         </ul>
                     </div>
-                    <p>{{$item->excerpt}}</p>
-                    <a href="{{$menu->url}}/{{$item->id}}" class="btn btn-style">Дэлгэрэнгүй</a>
+                    @endif
+                    <!-- /.social icon -->
                 </div>
-            </div>
-            @endforeach
-
+                <h1>{{$post->title}}</h1>
+                {!! $post->body !!}
+              </article>
+          </div>
+          <div class="row">
+            <div class="form-area">
+                        <h3 class="category-headding ">Сэтгэгдэл үлдээх</h3>
+                        <div class="headding-border"></div>
+                        <form action="{{route('addComment')}}" method="post">
+                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          <input type="hidden" name="postid" value="{{ $post->id }}">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <span class="input">
+                                            <input class="input_field" type="text" name="username" id="input-1">
+                                            <label class="input_label" for="input-1">
+                                                <span class="input_label_content" data-content="Та энэ хэсэгт нэрээ оруулна уу">Нэр</span>
+                                    </label>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="input">
+                                            <textarea class="input_field" name="comment" id="message"></textarea>
+                                            <label class="input_label" for="message">
+                                                <span class="input_label_content" data-content="Сэтгэгдэлээ оруулна уу">Сэтгэгдэл</span>
+                                    </label>
+                                    </span>
+                                    <button type="submit" class="btn btn-style">Сэтгэгдэл үлдээх</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+          </div>
+          <div class="row">
+            <div class="comments-container">
+                        <h1>Сэтгэгдэлүүд </h1>
+                        <ul id="comments-list" class="comments-list">
+                          @foreach($comments as $comment)
+                            <li>
+                                <div class="comment-main-level">
+                                    <!-- Avatar -->
+                                    <div class="comment-avatar"><img src="\assets\images\comment-02.jpg" class="img-circle" alt=""></div>
+                                    <!-- Contenedor del Comentario -->
+                                    <div class="comment-box">
+                                        <div class="comment-head">
+                                            <h6 class="comment-name"><a href="#">{{$comment->username}}</a></h6>
+                                            <span>{{date('Y.m.d H:i', strtotime($comment->created_at))}}</span>
+                                            @if(1===0)
+                                            <i class="fa fa-reply"></i>
+                                            <i class="fa fa-heart"></i>
+                                            @endif
+                                        </div>
+                                        <div class="comment-content">
+                                            {{$comment->comment}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+          </div>
         </div>
         <aside class="col-sm-4 left-padding">
             <div class="input-group search-area">
@@ -236,20 +295,6 @@
                 <a href="#"><img src="\assets\images\ad-banner.jpg" class="img-responsive center-block" alt=""></a>
             </div>
         </aside>
-    </div>
-    <!-- pagination -->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                {{ $posts->links() }}
-            </div>
-            <div class="col-sm-12">
-                <div class="banner">
-                    <img src="\assets\images\top-bannner2.jpg" class="img-responsive center-block" alt="">
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
