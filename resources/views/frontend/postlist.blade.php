@@ -20,10 +20,11 @@
     <div class="row">
         <div class="col-sm-8">
             <!--Post list-->
+            @foreach($posts as $item)
             <div class="post-style2 wow fadeIn" data-wow-duration="1s">
                 <a href="#"><img src="\assets\images\category\category-post-11.jpg" alt=""></a>
                 <div class="post-style2-detail">
-                    <h3><a href="#" title="">It uses a dictionary of over 200 Latin words, combined with</a></h3>
+                    <h3><a href="#" title="">{{$item->title}}</a></h3>
                     <div class="date">
                         <ul>
                             <li><img src="\assets\images\comment-01.jpg" class="img-responsive" alt=""></li>
@@ -32,10 +33,11 @@
                             <li><a title="" href="#"><span>275 Comments</span></a></li>
                         </ul>
                     </div>
-                    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.</p>
-                    <button type="button" class="btn btn-style">Reade more</button>
+                    <p>{{$item->excerpt}}</p>
+                    <button type="button" class="btn btn-style">Дэлгэрэнгүй</button>
                 </div>
             </div>
+            @endforeach
 
         </div>
         <aside class="col-sm-4 left-padding">

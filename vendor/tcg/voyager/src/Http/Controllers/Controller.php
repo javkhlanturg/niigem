@@ -95,6 +95,10 @@ abstract class Controller extends BaseController
 
                 $content = 0;
                 break;
+            case 'select_dropdown':
+                    $checkBoxRow = $request->input($row->field);
+                    $content = $checkBoxRow;
+                    break;
 
             /********** FILE TYPE **********/
             case 'file':
