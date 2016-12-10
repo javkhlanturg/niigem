@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    $menus = TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get();
-    return view('/frontend/index', ['menus'=>$menus]);
+    return view('/frontend/index');
 });
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('/{slug}','PostController@postList')->name('postList');
