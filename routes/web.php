@@ -13,6 +13,7 @@
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-
+Route::post('/comment','CommentController@addComment')->name('addComment');
 Route::get('/','HomeController@index');
 Route::get('/{slug}','PostController@postList')->name('postList');
+Route::get('/{slug}/{postid}','PostController@post')->name('viewPost');
