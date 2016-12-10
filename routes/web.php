@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,12 +10,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('/frontend/index');
-});
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+Route::get('/','HomeController@index');
 Route::get('/{slug}','PostController@postList')->name('postList');

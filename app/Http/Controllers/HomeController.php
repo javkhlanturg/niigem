@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
   public function index(){
-    $top_news = TCG\Voyager\Models\MenuItem::where('menu_id', 3)->limit('5')->get();
+    $top_news = \TCG\Voyager\Models\Category::where('id', '8')->get();
     return view('frontend.index')
     ->with('top_news',$top_news);
   }

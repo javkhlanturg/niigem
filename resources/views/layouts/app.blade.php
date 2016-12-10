@@ -34,7 +34,7 @@
 
 <body>
     <div class="se-pre-con"></div>
-    <? $menus = TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get(); ?>
+    <?php $menus = \TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get(); ?>
     @include('frontend.header', ['menus'=>$menus])
     @yield('content')
     @include('frontend.footer')

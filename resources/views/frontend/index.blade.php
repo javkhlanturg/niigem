@@ -4,7 +4,7 @@
 <section class="headding-news">
     <div class="container">
         <div class="row row-margin">
-          @foreach($top_news as $top_new)
+
             <div class="col-sm-3 col-padding">
                 <div class="post-wrapper post-grid-1 wow fadeIn" data-wow-duration="2s">
                     <div class="post-thumb img-zoom-in">
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+          
         </div>
     </div>
 </section>
@@ -176,7 +176,7 @@
                                 <div class="date">
                                     <ul>
                                         <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
-                                        <li><a title="" href="#">Oct 6, 2016</a> --</li>
+                                        <li><a title="" href="#">Oct 6, 2016</a>--</li>
                                         <li><a title="" href="#"><span>275 Comments</span></a></li>
                                     </ul>
                                 </div>
