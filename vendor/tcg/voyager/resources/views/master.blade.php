@@ -152,7 +152,7 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                             <h4>{{ ucwords(Auth::user()->name) }}</h4>
                             <p>{{ Auth::user()->email }}</p>
 
-                            <a href="{{ route('voyager.profile') }}" class="btn btn-primary">Profile</a>
+                            <a href="{{ route('voyager.profile') }}" class="btn btn-primary">Профайл</a>
                             <div style="clear:both"></div>
                         </div>
                     </div>
