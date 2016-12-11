@@ -35,7 +35,9 @@
 <body>
     <div class="se-pre-con"></div>
     <?php $menus = \TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get(); ?>
-    @include('frontend.header', ['menus'=>$menus])
+    <?php $banner_top = App\Banners::where('id', 2)->first(); ?>
+    <?php $logo = App\Banners::where('id', 3)->first(); ?>
+    @include('frontend.header', ['menus'=>$menus,'top_banner'=>$banner_top, 'logo'=>$logo])
     @yield('content')
     @include('frontend.footer')
 

@@ -106,14 +106,14 @@
                 <div class="col-xs-12 col-md-4 col-sm-4">
                     <div class="header-logo">
                         <!-- logo -->
-                        <a href="home-style-one.htm">
-                            <img class="td-retina-data img-responsive" src="\assets\images\logo.png" alt="">
+                        <a href="/">
+                            <img class="td-retina-data img-responsive" src="/storage/{{$logo->bannerpath}}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-xs-8 col-md-8 col-sm-8 hidden-xs">
                     <div class="header-banner">
-                        <a href="#"><img class="td-retina img-responsive" src="\assets\images\top-bannner.jpg" alt=""></a>
+                        <a href="{{$top_banner->url}}"><img class="td-retina img-responsive" src="/storage/{{$top_banner->bannerpath}}" alt=""></a>
                     </div>
                 </div>
             </div>

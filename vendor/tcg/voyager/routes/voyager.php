@@ -69,18 +69,7 @@ Route::group(['as' => 'voyager.'], function () {
             Route::get('{id}/move_down', ['uses' => $namespacePrefix.'VoyagerSettingsController@move_down', 'as' => 'move_down']);
             Route::get('{id}/delete_value', ['uses' => $namespacePrefix.'VoyagerSettingsController@delete_value', 'as' => 'delete_value']);
         });
-
-        // Banner
-        Route::group([
-            'as'     => 'banners.',
-            'prefix' => 'banners',
-        ], function () use ($namespacePrefix) {
-            Route::get('/', ['uses' => $namespacePrefix.'VoyagerBreadController@index', 'as' => 'index']);
-            Route::post('/', ['uses' => $namespacePrefix.'VoyagerBreadController@store', 'as' => 'store']);
-            Route::put('/', ['uses' => $namespacePrefix.'VoyagerBreadController@update', 'as' => 'update']);
-            Route::delete('{id}', ['uses' => $namespacePrefix.'VoyagerBreadController@delete', 'as' => 'delete']);
-        });
-
+        
         // Admin Media
         Route::group([
             'as'     => 'media.',

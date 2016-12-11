@@ -25,4 +25,14 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function category()
+    {
+        return $this->hasOne("TCG\Voyager\Models\Category", 'id', 'category_id');
+    }
+
+    public function commentCount()
+    {
+        return $this->hasMany("App\Comments", 'postid', 'id')->count();
+    }
 }
