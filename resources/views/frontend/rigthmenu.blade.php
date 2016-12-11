@@ -57,7 +57,6 @@
       <img src="\assets\images\comment-01.jpg" alt="">
       <div class="latest-com-detail">
         <h5>{{$comment->username}}</h5>
-        <span>Nec sagittis sem nibh dictionary...</span>
         <p>{{str_limit($comment->comment, 20)}} </p>
       </div>
     </div>

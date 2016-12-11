@@ -11,7 +11,7 @@
             <div class="post-wrapper post-grid-1 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="#">
-                  <img class="entry-thumb" src="\assets\images\slider\slide-06.jpg" alt="">
+                  <img class="entry-thumb" src="/storage/{{$top_new->image}}" alt="">
                 </a>
               </div>
               <div class="post-info">
@@ -23,9 +23,9 @@
                     <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
                   </div>
                   <!-- post comment -->
-                  <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
+                  <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                   <!-- read more -->
-                  <a class="readmore pull-right" href="#"><i class="pe-7s-angle-right"></i></a>
+                  <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
                 </div>
               </div>
             </div>
@@ -33,21 +33,21 @@
             <div class="post-wrapper post-grid-2 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="#">
-                  <img class="entry-thumb" src="\assets\images\slider\slide-07.jpg" alt="">
+                  <img class="entry-thumb" src="/storage/{{$top_new->image}}" alt="">
                 </a>
               </div>
               <div class="post-info">
                 <span class="color-5">Мэдээ</span>
-                <h3 class="post-title post-title-size"><a href="#" rel="bookmark">{{$top_new->title}} </a></h3>
+                <h3 class="post-title post-title-size"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}} </a></h3>
                 <div class="post-editor-date">
                   <!-- post date -->
                   <div class="post-date">
                     <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
                   </div>
                   <!-- post comment -->
-                  <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
+                  <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                   <!-- read more -->
-                  <a class="readmore pull-right" href="#"><i class="pe-7s-angle-right"></i></a>
+                  <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
                 </div>
               </div>
             </div>
@@ -61,21 +61,21 @@
               <div class="post-wrapper post-grid-3 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="#">
-                    <img class="entry-thumb-middle" src="\assets\images\slider\slide-08.jpg" alt="">
+                    <img class="entry-thumb-middle" src="/storage/{{$top_new->image}}" alt="">
                   </a>
                 </div>
                 <div class="post-info">
                   <span class="color-4">Мэдээ</span>
-                  <h3 class="post-title"><a href="#" rel="bookmark">{{$top_new->title}} </a></h3>
+                  <h3 class="post-title"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}} </a></h3>
                   <div class="post-editor-date">
                     <!-- post date -->
                     <div class="post-date">
                       <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
                     </div>
                     <!-- post comment -->
-                    <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
+                    <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-                    <a class="readmore pull-right" href="#"><i class="pe-7s-angle-right"></i></a>
+                    <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -95,16 +95,16 @@
                 </div>
                 <div class="post-info">
                   <span class="color-1">Мэдээ</span>
-                  <h3 class="post-title post-title-size"><a href="#" rel="bookmark">{{$top_new->title}}</a></h3>
+                  <h3 class="post-title post-title-size"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}}</a></h3>
                   <div class="post-editor-date">
                     <!-- post date -->
                     <div class="post-date">
                       <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
                     </div>
                     <!-- post comment -->
-                    <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
+                    <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-                    <a class="readmore pull-right" href="#"><i class="pe-7s-angle-right"></i></a>
+                    <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -120,16 +120,16 @@
                 </div>
                 <div class="post-info">
                   <span class="color-2">Мэдээ</span>
-                  <h3 class="post-title post-title-size"><a href="#" rel="bookmark">{{$top_new->title}} </a></h3>
+                  <h3 class="post-title post-title-size"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}} </a></h3>
                   <div class="post-editor-date">
                     <!-- post date -->
                     <div class="post-date">
                       <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
                     </div>
                     <!-- post comment -->
-                    <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
+                    <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-                    <a class="readmore pull-right" href="#"><i class="pe-7s-angle-right"></i></a>
+                    <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -155,9 +155,9 @@
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="post-thumb">
+                    <div class="img-thumb">
                       <a href="#">
-                        <img class="img-responsive" src="/assets/images/recent_news_04.jpg" alt="">
+                        <img class="entry-thumb" height="90" src="/storage/{{$tur->image}}" alt="">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -167,7 +167,7 @@
                     </div>
                   </div>
                   <div class="post-title-author-details">
-                    <h4><a href="#">{{$tur->title}}</a></h4>
+                    <h4><a href="/{{$tur->category['slug']}}/{{$tur->id}}">{{$tur->title}}</a></h4>
                     <div class="date">
                       <ul>
                         <li>By <a title="" href="#"><span>Админ</span></a> --</li>
@@ -190,9 +190,9 @@
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="post-thumb">
+                    <div class="img-thumb">
                       <a href="#">
-                        <img class="img-responsive" src="/storage/{{$zasag->image}}" alt="">
+                        <img class="entry-thumb" height="90" src="/storage/{{$zasag->image}}" alt="">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -225,9 +225,9 @@
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="post-thumb">
+                    <div class="img-thumb">
                       <a href="#">
-                        <img class="img-responsive" src="/storage/{{$del->image}}" alt="">
+                        <img class="entry-thumb" height="90" src="/storage/{{$del->image}}" alt="">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
