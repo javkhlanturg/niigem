@@ -155,9 +155,9 @@
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="img-thumb">
+                    <div class="img-thumb" style="object-fit: cover;">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/{{$tur->image}}" alt="">
+                        <img class="entry-thumb" style="height:130px; width:100%;object-fit: cover;" src="/storage/{{$tur->image}}" alt="">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -190,9 +190,9 @@
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="img-thumb">
+                    <div class="img-thumb" style="object-fit: cover;">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/{{$zasag->image}}" alt="">
+                        <img class="entry-thumb" style="height:130px; width:100%;object-fit: cover;" src="/storage/{{$zasag->image}}" alt="">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -225,9 +225,9 @@
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="img-thumb">
+                    <div class="img-thumb" style="object-fit: cover;">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/{{$del->image}}" alt="">
+                        <img class="entry-thumb" style="height:130px; width:100%;object-fit: cover;" src="/storage/{{$del->image}}" alt="">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -264,11 +264,11 @@
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="post-thumb">
+                    <div class="post-thumb" style="object-fit: cover;">
 
                       <a href="#" class="video-img-icon">
                         <i class="fa fa-play"></i>
-                        <img class="img-responsive" src="\assets\images\recent_news_04.jpg" alt="">
+                        <img class="img-responsive" style="height:130px; width:100%;object-fit: cover;" src="\assets\images\recent_news_04.jpg" alt="">
                       </a>
                     </div>
 
