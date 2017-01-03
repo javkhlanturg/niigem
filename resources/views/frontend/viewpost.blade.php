@@ -77,12 +77,14 @@
                             <li>
                                 <div class="comment-main-level">
                                     <!-- Avatar -->
-                                    <div class="comment-avatar"><img src="\assets\images\comment-02.jpg" class="img-circle" alt=""></div>
+                                    <div class="comment-avatar">
+                                      <i class="fa fa-user fa-2x"></i>
+                                    </div>
                                     <!-- Contenedor del Comentario -->
                                     <div class="comment-box">
                                         <div class="comment-head">
                                             <h6 class="comment-name"><a href="#">{{$comment->username}}</a></h6>
-                                            <span>{{date('Y.m.d H:i', strtotime($comment->created_at))}}</span>
+                                            <span>{{date('M.d.Y', strtotime($comment->created_at))}}</span>
                                             @if(1===0)
                                             <i class="fa fa-reply"></i>
                                             <i class="fa fa-heart"></i>
