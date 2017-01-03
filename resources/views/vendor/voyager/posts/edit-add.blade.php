@@ -119,10 +119,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                <label for="name">Слаг</label>
-                                <input type="text" class="form-control" name="slug" placeholder="slug" value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
-                            </div>
+
                             <div class="form-group">
                                 <label for="name">Мэдээний төлөв</label>
                                 <select class="form-control" name="status">

@@ -22,7 +22,7 @@
             <!--Post list-->
             @foreach($posts as $item)
             <div class="post-style2 wow fadeIn" data-wow-duration="1s">
-                <a href="#"><img src="/storage/{{$item->image}}" style="max-width:250px" alt=""></a>
+                <a href="#"><img src="/storage/app/public/{{$item->image}}" style="max-width:250px" alt=""></a>
                 <div class="post-style2-detail">
                     <h3><a href="{{$menu->url}}/{{$item->id}}" title="">{{$item->title}}</a></h3>
                     <div class="date">

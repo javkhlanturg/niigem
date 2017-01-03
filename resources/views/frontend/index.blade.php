@@ -11,7 +11,7 @@
             <div class="post-wrapper post-grid-1 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="#">
-                  <img class="entry-thumb" src="/storage/{{$top_new->image}}" alt="">
+                  <img class="entry-thumb" src="/storage/app/public/{{$top_new->image}}" style="width:257px;height:199px;object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -33,7 +33,7 @@
             <div class="post-wrapper post-grid-2 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="#">
-                  <img class="entry-thumb" src="/storage/{{$top_new->image}}" alt="">
+                  <img class="entry-thumb" src="/storage/app/public/{{$top_new->image}}" style="width:257px;height:199px;object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -61,7 +61,7 @@
               <div class="post-wrapper post-grid-3 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="#">
-                    <img class="entry-thumb-middle" src="/storage/{{$top_new->image}}" alt="">
+                    <img class="entry-thumb-middle" src="/storage/app/public/{{$top_new->image}}" style="width:519px;height:400px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -80,7 +80,7 @@
                 </div>
               </div>
             <?php endif;?>
-          <?php endforeach;?>
+          <?php $i++; endforeach;?>
         </div>
 
         <div class="col-sm-3 col-padding">
@@ -90,7 +90,7 @@
               <div class="post-wrapper post-grid-4 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="#">
-                    <img class="entry-thumb" src="\assets\images\slider\slide-09.jpg" alt="">
+                    <img class="entry-thumb" src="\assets\images\slider\slide-09.jpg" style="width:257px;height:199px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -109,13 +109,13 @@
                 </div>
               </div>
             <?php endif; ?>
-          <?php endforeach;?>
+          <?php $i++;  endforeach;?>
           <?php $i = 1; foreach($top_news as $top_new): ?>
             <?php if($i == 5):?>
               <div class="post-wrapper post-grid-5 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="#">
-                    <img class="entry-thumb" src="\assets\images\slider\slide-10.jpg" alt="">
+                    <img class="entry-thumb" src="\assets\images\slider\slide-10.jpg" style="width:257px;height:199px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -157,7 +157,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/{{$tur->image}}" alt="">
+                        <img class="entry-thumb" height="90" src="/storage/app/public/{{$tur->image}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -192,7 +192,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/{{$zasag->image}}" alt="">
+                        <img class="entry-thumb" height="90" src="/storage/app/public/{{$zasag->image}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -227,7 +227,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/{{$del->image}}" alt="">
+                        <img class="entry-thumb" height="90" src="/storage/app/public/{{$del->image}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -253,7 +253,7 @@
           </section>
           <!-- /.Politics -->
           <div class="ads">
-            <a href="#"><img src="/storage/{{$footer_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
+            <a href="#"><img src="/storage/app/public/{{$footer_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
           </div>
           <section class="politics_wrapper">
             <h3 class="category-headding ">Видео</h3>
@@ -268,7 +268,7 @@
 
                       <a href="#" class="video-img-icon">
                         <i class="fa fa-play"></i>
-                        <img class="img-responsive" src="\assets\images\recent_news_04.jpg" alt="">
+                        <img class="img-responsive" src="\assets\images\recent_news_04.jpg" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
 
