@@ -157,11 +157,7 @@
                     <!-- image -->
                     <div class="img-thumb" style="object-fit: cover;">
                       <a href="#">
-<<<<<<< HEAD
                         <img class="entry-thumb" height="90" src="/storage/app/public/{{$tur->image}}" style="width:214px;height:126px;object-fit: cover;">
-=======
-                        <img class="entry-thumb" style="height:130px; width:100%;object-fit: cover;" src="/storage/{{$tur->image}}" alt="">
->>>>>>> 4f415b90ce5764ece6afade1405eb0bc951e31de
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -196,11 +192,7 @@
                     <!-- image -->
                     <div class="img-thumb" style="object-fit: cover;">
                       <a href="#">
-<<<<<<< HEAD
                         <img class="entry-thumb" height="90" src="/storage/app/public/{{$zasag->image}}" style="width:214px;height:126px;object-fit: cover;">
-=======
-                        <img class="entry-thumb" style="height:130px; width:100%;object-fit: cover;" src="/storage/{{$zasag->image}}" alt="">
->>>>>>> 4f415b90ce5764ece6afade1405eb0bc951e31de
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -235,11 +227,7 @@
                     <!-- image -->
                     <div class="img-thumb" style="object-fit: cover;">
                       <a href="#">
-<<<<<<< HEAD
                         <img class="entry-thumb" height="90" src="/storage/app/public/{{$del->image}}" style="width:214px;height:126px;object-fit: cover;">
-=======
-                        <img class="entry-thumb" style="height:130px; width:100%;object-fit: cover;" src="/storage/{{$del->image}}" alt="">
->>>>>>> 4f415b90ce5764ece6afade1405eb0bc951e31de
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -280,11 +268,7 @@
 
                       <a href="#" class="video-img-icon">
                         <i class="fa fa-play"></i>
-<<<<<<< HEAD
                         <img class="img-responsive" src="\assets\images\recent_news_04.jpg" style="width:214px;height:126px;object-fit: cover;">
-=======
-                        <img class="img-responsive" style="height:130px; width:100%;object-fit: cover;" src="\assets\images\recent_news_04.jpg" alt="">
->>>>>>> 4f415b90ce5764ece6afade1405eb0bc951e31de
                       </a>
                     </div>
 
