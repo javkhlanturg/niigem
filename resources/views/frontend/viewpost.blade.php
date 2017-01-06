@@ -89,10 +89,13 @@
                                             <i class="fa fa-reply"></i>
                                             <i class="fa fa-heart"></i>
                                             @endif
+                                            <h6 style="float:right">IP хаяг: {{$_SERVER['REMOTE_ADDR']}}</h6>
                                         </div>
                                         <div class="comment-content">
                                             {{$comment->comment}}
+                                            <span style="float:right;">хариулах</span>
                                         </div>
+
                                     </div>
                                 </div>
                             </li>
