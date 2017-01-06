@@ -54,7 +54,7 @@
     <!-- latest comment post -->
     @foreach($comments as $comment)
     <div class="post-style2 latest-com">
-      <i class="fa fa-user fa-2x"></i>
+      <img src="\assets\images\comment-01.jpg" alt="">
       <div class="latest-com-detail">
         <h5>{{$comment->username}}</h5>
         <p>{{str_limit($comment->comment, 20)}} </p>

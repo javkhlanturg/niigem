@@ -23,7 +23,7 @@
             <div class="row">
               <article class="content">
                 <div class="post-thumb">
-                    <img src="/storage/{{$post->image}}" class="img-responsive post-image" alt="">
+                    <img src="/storage/app/public/{{$post->image}}" class="img-responsive post-image" alt="">
                     @if(1=== 0)
                     <div class="social">
                         <ul>
