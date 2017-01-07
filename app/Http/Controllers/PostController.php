@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comments;
+use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
     public function postList($slug){
@@ -27,8 +28,13 @@ class PostController extends Controller
         if(!$post){
           return view('frontend.404');
         }
-        $comments = Comments::where('postid', $post->id)->get();
+        $comments = DB::table('comments')->where('postid', $post->id)->where('parent_id','0')->get();
+        foreach($comments as $c){
+          $c->replies = DB::table('comments')->where('parent_id', $c->id)->get();
+        }
+
+        // $reply_comments = Comments::where('postid',$post->id)->where('parent_id',)->get();
         $newss = \TCG\Voyager\Models\Post::orderBy('created_at', 'desc')->limit('3')->get();
-        return view('frontend.viewpost', ['post'=>$post, 'menu'=>$menu, 'comments'=>$comments, 'newss'=>$newss]);
+        return view('frontend.viewpost', ['post'=>$post, 'menu'=>$menu, 'comments'=>$comments, 'newss'=>$newss,'replies'=>$c->replies]);
     }
 }
