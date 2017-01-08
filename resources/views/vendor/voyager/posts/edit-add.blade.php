@@ -1,6 +1,7 @@
 @extends('voyager::master')
 
 @section('css')
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
     <style>
         .panel .mce-panel {
             border-left-color: #fff;
@@ -106,18 +107,22 @@
                     </div>
 
                     <!-- ### IMAGE ### -->
-                    <div class="panel panel-bordered panel-primary">
+                    <div class="panel panel-bordered panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> Фото мэдээ оруулах</h3>
+                            <h3 class="panel-title"><div class="checkbox"> <label> <input type="checkbox"> Фото мэдээ оруулах  </div> </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
-                            @if(isset($dataTypeContent->image))
-                                <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
-                            @endif
-                            <input type="file" name="image">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <form action="/gallery/action"
+                                class="dropzone" id="addImages">
+
+                              </form>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -211,6 +216,7 @@
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
 @stop
