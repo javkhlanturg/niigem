@@ -35,6 +35,6 @@ class PostController extends Controller
 
         // $reply_comments = Comments::where('postid',$post->id)->where('parent_id',)->get();
         $newss = \TCG\Voyager\Models\Post::orderBy('created_at', 'desc')->limit('3')->get();
-        return view('frontend.viewpost', ['post'=>$post, 'menu'=>$menu, 'comments'=>$comments, 'newss'=>$newss,'replies'=>$c->replies]);
+        return view('frontend.viewpost', ['post'=>$post, 'menu'=>$menu, 'comments'=>$comments, 'newss'=>$newss]);
     }
 }

@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
                                 <ul class="comments-list reply-list">
-                                  @foreach($replies as $reply)
+                                  @foreach($comment->replies as $reply)
                                     <li>
                                         <!-- Avatar -->
                                         <div class="comment-avatar">
