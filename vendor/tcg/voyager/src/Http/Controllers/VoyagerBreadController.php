@@ -5,6 +5,7 @@ namespace TCG\Voyager\Http\Controllers;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\DataType;
 use TCG\Voyager\Voyager;
+use App\PostImage;
 
 class VoyagerBreadController extends Controller
 {
@@ -168,10 +169,10 @@ class VoyagerBreadController extends Controller
     // POST BRE(A)D
     public function store(Request $request)
     {
+
         $slug = $this->getSlug($request);
 
         $dataType = DataType::where('slug', '=', $slug)->first();
-
         // Check permission
         Voyager::can('add_'.$dataType->name);
 
@@ -181,14 +182,34 @@ class VoyagerBreadController extends Controller
         }
 
         $data = new $dataType->model_name();
-        $this->insertUpdateData($request, $slug, $dataType->addRows, $data);
 
+        $this->insertUpdateData($request, $slug, $dataType->addRows, $data);
+        if($slug === 'posts'){
+          if($request->input('featured')){
+              $this->createSlider($request->input('sliders'), $data->id);
+          }
+        }
         return redirect()
             ->route("voyager.{$dataType->slug}.index")
             ->with([
                 'message'    => "Successfully Added New {$dataType->display_name_singular}",
                 'alert-type' => 'success',
             ]);
+    }
+
+    public function createSlider($sliders, $postid){
+      foreach($sliders as $slider){
+        $arr = explode(":::", $slider);
+        $path = $arr[0];
+        $public_path = $arr[1];
+        $file_name = $arr[2];
+        $pi = new PostImage();
+        $pi->post_id = $postid;
+        $pi->path = $path;
+        $pi->public_path = $public_path;
+        $pi->file_name = $file_name;
+        $pi->save();
+      }
     }
 
     //***************************************

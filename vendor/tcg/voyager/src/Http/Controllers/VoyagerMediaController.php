@@ -52,6 +52,7 @@ class VoyagerMediaController extends Controller
 
     private function getFiles($dir)
     {
+
         $files = [];
         $storageFiles = Storage::files($dir);
         $storageFolders = Storage::directories($dir);
@@ -216,7 +217,7 @@ class VoyagerMediaController extends Controller
         try {
             $path = $request->file->store($request->upload_path);
             $success = true;
-            $message = 'Successfully uploaded new file!';
+            $message = 'Фото зураг хадгалагдлаа!';
         } catch (Exception $e) {
             $success = false;
             $message = $e->getMessage();

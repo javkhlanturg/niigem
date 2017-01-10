@@ -14,7 +14,6 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 Route::post('/comment','CommentController@addComment')->name('addComment');
-Route::post('/gallery/action','GalleryController@galleryAction')->name('galleryAction');
 Route::post('/replycomment','CommentController@replyComment')->name('replyComment');
 Route::get('/','HomeController@index');
 Route::get('/{slug}','PostController@postList')->name('postList');
