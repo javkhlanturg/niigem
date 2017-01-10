@@ -55,7 +55,7 @@ class VoyagerController extends Controller
             $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
         }
 
-        // echo out script that TinyMCE can handle and update the image in the editor
+        // echo out script that TinyMCE can handE:\react\niigem\niigem\vendor\tcg\voyager\src\Http\Controllers\VoyagerController.phple and update the image in the editor
         return "<script> parent.setImageValue('".Voyager::image($fullFilename)."'); </script>";
     }
 
