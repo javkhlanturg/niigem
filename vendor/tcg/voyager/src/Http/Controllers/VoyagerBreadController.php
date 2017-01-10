@@ -126,7 +126,10 @@ class VoyagerBreadController extends Controller
 
         $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
         $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
-
+        if($slug === 'posts'){
+          PostImage::where('post_id', $data->id)->delete();
+          $this->createSlider($request->input('sliders'), $data->id);
+        }
         return redirect()
             ->route("voyager.{$dataType->slug}.index")
             ->with([

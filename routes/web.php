@@ -16,5 +16,7 @@ Route::group(['prefix' => 'admin'], function () {
 Route::post('/comment','CommentController@addComment')->name('addComment');
 Route::post('/replycomment','CommentController@replyComment')->name('replyComment');
 Route::get('/','HomeController@index');
+Route::post('/slider/action','PostController@sliders')->name('sliders');
+Route::post('/slider/directories','PostController@get_all_dirs')->name('postList');
 Route::get('/{slug}','PostController@postList')->name('postList');
 Route::get('/{slug}/{postid}','PostController@post')->name('viewPost');
