@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section class="headding-news">
   <div class="container">
     <div class="row row-margin">
