@@ -44,6 +44,23 @@
                 </div>
                 <h1>{{$post->title}}</h1>
                 {!! $post->body !!}
+                <div class="social" style="float:right"><div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-href="http://niigem.net/" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fniigem.net%2F&amp;src=sdkpreparse">Share</a></div>
+<iframe
+  src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&via=twitterdev&related=twitterapi%2Ctwitter&text=custom%20share%20text&hashtags=example%2Cdemo"
+  width="100"
+  height="28"
+  title="Twitter Tweet Button"
+  style="border: 0; overflow: hidden;">
+</iframe>
+</div>
               </article>
           </div>
           <div class="row">
@@ -126,7 +143,7 @@
                                     </div>
                                 </div>
                                 <ul class="comments-list reply-list">
-                                  @foreach($replies as $reply)
+                                  @foreach($comment->replies as $reply)
                                     <li>
                                         <!-- Avatar -->
                                         <div class="comment-avatar">
