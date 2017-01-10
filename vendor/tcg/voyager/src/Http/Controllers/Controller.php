@@ -192,6 +192,64 @@ abstract class Controller extends BaseController
         return $content;
     }
 
+    public function uploadPhoto(Request $request)
+    {
+        $base_folder = 'uploaded';
+        $destination_folder = 'zar';
+        $thumb_folder = 'thumb';
+
+        $mimes = 'mimes:JPG,PNG,GIF,JPEG,png,gif,jpeg,jpg|max:80000';
+        $watermark = 'images/watermark.png';
+        $file = Request::file('file');
+        $rules = ['file' => $mimes];
+        $validator = Validator::make(Request::all(), $rules);
+
+        if ($validator->passes()) {
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . $base_folder . DIRECTORY_SEPARATOR . $destination_folder . DIRECTORY_SEPARATOR;
+            $thumbPath = $destinationPath . $thumb_folder . DIRECTORY_SEPARATOR;
+            if (!is_dir($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            if (!is_dir($thumbPath)) {
+                mkdir($thumbPath, 0755, true);
+            }
+
+            $destinationUrl = "/" . $base_folder . "/" . $destination_folder . '/';
+            $thumbUrl = $destinationUrl . $thumb_folder . '/';
+
+            $fileOrigName = $file->getClientOriginalName();
+            $fileUniqueName = date("YmdHis") . "_" . str_random(25) . '.' . $file->getClientOriginalExtension();
+            while (File::exists($destinationPath . $fileUniqueName)) {
+                $fileUniqueName = uniqid() . "_" . $fileUniqueName;
+            }
+
+            $uploadSuccess = Image::make($file->getRealPath());
+            $bigImage = $uploadSuccess->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $bigImage->insert($watermark, 'bottom-right', null, null, 220, 80);
+            $bigImage->save($destinationPath . $fileUniqueName, 100);
+            $thumb_image = $uploadSuccess->resize(250, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $thumb_image->save($thumbPath . $fileUniqueName);
+            $result = [
+                'destinationUrl' => $destinationUrl,
+                'thumbUrl' => $thumbUrl,
+                'origName' => $fileOrigName,
+                'uniqueName' => $fileUniqueName
+            ];
+
+            if ($uploadSuccess) {
+                return Response::json(['status' => true, 'data' => $result], 200);
+            } else {
+                return Response::json(['status' => false, 'flash' => 'Үйлдэл амжилтгүй боллоо'], 400);
+            }
+        } else {
+            return Response::json(['status' => false, 'flash' => 'Үйлдэл амжилтгүй боллоо. Файлын төрөл, хэмжээг шалгана уу!!'], 400);
+        }
+    }
+
     public function generate_views(Request $request)
     {
         //$dataType = DataType::where('slug', '=', $slug)->first();

@@ -1,7 +1,9 @@
 @extends('voyager::master')
 
 @section('css')
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
+<link rel="stylesheet" href="{{ config('voyager.assets_path') }}/css/media/media.css"/>
+<link rel="stylesheet" type="text/css" href="{{ config('voyager.assets_path') }}/js/select2/select2.min.css">
+<link rel="stylesheet" href="{{ config('voyager.assets_path') }}/css/media/dropzone.css"/>
     <style>
         .panel .mce-panel {
             border-left-color: #fff;
@@ -109,18 +111,70 @@
                     <!-- ### IMAGE ### -->
                     <div class="panel panel-bordered panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><div class="checkbox"> <label> <input type="checkbox"> Фото мэдээ оруулах  </div> </h3>
+                            <h3 class="panel-title"><div class="checkbox"> <label> <input type="checkbox" name="featured" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured){{ 'checked="checked"' }}@endif > Фото мэдээ оруулах  </div> </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
-                          <div class="row">
-                            <div class="col-md-12">
-                              <form action="/gallery/action"
-                                class="dropzone" id="addImages">
+                          <div id="filemanager">
+                            <div class="breadcrumb-container">
+                                <ol class="breadcrumb filemanager">
+                                    <li data-folder="/" data-index="0"><span class="arrow"></span><strong>Мэдиа
+                                            сан</strong></li>
+                                    <template v-for="folder in folders">
+                                        <li data-folder="@{{folder}}" data-index="@{{ $index+1 }}"><span
+                                                    class="arrow"></span>@{{ folder }}</li>
+                                    </template>
+                                </ol>
 
-                              </form>
+                                <div class="toggle"><span>Хаах</span><i class="voyager-double-right"></i></div>
+                            </div>
+
+                            <ul id="files">
+
+                              <li v-for="file in files.items">
+                                  <div class="file_link" data-folder="@{{file.name}}" data-index="@{{ $index }}">
+                                      <div class="link_icon">
+                                          <template v-if="file.type.includes('image')">
+                                              <div class="img_icon"
+                                                   style="background-size: cover; background-image: url(@{{ encodeURI(file.path) }}); background-repeat:no-repeat; background-position:center center;display:inline-block; width:100%; height:100%;"></div>
+                                          </template>
+                                          <template v-if="file.type.includes('video')">
+                                              <i class="icon voyager-video"></i>
+                                          </template>
+                                          <template v-if="file.type.includes('audio')">
+                                              <i class="icon voyager-music"></i>
+                                          </template>
+                                          <template v-if="file.type == 'folder'">
+                                              <i class="icon voyager-folder"></i>
+                                          </template>
+                                          <template
+                                                  v-if="file.type != 'folder' && !file.type.includes('image') && !file.type.includes('video') && !file.type.includes('audio')">
+                                              <i class="icon voyager-file-text"></i>
+                                          </template>
+
+                                      </div>
+                                      <div class="details @{{ file.type }}"><h4>@{{ file.name }}</h4>
+                                          <small>
+                                              <template v-if="file.type == 'folder'">
+                                              <!--span class="num_items">@{{ file.items }} file(s)</span-->
+                                              </template>
+                                              <template v-else>
+                                                  <input type="checkbox" name="sliders[]" value="@{{ file.path }}:::@{{files.path}}:::@{{ file.name}}">
+                                              </template>
+                                          </small>
+                                      </div>
+                                  </div>
+                              </li>
+
+                            </ul>
+
+                            <div id="file_loader">
+                                <div id="file_loader_inner">
+                                    <div class="icon voyager-helm"></div>
+                                </div>
+                                <p>Таны мэдиа файлуудыг ачааллаж байна</p>
                             </div>
                           </div>
                         </div>
@@ -151,10 +205,6 @@
                                         <option value="{{ $category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Featured</label>
-                                <input type="checkbox" name="featured" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured){{ 'checked="checked"' }}@endif>
                             </div>
                         </div>
                     </div>
@@ -216,7 +266,17 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+  <script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>
+  <script src="{{ config('voyager.assets_path') }}/js/media/dropzone.js"></script>
+  <script src="{{ config('voyager.assets_path') }}/js/media/media.js"></script>
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
+    <script type="text/javascript">
+    var media = new VoyagerMedia({
+        baseUrl: "{{ route('voyager.dashboard') }}"
+    });
+    $(function () {
+        media.init();
+    });
+    </script>
 @stop
