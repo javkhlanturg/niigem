@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Swap;
 
 class HomeController extends Controller
 {
@@ -15,6 +16,7 @@ class HomeController extends Controller
       $videos =  \TCG\Voyager\Models\Post::where('category_id', '11')->limit('3')->get();
       $newss = \TCG\Voyager\Models\Post::orderBy('created_at', 'desc')->limit('3')->get();
       $footer_banner = \App\Banners::where('id', 4)->first();
+      $rate = Swap::latest('USD/MNT');
     return view('frontend.index')
     ->with('top_news',$top_news)
     ->with('uls_turs',$uls_turs)
@@ -22,7 +24,8 @@ class HomeController extends Controller
     ->with('delhiis',$delhiis)
     ->with('footer_banner',$footer_banner)
     ->with('videos',$videos)
-    ->with('newss',$newss);
+    ->with('newss',$newss)
+    ->with('rate',$rate);
   }
 
 }
