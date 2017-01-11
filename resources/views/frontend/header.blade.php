@@ -76,16 +76,29 @@
                 <div class="col-sm-8 col-md-7">
                     <div class="newsticker-inner">
                         <ul class="newsticker" style="float:right;">
-                          <?php   $rate = Swap\Laravel\Facades\Swap::latest('USD/MNT');?>
-                            <li><span class="color-1"><img src="/../assets/flag/usd.png" style="width: 20px;"/> USD:</span><a href="#"><?php echo $rate->getValue(); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/usd.png" style="width: 20px;"/> USD:</span><a href="#"><?php echo $rate->getValue(); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/usd.png" style="width: 20px;"/> USD:</span><a href="#"><?php echo $rate->getValue(); ?></a></li>
+                          <?php  $usd = Swap\Laravel\Facades\Swap::latest('USD/MNT');?>
+                          <?php  $euro = Swap\Laravel\Facades\Swap::latest('EUR/MNT');?>
+                          <?php  $gbp = Swap\Laravel\Facades\Swap::latest('GBP/MNT');?>
+                          <?php  $jpy = Swap\Laravel\Facades\Swap::latest('JPY/MNT');?>
+                          <?php  $krw = Swap\Laravel\Facades\Swap::latest('KRW/MNT');?>
+                          <?php  $rub = Swap\Laravel\Facades\Swap::latest('RUB/MNT');?>
+                          <?php  $cny = Swap\Laravel\Facades\Swap::latest('CNY/MNT');?>
+                            <li><span class="color-1"><img src="/../assets/flag/usd.png" style="width: 16px;"/> USD:</span><a href="#"><?php echo number_format($usd->getValue()); ?></a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/eur.png" style="width: 16px;"/> UER:</span><a href="#"><?php echo number_format($euro->getValue()); ?></a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/cny.png" style="width: 16px;"/> CNY:</span><a href="#"><?php echo number_format($cny->getValue()); ?></a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/gbp.png" style="width: 16px;"/> GBP:</span><a href="#"><?php echo number_format($gbp->getValue()); ?></a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/JPE.png" style="width: 16px;"/> JPE:</span><a href="#"><?php echo number_format($jpy->getValue()); ?></a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 16px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?></a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 16px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?></a></li>
                         </ul>
-
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-2">
-                  Цаг агаар
+                <div class="col-sm-12 col-md-2" style="margin-top: 9px;">
+                  <?php $ub = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22ulaanbaatar%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+                          $json_ub = file_get_contents($ub, 0, null, null);
+                          $json_output_ub = json_decode($json_ub);
+                          $weather = $json_output_ub->query->results->channel->item->condition; ?>
+                <span> <span class="color-1">Улаанбаатар:</span> <?php echo ($weather!='X') ?  number_format(($weather->temp - 32) * (5 / 9), 0): "X"; ?>&deg; </span>
                 </div>
             </div>
         </div>
