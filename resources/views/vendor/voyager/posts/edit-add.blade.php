@@ -161,7 +161,7 @@
                                               <!--span class="num_items">@{{ file.items }} file(s)</span-->
                                               </template>
                                               <template v-else>
-                                                  <input type="checkbox" name="sliders[]" value="@{{ file.path }}:::@{{files.path}}:::@{{ file.name}}">
+                                                  <input type="checkbox" id="@{{ file.name}}" checked="@{{ file.checked}}" name="sliders[]" value="@{{ file.path }}:::@{{files.path}}:::@{{ file.name}}">
                                               </template>
                                           </small>
                                       </div>
@@ -268,13 +268,182 @@
 @section('javascript')
   <script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>
   <script src="{{ config('voyager.assets_path') }}/js/media/dropzone.js"></script>
-  <script src="{{ config('voyager.assets_path') }}/js/media/media.js"></script>
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
     <script type="text/javascript">
-    var media = new VoyagerMedia({
-        baseUrl: "{{ route('voyager.dashboard') }}"
+    var manager = new Vue({
+      el: '#filemanager',
+      data: {
+          files: '',
+          folders: [],
+          selected_file: '',
+          directories: [],
+      },
     });
+
+
+    CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+    var VoyagerMedia = function(o){
+      var defaults = {
+        baseUrl: "/slider"
+      };
+      var options = $.extend(true, defaults, o);
+      this.init = function(){
+        @if(isset($dataTypeContent->featured) and $dataTypeContent->id)
+        <?php $sd = App\PostImage::where('post_id', $dataTypeContent->id)->first();
+        ?>
+          @if($sd)
+          <?php $nm = explode('/', substr( $sd->public_path, 7 ));
+          ?>
+            @for($i=0; $i < sizeof($nm); $i++)
+              @if($nm[$i])
+                manager.folders.push( "{{$nm[$i]}}" );
+              @endif
+            @endfor
+              getFiles(manager.folders);
+          @else
+              getFiles('/');
+          @endif
+        @else
+        getFiles('/');
+        @endif
+
+        $('#files').on("dblclick", "li .file_link", function(){
+          if (! $(this).children('.details').hasClass('folder')) {
+            return false;
+          }
+          manager.folders.push( $(this).data('folder') );
+          getFiles(manager.folders);
+        });
+
+        $('#files').on("click", "li", function(e){
+          var clicked = e.target;
+          if(!$(clicked).hasClass('file_link')){
+            clicked = $(e.target).closest('.file_link');
+          }
+          setCurrentSelected(clicked);
+        });
+
+        $('.breadcrumb').on("click", "li", function(){
+          var index = $(this).data('index');
+          manager.folders = manager.folders.splice(0, index);
+          getFiles(manager.folders);
+        });
+
+        $('.breadcrumb-container .toggle').click(function(){
+          $('.flex #right').toggle();
+          var toggle_text = $('.breadcrumb-container .toggle span').text();
+          $('.breadcrumb-container .toggle span').text(toggle_text == "Close" ? "Open" : "Close");
+          $('.breadcrumb-container .toggle .icon').toggleClass('fa-toggle-right').toggleClass('fa-toggle-left');
+        });
+
+        //********** Add Keypress Functionality **********//
+        $(document).keydown(function(e) {
+          var curSelected = $('#files li .selected').data('index');
+          // left key
+          if( (e.which == 37 || e.which == 38) && parseInt(curSelected)) {
+            newSelected = parseInt(curSelected)-1;
+            setCurrentSelected( $('*[data-index="'+ newSelected + '"]') );
+          }
+          // right key
+          if( (e.which == 39 || e.which == 40) && parseInt(curSelected) < manager.files.items.length-1 ) {
+            newSelected = parseInt(curSelected)+1;
+            setCurrentSelected( $('*[data-index="'+ newSelected + '"]') );
+          }
+          // enter key
+          if(e.which == 13) {
+            if (!$('#new_folder_modal').is(':visible') && !$('#move_file_modal').is(':visible') && !$('#confirm_delete_modal').is(':visible') ) {
+              manager.folders.push( $('#files li .selected').data('folder') );
+              getFiles(manager.folders);
+            }
+            if($('#confirm_delete_modal').is(':visible')){
+              $('#confirm_delete').trigger('click');
+            }
+          }
+        });
+        //********** End Keypress Functionality **********//
+
+        manager.$watch('files', function (newVal, oldVal) {
+          setCurrentSelected( $('*[data-index="0"]') );
+          $('#filemanager #content #files').hide();
+          $('#filemanager #content #files').fadeIn('fast');
+          $('#filemanager .loader').fadeOut(function(){
+
+            $('#filemanager #content').fadeIn();
+          });
+
+          if(newVal.items.length < 1){
+            $('#no_files').show();
+          } else {
+            $('#no_files').hide();
+          }
+        });
+
+        manager.$watch('directories', function (newVal, oldVal) {
+          if($("#move_folder_dropdown").select2()){
+            $("#move_folder_dropdown").select2('destroy');
+          }
+          $("#move_folder_dropdown").select2();
+        });
+
+        manager.$watch('selected_file', function (newVal, oldVal) {
+          if(typeof(newVal) == 'undefined'){
+            $('.right_details').hide();
+            $('.right_none_selected').show();
+            $('#move').attr('disabled', true);
+            $('#delete').attr('disabled', true);
+          } else {
+            $('.right_details').show();
+            $('.right_none_selected').hide();
+            $('#move').removeAttr("disabled");
+            $('#delete').removeAttr("disabled");
+          }
+        });
+
+        function getFiles(folders){
+          if(folders != '/'){
+            var folder_location = '/' + folders.join('/');
+          } else {
+            var folder_location = '/';
+          }
+          $('#file_loader').fadeIn();
+          $.post(options.baseUrl+'/action', { folder:folder_location, _token: CSRF_TOKEN,@if(isset($dataTypeContent->featured) and $dataTypeContent->id) post_id:{{$dataTypeContent->id}}, @endif _token: CSRF_TOKEN }, function(data) {
+            $('#file_loader').hide();
+            manager.files = data;
+            for(var i=0; i < manager.files.items.length; i++){
+              if(typeof(manager.files.items[i].size) != undefined){
+                manager.files.items[i].size = bytesToSize(manager.files.items[i].size);
+              }
+            }
+          });
+
+          // Add the latest files to the folder dropdown
+          var all_folders = '';
+          $.post(options.baseUrl+'/directories', { folder_location:manager.folders, _token: CSRF_TOKEN }, function(data){
+            manager.directories = data;
+          });
+
+        }
+
+        function setCurrentSelected(cur){
+          $('#files li .selected').removeClass('selected');
+          $(cur).addClass('selected');
+          manager.selected_file = manager.files.items[$(cur).data('index')];
+        }
+
+        function bytesToSize(bytes) {
+          var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+          if (bytes == 0) return '0 Bytes';
+          var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+          return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+        }
+      }
+    };
+
+    </script>
+    <script type="text/javascript">
+    var media = new VoyagerMedia();
     $(function () {
         media.init();
     });
