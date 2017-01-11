@@ -201,18 +201,21 @@ class VoyagerBreadController extends Controller
     }
 
     public function createSlider($sliders, $postid){
-      foreach($sliders as $slider){
-        $arr = explode(":::", $slider);
-        $path = $arr[0];
-        $public_path = $arr[1];
-        $file_name = $arr[2];
-        $pi = new PostImage();
-        $pi->post_id = $postid;
-        $pi->path = $path;
-        $pi->public_path = $public_path;
-        $pi->file_name = $file_name;
-        $pi->save();
+      if(sizeof($sliders)>0){
+        foreach($sliders as $slider){
+          $arr = explode(":::", $slider);
+          $path = $arr[0];
+          $public_path = $arr[1];
+          $file_name = $arr[2];
+          $pi = new PostImage();
+          $pi->post_id = $postid;
+          $pi->path = $path;
+          $pi->public_path = $public_path;
+          $pi->file_name = $file_name;
+          $pi->save();
+        }
       }
+
     }
 
     //***************************************

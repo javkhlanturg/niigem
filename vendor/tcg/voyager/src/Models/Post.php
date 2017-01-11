@@ -35,4 +35,9 @@ class Post extends Model
     {
         return $this->hasMany("App\Comments", 'postid', 'id')->count();
     }
+
+    public function sliders()
+    {
+        return $this->hasMany("App\PostImage", 'post_id', 'id')->get();
+    }
 }

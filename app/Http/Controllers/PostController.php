@@ -80,9 +80,6 @@ class PostController extends Controller
         $dir = $this->directory.$folder;
         if($request->input('post_id')){
             $images = PostImage::where('post_id', $request->input('post_id'));
-            if(sizeof($images)>0){
-                $dir = $this->directory.$folder.substr($images->get()[0]->public_path, 6);
-            }
         }
 
         return response()->json([

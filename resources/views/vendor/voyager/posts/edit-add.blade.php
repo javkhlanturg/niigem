@@ -290,8 +290,24 @@
       };
       var options = $.extend(true, defaults, o);
       this.init = function(){
-
+        @if(isset($dataTypeContent->featured) and $dataTypeContent->id)
+        <?php $sd = App\PostImage::where('post_id', $dataTypeContent->id)->first();
+        ?>
+          @if($sd)
+          <?php $nm = explode('/', substr( $sd->public_path, 7 ));
+          ?>
+            @for($i=0; $i < sizeof($nm); $i++)
+              @if($nm[$i])
+                manager.folders.push( "{{$nm[$i]}}" );
+              @endif
+            @endfor
+              getFiles(manager.folders);
+          @else
+              getFiles('/');
+          @endif
+        @else
         getFiles('/');
+        @endif
 
         $('#files').on("dblclick", "li .file_link", function(){
           if (! $(this).children('.details').hasClass('folder')) {
