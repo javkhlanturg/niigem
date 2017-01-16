@@ -141,13 +141,12 @@ abstract class Controller extends BaseController
                         $resize_width = 1800;
                         $resize_height = null;
                     }
-
                     $image = Image::make($file)->resize($resize_width, $resize_height,
                         function (Constraint $constraint) {
                             $constraint->aspectRatio();
                             $constraint->upsize();
                         })->encode($file->getClientOriginalExtension(), 75);
-
+                        //$image->save($destinationPath . $fileUniqueName, 100);
                     Storage::put(config('voyager.storage.subfolder').$fullPath, (string) $image, 'public');
 
                     if (isset($options->thumbnails)) {
