@@ -227,7 +227,7 @@
                         </div>
                         <div class="panel-body">
                             @if(isset($dataTypeContent->image))
-                                <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
+                                <img src="{{env('STORAGE_PATH', '/storage')}}/{{$dataTypeContent->image}}" style="width:100%" />
                             @endif
                             <input type="file" name="image">
                         </div>
