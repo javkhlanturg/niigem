@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use TCG\Voyager\Models\DataType;
 use TCG\Voyager\Voyager;
 use App\PostImage;
-
+use App\PostCategories;
 class VoyagerBreadController extends Controller
 {
     //***************************************
@@ -129,6 +129,9 @@ class VoyagerBreadController extends Controller
         if($slug === 'posts'){
           PostImage::where('post_id', $data->id)->delete();
           $this->createSlider($request->input('sliders'), $data->id);
+
+          PostCategories::where('post_id', $data->id)->delete();
+          $this->addPostCategories($request->input('cats'), $data->id);
         }
         return redirect()
             ->route("voyager.{$dataType->slug}.index")
@@ -190,6 +193,7 @@ class VoyagerBreadController extends Controller
         if($slug === 'posts'){
           if($request->input('featured')){
               $this->createSlider($request->input('sliders'), $data->id);
+              $this->addPostCategories($request->input('cats'), $data->id);
           }
         }
         return redirect()
@@ -198,6 +202,17 @@ class VoyagerBreadController extends Controller
                 'message'    => "Successfully Added New {$dataType->display_name_singular}",
                 'alert-type' => 'success',
             ]);
+    }
+
+    public function addPostCategories($categories, $postid){
+      if(sizeof($categories)>0){
+        foreach($categories as $category){
+            $post = new PostCategories();
+            $post->post_id = $postid;
+            $post->cat_id = $category;
+            $post->save();
+        }
+      }
     }
 
     public function createSlider($sliders, $postid){

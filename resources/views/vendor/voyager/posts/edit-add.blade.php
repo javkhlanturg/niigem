@@ -199,12 +199,20 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="name">Мэдээний категори</label>
+                                <label for="name">Үндсэн категори</label>
                                 <select class="form-control" name="category_id">
                                     @foreach(TCG\Voyager\Models\Category::all() as $category)
                                         <option value="{{ $category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Нэмэлт категори</label>
+                                @foreach(TCG\Voyager\Models\Category::all() as $category)
+                                    <div class="checkbox">
+                                      <label><input type="checkbox" @if($category->moreCats($dataTypeContent->id)) checked="true"  @endif name="cats[]" value="{{ $category->id }}">{{ $category->name }}</label>
+                                    </div>
+                                  @endforeach
                             </div>
                         </div>
                     </div>

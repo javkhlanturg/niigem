@@ -101,19 +101,22 @@ class PostController extends Controller
 
         foreach ($storageFiles as $file) {
           $filename = strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file;
-          $temp_image = clone $images;
-          $temp = $temp_image->where('file_name',$filename);
-            $files[] = [
-                'name'          => $filename,
-                'checked'       => sizeof($temp->first())>0,
-                'type'          => Storage::mimeType($file),
-                'path'          => Storage::disk(config('filesystem.default'))->url($file),
-                'size'          => Storage::size($file),
-                'last_modified' => Storage::lastModified($file),
-            ];
+          $check = starts_with($filename, 'thumb');
+          if(!$check){
+            $temp_image = clone $images;
+            $temp = $temp_image->where('file_name',$filename);
+              $files[] = [
+                  'name'          => $filename,
+                  'checked'       => sizeof($temp->first())>0,
+                  'type'          => Storage::mimeType($file),
+                  'path'          => Storage::disk(config('filesystem.default'))->url($file),
+                  'size'          => Storage::size($file),
+                  'last_modified' => Storage::lastModified($file),
+              ];
 
 
-            $temp = null;
+              $temp = null;
+          }
         }
 
         foreach ($storageFolders as $folder) {

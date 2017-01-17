@@ -6,6 +6,9 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use TCG\Voyager\Voyager;
+use Validator;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class VoyagerMediaController extends Controller
 {
@@ -215,16 +218,52 @@ class VoyagerMediaController extends Controller
     public function upload(Request $request)
     {
         try {
-            $path = $request->file->store($request->upload_path);
+            $mimes = 'mimes:JPG,PNG,GIF,JPEG,png,gif,jpeg,jpg|max:80000';
+            $file = $request->file('file');
+            $rules = ['file' => $mimes];
+            $validator = Validator::make( $request->all(), $rules );
+            $path = "";
+            if ($validator->passes()) {
+              $path = $this->uploadImage($file,  $request->upload_path);
+            }else{
+                $path = $request->file->store($request->upload_path);
+            }
             $success = true;
-            $message = 'Фото зураг хадгалагдлаа!';
-        } catch (Exception $e) {
+            $message = 'Файл хадгалагдлаа!';
+        } catch ( Exception $e ) {
             $success = false;
             $message = $e->getMessage();
         }
 
         $path = preg_replace('/^public\//', '', $path);
 
-        return response()->json(compact('success', 'message', 'path'));
+        return response()->json( compact('success', 'message', 'path') );
     }
+
+    public function uploadImage($file, $path)
+    {
+          $filename = Str::random(20);
+          $watermark = public_path()."/assets/images/watermark.png";
+          $fullPath = $path."/".$filename.'.'.$file->getClientOriginalExtension();
+          $resize_width = 800;
+          $resize_height = null;
+          $uploadSuccess = Image::make($file->getRealPath());
+          $bigImage = $uploadSuccess->resize($resize_width, $resize_height, function ($constraint) {
+              $constraint->aspectRatio();
+          });
+          $bigImage->insert($watermark, 'bottom-right', null, null, 220, 80);
+          $image = $bigImage->encode($file->getClientOriginalExtension(), 75);
+              //$image->save($destinationPath . $fileUniqueName, 100);
+          Storage::put($fullPath, (string) $image, 'public');
+
+          //-------------- thumb image -------------
+          $thumb_image = $uploadSuccess->resize(250, null, function ($constraint) {
+              $constraint->aspectRatio();
+          });
+          $t_image = $thumb_image->encode($file->getClientOriginalExtension(), 75);
+              //$image->save($destinationPath . $fileUniqueName, 100);
+          Storage::put($path."/"."thumb-".$filename.'.'.$file->getClientOriginalExtension(), (string) $t_image, 'public');
+          //----------------------------------------
+          return $fullPath;
+      }
 }
