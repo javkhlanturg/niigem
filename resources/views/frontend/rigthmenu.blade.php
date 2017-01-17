@@ -14,7 +14,7 @@
         @foreach($newss as $news)
         <div class="box-item wow fadeIn" data-wow-duration="1s">
           <div class="img-thumb">
-            <a href="" rel="bookmark"><img class="entry-thumb" src="/storage/app/public/{{$news->image}}" style="width:90px;height:80px;object-fit: cover;"></a>
+            <a href="" rel="bookmark"><img class="entry-thumb" src="/storage/{{str_replace('.', '-small.',$news->image)}}" style="width:90px;height:80px;object-fit: cover;"></a>
           </div>
           <div class="item-details">
             <h6 class="sub-category-title bg-color-1">

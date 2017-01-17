@@ -133,7 +133,6 @@ abstract class Controller extends BaseController
                     $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
 
                     $options = json_decode($row->details);
-
                     if (isset($options->resize) && isset($options->resize->width) && isset($options->resize->height)) {
                         $resize_width = $options->resize->width;
                         $resize_height = $options->resize->height;
@@ -172,7 +171,6 @@ abstract class Controller extends BaseController
                                 $image = Image::make($file)->fit($crop_width,
                                     $crop_height)->encode($file->getClientOriginalExtension(), 75);
                             }
-
                             Storage::put(config('voyager.storage.subfolder').$path.$filename.'-'.$thumbnails->name.'.'.$file->getClientOriginalExtension(),
                                 (string) $image, 'public');
                         }

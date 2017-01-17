@@ -75,6 +75,7 @@
                 <!--breaking news-->
                 <div class="col-sm-8 col-md-7">
                     <div class="newsticker-inner">
+                      <?php /* ?>
                         <ul class="newsticker" style="float:right;">
                           <?php  $usd = Swap\Laravel\Facades\Swap::latest('USD/MNT');?>
                           <?php  $euro = Swap\Laravel\Facades\Swap::latest('EUR/MNT');?>
@@ -91,14 +92,8 @@
                             <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 16px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?></a></li>
                             <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 16px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?></a></li>
                         </ul>
+                        <?php */ ?>
                     </div>
-                </div>
-                <div class="col-sm-12 col-md-2" style="margin-top: 9px;">
-                  <?php $ub = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22ulaanbaatar%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-                          $json_ub = file_get_contents($ub, 0, null, null);
-                          $json_output_ub = json_decode($json_ub);
-                          $weather = $json_output_ub->query->results->channel->item->condition; ?>
-                <span> <span class="color-1">Улаанбаатар:</span> <?php echo ($weather!='X') ?  number_format(($weather->temp - 32) * (5 / 9), 0): "X"; ?>&deg; </span>
                 </div>
             </div>
         </div>

@@ -210,7 +210,7 @@
                                 <label for="name">Нэмэлт категори</label>
                                 @foreach(TCG\Voyager\Models\Category::all() as $category)
                                     <div class="checkbox">
-                                      <label><input type="checkbox" @if($category->moreCats($dataTypeContent->id)) checked="true"  @endif name="cats[]" value="{{ $category->id }}">{{ $category->name }}</label>
+                                      <label><input type="checkbox" @if(isset($dataTypeContent->id) and $category->moreCats($dataTypeContent->id)) checked="true"  @endif name="cats[]" value="{{ $category->id }}">{{ $category->name }}</label>
                                     </div>
                                   @endforeach
                             </div>

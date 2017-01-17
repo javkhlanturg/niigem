@@ -12,7 +12,7 @@
             <div class="post-wrapper post-grid-1 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="#">
-                  <img class="entry-thumb" src="/storage/app/public/{{$top_new->image}}" style="width:257px;height:199px;object-fit: cover;">
+                  <img class="entry-thumb" src="/storage/{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -34,7 +34,7 @@
             <div class="post-wrapper post-grid-2 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="#">
-                  <img class="entry-thumb" src="/storage/app/public/{{$top_new->image}}" style="width:257px;height:199px;object-fit: cover;">
+                  <img class="entry-thumb" src="/storage/{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -62,7 +62,7 @@
               <div class="post-wrapper post-grid-3 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="#">
-                    <img class="entry-thumb-middle" src="/storage/app/public/{{$top_new->image}}" style="width:519px;height:400px;object-fit: cover;">
+                    <img class="entry-thumb-middle" src="/storage/{{str_replace('.', '-medium.',$top_new->image)}}" style="width:519px;height:400px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -91,7 +91,7 @@
               <div class="post-wrapper post-grid-4 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="#">
-                    <img class="entry-thumb" src="\assets\images\slider\slide-09.jpg" style="width:257px;height:199px;object-fit: cover;">
+                    <img class="entry-thumb" src="/storage/{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -116,7 +116,7 @@
               <div class="post-wrapper post-grid-5 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="#">
-                    <img class="entry-thumb" src="\assets\images\slider\slide-10.jpg" style="width:257px;height:199px;object-fit: cover;">
+                    <img class="entry-thumb" src="/storage/{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -158,13 +158,8 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/app/public/{{$tur->image}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="/storage/{{str_replace('.', '-medium.',$tur->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
-                    </div>
-                    <div class="post-info meta-info-rn">
-                      <div class="slide">
-                        <a target="_blank" href="#" class="post-badge btn_eight">У</a>
-                      </div>
                     </div>
                   </div>
                   <div class="post-title-author-details">
@@ -193,13 +188,8 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/app/public/{{$zasag->image}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="/storage/{{str_replace('.', '-medium.',$zasag->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
-                    </div>
-                    <div class="post-info meta-info-rn">
-                      <div class="slide">
-                        <a target="_blank" href="#" class="post-badge btn_eight">У</a>
-                      </div>
                     </div>
                   </div>
                   <div class="post-title-author-details">
@@ -228,7 +218,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="#">
-                        <img class="entry-thumb" height="90" src="/storage/app/public/{{$del->image}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="/storage/{{str_replace('.', '-medium.',$del->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
                     <div class="post-info meta-info-rn">
@@ -254,7 +244,7 @@
           </section>
           <!-- /.Politics -->
           <div class="ads">
-            <a href="#"><img src="/storage/app/public/{{$footer_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
+            <a href="#"><img src="/storage/{{$footer_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
           </div>
           <section class="politics_wrapper">
             <h3 class="category-headding ">Видео</h3>
@@ -269,7 +259,7 @@
 
                       <a href="#" class="video-img-icon">
                         <i class="fa fa-play"></i>
-                        <img class="img-responsive" src="\assets\images\recent_news_04.jpg" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="img-responsive" src="/storage/{{str_replace('.', '-medium.',$video->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
 
