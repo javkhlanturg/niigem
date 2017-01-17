@@ -33,7 +33,7 @@
 </head>
 
 <body>
-    <div class="se-pre-con"></div>
+    
     <?php $menus = \TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get(); ?>
     <?php $banner_top = App\Banners::where('id', 2)->first(); ?>
     <?php $logo = App\Banners::where('id', 3)->first(); ?>
