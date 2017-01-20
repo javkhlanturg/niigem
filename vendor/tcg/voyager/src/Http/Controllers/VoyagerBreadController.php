@@ -191,15 +191,13 @@ class VoyagerBreadController extends Controller
 
         $this->insertUpdateData($request, $slug, $dataType->addRows, $data);
         if($slug === 'posts'){
-          if($request->input('featured')){
               $this->createSlider($request->input('sliders'), $data->id);
               $this->addPostCategories($request->input('cats'), $data->id);
-          }
         }
         return redirect()
             ->route("voyager.{$dataType->slug}.index")
             ->with([
-                'message'    => "Successfully Added New {$dataType->display_name_singular}",
+                'message'    => "Мэдээ нэмэгдлээ {$dataType->display_name_singular}",
                 'alert-type' => 'success',
             ]);
     }

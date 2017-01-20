@@ -14,11 +14,11 @@
         @foreach($newss as $news)
         <div class="box-item wow fadeIn" data-wow-duration="1s">
           <div class="img-thumb">
-            <a href="" rel="bookmark"><img class="entry-thumb" src="/storage/app/public/{{$news->image}}" style="width:90px;height:80px;object-fit: cover;"></a>
+            <a href="/{{$news->category['slug']}}/{{$news->id}}" rel="bookmark"><img class="entry-thumb" src="{{env('STORAGE_PATH', '/storage')}}/{{str_replace('.', '-small.',$news->image)}}" style="width:90px;height:80px;object-fit: cover;"></a>
           </div>
           <div class="item-details">
             <h6 class="sub-category-title bg-color-1">
-              <a href="#">{{$news->category['name']}}</a>
+              <a href="/{{$news->category['slug']}}/{{$news->id}}">{{$news->category['name']}}</a>
             </h6>
             <h3 class="td-module-title"><a href="/{{$news->category['slug']}}/{{$news->id}}">{{$news->title}}</a></h3>
             <div class="post-editor-date">
@@ -44,7 +44,7 @@
     <!-- add -->
     <?php $add_banner = App\Banners::where('id', 5)->first(); ?>
     <span class="add-title">- Сурталчилгаа -</span>
-    <a href="{{$add_banner->url}}"><img src="/storage/app/public/{{$add_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
+    <a href="{{$add_banner->url}}"><img src="{{env('STORAGE_PATH', '/storage')}}/{{$add_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
   </div>
   <!-- comments -->
   <div class="latest-comments-inner">

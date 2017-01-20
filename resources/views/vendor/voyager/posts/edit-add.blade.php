@@ -210,7 +210,7 @@
                                 <label for="name">Нэмэлт категори</label>
                                 @foreach(TCG\Voyager\Models\Category::all() as $category)
                                     <div class="checkbox">
-                                      <label><input type="checkbox" @if($category->moreCats($dataTypeContent->id)) checked="true"  @endif name="cats[]" value="{{ $category->id }}">{{ $category->name }}</label>
+                                      <label><input type="checkbox" @if(isset($dataTypeContent->id) and $category->moreCats($dataTypeContent->id)) checked="true"  @endif name="cats[]" value="{{ $category->id }}">{{ $category->name }}</label>
                                     </div>
                                   @endforeach
                             </div>
@@ -227,7 +227,7 @@
                         </div>
                         <div class="panel-body">
                             @if(isset($dataTypeContent->image))
-                                <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
+                                <img src="{{env('STORAGE_PATH', '/storage')}}/{{$dataTypeContent->image}}" style="width:100%" />
                             @endif
                             <input type="file" name="image">
                         </div>

@@ -254,7 +254,7 @@ class VoyagerMediaController extends Controller
           $bigImage->insert($watermark, 'bottom-right', null, null, 220, 80);
           $image = $bigImage->encode($file->getClientOriginalExtension(), 75);
               //$image->save($destinationPath . $fileUniqueName, 100);
-          Storage::put($fullPath, (string) $image, 'public');
+          Storage::put( $fullPath, (string) $image, 'public' );
 
           //-------------- thumb image -------------
           $thumb_image = $uploadSuccess->resize(250, null, function ($constraint) {

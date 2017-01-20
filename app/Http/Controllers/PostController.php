@@ -7,6 +7,8 @@ use App\Comments;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\PostImage;
+use App\PostCategories;
+use \TCG\Voyager\Models\Post;
 class PostController extends Controller
 {
   /** @var string */
@@ -31,8 +33,16 @@ class PostController extends Controller
         if(!$category){
           return view('frontend.404');
         }
-        $posts = $category->posts()->paginate(3);
-        $newss = \TCG\Voyager\Models\Post::orderBy('created_at', 'desc')->limit('3')->get();
+
+
+        $post_ids = PostCategories::where("cat_id", $category->id)->get();
+        $ids = array();
+        foreach($post_ids as $id){
+          array_push($ids, $id->post_id);
+        }
+        $posts = Post::where('status', '=', 'PUBLISHED')->where("category_id",'=', $category->id)->orWhereIn('id', $ids)->where('status', '=', 'PUBLISHED')
+            ->orderBy('created_at', 'DESC')->paginate(6);
+        $newss = Post::orderBy('created_at', 'desc')->limit('3')->get();
         return view("frontend.postlist", ['posts'=>$posts, 'menu'=>$menu, 'newss'=>$newss]);
     }
 
@@ -42,13 +52,15 @@ class PostController extends Controller
         if(!$category){
           return view('frontend.404');
         }
-        $post = $category->posts()->where('id', $postid)->first();
+        $post = Post::where('id', $postid)->first();
         if(!$post){
           return view('frontend.404');
         }
         $comments = DB::table('comments')->where('postid', $post->id)->where('parent_id','0')->get();
-        foreach($comments as $c){
-          $c->replies = DB::table('comments')->where('parent_id', $c->id)->get();
+        if(sizeof($comments) > 0 ){
+          foreach($comments as $c){
+            $c->replies = DB::table('comments')->where('parent_id', $c->id)->get();
+          }
         }
 
         // $reply_comments = Comments::where('postid',$post->id)->where('parent_id',)->get();
@@ -80,6 +92,15 @@ class PostController extends Controller
         $dir = $this->directory.$folder;
         if($request->input('post_id')){
             $images = PostImage::where('post_id', $request->input('post_id'));
+        }else{
+          return response()->json([
+              'name'          => 'files',
+              'type'          => 'folder',
+              'path'          => $dir,
+              'folder'        => $folder,
+              'items'         => $this->getFileOne($dir),
+              'last_modified' => 'asdf',
+          ]);
         }
 
         return response()->json([
@@ -117,6 +138,42 @@ class PostController extends Controller
 
               $temp = null;
           }
+        }
+
+        foreach ($storageFolders as $folder) {
+            $files[] = [
+                'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
+                'type'          => 'folder',
+                'path'          => Storage::disk(config('filesystem.default'))->url($folder),
+                'items'         => '',
+                'last_modified' => '',
+            ];
+        }
+
+        return $files;
+    }
+
+    private function getFileOne($dir)
+    {
+
+        $files = [];
+        $storageFiles = Storage::files($dir);
+        $storageFolders = Storage::directories($dir);
+
+        foreach ($storageFiles as $file) {
+          $filename = strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file;
+          $check = starts_with($filename, 'thumb');
+          if(!$check){
+            $files[] = [
+                'name'          => strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file,
+                'checked'       => false,
+                'type'          => Storage::mimeType($file),
+                'path'          => Storage::disk(config('filesystem.default'))->url($file),
+                'size'          => Storage::size($file),
+                'last_modified' => Storage::lastModified($file),
+            ];
+          }
+
         }
 
         foreach ($storageFolders as $folder) {

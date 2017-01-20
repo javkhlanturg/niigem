@@ -75,6 +75,7 @@
                 <!--breaking news-->
                 <div class="col-sm-8 col-md-7">
                     <div class="newsticker-inner">
+                      <?php /* ?>
                         <ul class="newsticker" style="float:right;">
                           <?php  $usd = Swap\Laravel\Facades\Swap::latest('USD/MNT');?>
                           <?php  $euro = Swap\Laravel\Facades\Swap::latest('EUR/MNT');?>
@@ -91,9 +92,13 @@
                             <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 16px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?></a></li>
                             <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 16px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?></a></li>
                         </ul>
+                        <?php */ ?>
                     </div>
                 </div>
+<<<<<<< HEAD
             
+=======
+>>>>>>> 7e570f63114a4a4cbf8713921c245f09ac832c09
             </div>
         </div>
     </div>

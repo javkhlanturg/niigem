@@ -61,7 +61,7 @@
             <div class="row">
               <article class="content">
                 <div class="post-thumb">
-                    <img src="/storage/app/public/{{$post->image}}" class="img-responsive post-image" alt="">
+                    <img src="{{env('STORAGE_PATH', '/storage')}}/{{$post->image}}" class="img-responsive post-image" alt="">
                     @if(1=== 0)
                     <div class="social">
                         <ul>
@@ -86,7 +86,7 @@
                       @foreach($post->sliders() as $slider)
                         <div data-p="144.50">
                             <img data-u="image" style="width:100%" src="{{$slider->path}}" />
-                            <img data-u="thumb" src="{{$slider->path}}" />
+                            <img data-u="thumb" src="{{str_replace($slider->file_name, 'thumb-'.$slider->file_name, $slider->path)}}" />
                         </div>
                       @endforeach
                     </div>
