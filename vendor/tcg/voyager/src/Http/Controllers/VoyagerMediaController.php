@@ -247,7 +247,7 @@ class VoyagerMediaController extends Controller
           $fullPath = $path."/".$filename.'.'.$file->getClientOriginalExtension();
           $resize_width = 800;
           $resize_height = null;
-          $uploadSuccess = Image::make($file->getRealPath());
+          $uploadSuccess = Image::make($file);
           $bigImage = $uploadSuccess->resize($resize_width, $resize_height, function ($constraint) {
               $constraint->aspectRatio();
           });
