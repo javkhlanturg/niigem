@@ -161,3 +161,11 @@
 	echo json_encode($data);
 
   ?>
+
+	<!-- <div class="col-sm-12 col-md-2" style="margin-top: 9px;">
+		<?php $ub = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22ulaanbaatar%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+						$json_ub = file_get_contents($ub, 0, null, null);
+						$json_output_ub = json_decode($json_ub);
+						$weather = $json_output_ub->query->results->channel->item->condition; ?>
+	<span> <span class="color-1">Улаанбаатар:</span> <?php echo ($weather!='X') ?  number_format(($weather->temp - 32) * (5 / 9), 0): "X"; ?>&deg; </span>
+	</div> -->

@@ -88,13 +88,17 @@
                             <li><span class="color-1"><img src="/../assets/flag/eur.png" style="width: 16px;"/> UER:</span><a href="#"><?php echo number_format($euro->getValue()); ?></a></li>
                             <li><span class="color-1"><img src="/../assets/flag/cny.png" style="width: 16px;"/> CNY:</span><a href="#"><?php echo number_format($cny->getValue()); ?></a></li>
                             <li><span class="color-1"><img src="/../assets/flag/gbp.png" style="width: 16px;"/> GBP:</span><a href="#"><?php echo number_format($gbp->getValue()); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/JPE.png" style="width: 16px;"/> JPE:</span><a href="#"><?php echo number_format($jpy->getValue()); ?></a></li>
+                              <li><span class="color-1"><img src="/../assets/flag/JPE.png" style="width: 16px;"/> JPE:</span><a href="#"><?php echo number_format($jpy->getValue()); ?></a></li>
                             <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 16px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?></a></li>
                             <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 16px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?></a></li>
                         </ul>
                         <?php */ ?>
                     </div>
                 </div>
+<<<<<<< HEAD
+            
+=======
+>>>>>>> 7e570f63114a4a4cbf8713921c245f09ac832c09
             </div>
         </div>
     </div>
