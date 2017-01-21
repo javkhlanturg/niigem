@@ -66,14 +66,14 @@
                                     <small>Хэрэв хоосон орхивол таны хуучин нууц үгээр хадгалагдана.</small>
                                 @endif
                                 <input type="password" class="form-control" name="password"
-                                       placeholder="Password" id="password"
+                                       placeholder="Нууц үг" id="password"
                                        value="">
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Зураг</label>
+                                <label for="password">Нүүр зураг</label>
                                 @if(isset($dataTypeContent->avatar))
-                                    <img src="{{ Voyager::image( $dataTypeContent->avatar ) }}"
+                                    <img src="{{ $dataTypeContent->avatar }}"
                                          style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;">
                                 @endif
                                 <input type="file" name="avatar">
@@ -94,7 +94,7 @@
                         </div><!-- panel-body -->
 
                         <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary">Илгээх</button>
+                            <button type="submit" class="btn btn-primary">Хадгалах</button>
                         </div>
                     </form>
 

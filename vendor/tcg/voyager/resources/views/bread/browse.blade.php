@@ -35,7 +35,7 @@
                                         <td>
                                             <?php $options = json_decode($row->details); ?>
                                             @if($row->type == 'image')
-                                                <img src="@if( strpos($data->{$row->field}, 'http://') === false && strpos($data->{$row->field}, 'https://') === false){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
+                                                <img src="@if( strpos($data->{$row->field}, 'http://') === false && strpos($data->{$row->field}, 'https://') === false){{ $data->{$row->field} }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                                             @elseif($row->type == 'select_multiple')
                                                 @if ($data->{$row->field} && isset($options->relationship))
                                                     {{ $data->{$row->field}->implode($options->relationship->label, ', ') }}
@@ -45,16 +45,23 @@
                                             @endif
                                         </td>
                                     @endforeach
+
                                     <td class="no-sort no-click">
+                                      @if(Voyager::check('delete_'.$dataType->name))
                                         <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
                                             <i class="voyager-trash"></i> Устгах
                                         </div>
+                                      @endif
+                                      @if(Voyager::check('edit_'.$dataType->name))
                                         <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit">
                                             <i class="voyager-edit"></i> Засах
                                         </a>
+                                      @endif
+                                      @if(Voyager::check('read_'.$dataType->name))
                                         <a href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn-sm btn-warning pull-right">
                                             <i class="voyager-eye"></i> Үзэх
                                         </a>
+                                      @endif
                                     </td>
                                 </tr>
                                 @endforeach

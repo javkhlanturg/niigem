@@ -2,7 +2,7 @@
 
 @section('page_header')
     <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i> Viewing {{ ucfirst($dataType->display_name_singular) }}
+        <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_singular }}-н харагдах байдал
     </h1>
 @stop
 
@@ -27,7 +27,7 @@
                         <div class="panel-body" style="padding-top:0;">
                             @if($row->type == "image")
                                 <img style="max-width:640px"
-                                     src="<?= Voyager::image($dataTypeContent->{$row->field}) ?>">
+                                     src="<?= $dataTypeContent->{$row->field} ?>">
                             @else
                                 <p><?= $dataTypeContent->{$row->field} ?></p>
                             @endif

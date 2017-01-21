@@ -125,19 +125,22 @@ abstract class Controller extends BaseController
             /********** IMAGE TYPE **********/
             case 'image':
                 if ($request->hasFile($row->field)) {
-                    $storage_disk = 'local';
                     $file = $request->file($row->field);
                     $filename = Str::random(20);
 
-                    $path = $slug.'/'.date('F').date('Y').'/';
+                    $path = str_finish(DIRECTORY_SEPARATOR.$slug.DIRECTORY_SEPARATOR.date('F').date('Y'), '/');
                     $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
+
+                    if (!is_dir(public_path().$path)) {
+                        mkdir(public_path().$path, 0755, true);
+                    }
 
                     $options = json_decode($row->details);
                     if (isset($options->resize) && isset($options->resize->width) && isset($options->resize->height)) {
                         $resize_width = $options->resize->width;
                         $resize_height = $options->resize->height;
                     } else {
-                        $resize_width = 1800;
+                        $resize_width = 1000;
                         $resize_height = null;
                     }
                     $image = Image::make($file)->resize($resize_width, $resize_height,
@@ -145,11 +148,12 @@ abstract class Controller extends BaseController
                             $constraint->aspectRatio();
                             $constraint->upsize();
                         })->encode($file->getClientOriginalExtension(), 75);
-                        //$image->save($destinationPath . $fileUniqueName, 100);
-                    Storage::put(config('voyager.storage.subfolder').$fullPath, (string) $image, 'public');
+                    $image->save(public_path().$fullPath, 100);
+                    //Storage::put(config('voyager.storage.subfolder').$fullPath, (string) $image, 'public');
 
                     if (isset($options->thumbnails)) {
                         foreach ($options->thumbnails as $thumbnails) {
+                          $image = null;
                             if (isset($thumbnails->name) && isset($thumbnails->scale)) {
                                 $scale = intval($thumbnails->scale) / 100;
                                 $thumb_resize_width = $resize_width;
@@ -171,8 +175,7 @@ abstract class Controller extends BaseController
                                 $image = Image::make($file)->fit($crop_width,
                                     $crop_height)->encode($file->getClientOriginalExtension(), 75);
                             }
-                            Storage::put(config('voyager.storage.subfolder').$path.$filename.'-'.$thumbnails->name.'.'.$file->getClientOriginalExtension(),
-                                (string) $image, 'public');
+                            $image->save(public_path().$path.$filename.'-'.$thumbnails->name.'.'.$file->getClientOriginalExtension(), 100);
                         }
                     }
 

@@ -29,13 +29,15 @@
     <link rel="stylesheet" type="text/css" href="\assets\css\flaticon.css">
     <!-- custom css -->
     <link rel="stylesheet" href="\assets\css\style.css">
+    <style>
+    .dropdown:hover{display: block;}
+    </style>
     @yield('css')
 </head>
 
 <body>
-    
-    <?php $menus = \TCG\Voyager\Models\MenuItem::where('menu_id', 2)->get(); ?>
-    <?php $banner_top = App\Banners::where('id', 2)->first(); ?>
+    <?php $menus = \TCG\Voyager\Models\Menu::where('name', "site_menu")->first()->items->sortBy('order'); ?>
+    <?php $banner_top = App\Banners::where('banner_position', 'top_banner')->first(); ?>
     <?php $logo = App\Banners::where('id', 3)->first(); ?>
     @include('frontend.header', ['menus'=>$menus,'top_banner'=>$banner_top, 'logo'=>$logo])
     @yield('content')
@@ -54,6 +56,26 @@
     <script type="text/javascript" src="\assets\js\form-classie.js"></script>
     <script type="text/javascript" src="\assets\js\custom.js"></script>
     @yield('javascript')
+    <script>
+    $(document).ready(function(){
+      $('.dropdown').mouseenter(function(){
+        if(!$('.navbar-toggle').is(':visible')) { // disable for mobile view
+            if(!$(this).hasClass('open')) { // Keeps it open when hover it again
+                $('.dropdown-toggle', this).trigger('click');
+            }
+        }
+    });
+    $('li.dropdown').on('click', function() {
+      var $el = $(this);
+      if ($el.hasClass('open')) {
+          var $a = $el.children('a.dropdown-toggle');
+          if ($a.length && $a.attr('href')) {
+              location.href = $a.attr('href');
+          }
+      }
+    });
+  });
+    </script>
 </body>
 
 </html>

@@ -53,7 +53,7 @@
 </div>
 
 <?php
-$user_avatar = Voyager::image(Auth::user()->avatar);
+$user_avatar = Auth::user()->avatar;
 if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->avatar, 0, 8) == 'https://')) {
     $user_avatar = Auth::user()->avatar;
 }
@@ -83,9 +83,9 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                             @if(Request::segment($i) != ltrim(route('voyager.dashboard', [], false), '/') && !is_numeric(Request::segment($i)))
 
                                 @if($i < count(Request::segments()) & $i > 0)
-                                    <li class="active"><a href="{{ $breadcrumb_url }}">{{ Request::segment($i) }}</a></li>
+                                    <li class="active"><a href="{{ $breadcrumb_url }}">{{ title_case(Lang::get("strings.".Request::segment($i))) }}</a></li>
                                 @else
-                                    <li>{{ Request::segment($i) }}</li>
+                                    <li>{{ title_case(Lang::get("strings.".Request::segment($i))) }}</li>
                                 @endif
 
                             @endif

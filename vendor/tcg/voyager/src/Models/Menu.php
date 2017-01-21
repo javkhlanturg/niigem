@@ -63,10 +63,57 @@ class Menu extends Model
 
             case 'bootstrap':
                 return self::buildBootstrapOutput($menuItems, '', $options, request());
+            case 'site_menu':
+              return self::buildSitemMenu($menuItems, '', $options);
         }
 
         return empty($type) ? self::buildOutput($menuItems, '', $options,
             request()) : self::buildCustomOutput($menuItems, $type, $options, request());
+    }
+
+    public static function buildSitemMenu($menuItems, $output, $options, $child = null, $parent = 0){
+      if (!$child) {
+          $parentItems = $menuItems->filter(function ($value, $key) {
+              return $value->parent_id == null;
+          });
+      } else {
+          $parentItems = $menuItems->filter(function ($value, $key) use ($child) {
+              return $value->parent_id == $child;
+          });
+      }
+
+      $parentItems = $parentItems->sortBy('order');
+
+      foreach ($parentItems as $item) {
+          $children_menu_items = $menuItems->filter(function ($value, $key) use ($item) {
+              return $value->parent_id == $item->id;
+          });
+          if ($children_menu_items->count() > 0) {
+              if($parent === 0){
+                $output .= '<li class="dropdown">
+                            <a href="'.$item->url.'" class="dropdown-toggle category04" data-toggle="dropdown">'.$item->title.' <span class="pe-7s-angle-down"></span></a>
+                              <ul class="dropdown-menu menu-slide">';
+              }else{
+                $output .= '<li class="dropdown-submenu">
+                            <a href="'.$item->url.'">'.$item->title.'</a>
+                              <ul class="dropdown-menu zoomIn">';
+              }
+
+              $output = self::buildSitemMenu($menuItems, $output, $options, $item->id, $parent+1);
+                $output .= '</ul>';
+              $output .= '</li>';
+          }else{
+            if($parent === 0){
+              $output .= '<li><a href="'.$item->url.'" class="category04">'.$item->title.'</a></li>';
+            }else{
+              $output .= '<li><a href="'.$item->url.'">'.$item->title.'</a></li>';
+            }
+          }
+
+      }
+
+      return $output;
+
     }
 
     /**

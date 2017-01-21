@@ -15,10 +15,6 @@
                         </div>
                         <!-- /input-group -->
                     </li>
-                    @foreach($menus as $item)
-                      <li><a href="{{$item->url}}">{{$item->title}}</a> </li>
-                      @endforeach
-
                 </ul>
             </div>
         </nav>
@@ -105,13 +101,13 @@
                     <div class="header-logo">
                         <!-- logo -->
                         <a href="/">
-                            <img class="td-retina-data img-responsive" src="/storage/app/public/{{$logo->bannerpath}}" alt="">
+                            <img style="height:60px" class="td-retina-data img-responsive" src="{{$logo->bannerpath}}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-xs-8 col-md-8 col-sm-8 hidden-xs">
                     <div class="header-banner">
-                        <a href="{{$top_banner->url}}"><img class="td-retina img-responsive" src="/storage/app/public/{{$top_banner->bannerpath}}" alt=""></a>
+                        <a href="{{$top_banner->url}}"><img style="height:60px" class="td-retina img-responsive" src="{{$top_banner->bannerpath}}" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -122,10 +118,11 @@
         <nav class="navbar">
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
+                  {!!Menu::display('site_menu', 'site_menu')!!}
 
-                  @foreach($menus as $item)
+                  <?php /*@foreach($menus as $item)
                     <li id="menu_{{$item->id}}"><a href="{{$item->url}}" class="category04">{{$item->title}}</a> </li>
-                    @endforeach
+                    @endforeach */ ?>
                 </ul>
             </div>
             <!-- navbar-collapse -->

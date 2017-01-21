@@ -74,7 +74,7 @@
                                                   name="{{ $row->field }}">@if(isset($dataTypeContent->{$row->field})){{ old($row->field, $dataTypeContent->{$row->field}) }}@else{{old($row->field)}}@endif</textarea>
                                     @elseif($row->type == "image" || $row->type == "file")
                                         @if($row->type == "image" && isset($dataTypeContent->{$row->field}))
-                                            <img src="{{ Voyager::image( $dataTypeContent->{$row->field} ) }}"
+                                            <img src="{{ $dataTypeContent->{$row->field} }}"
                                                  style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;">
                                         @elseif($row->type == "file" && isset($dataTypeContent->{$row->field}))
                                             <div class="fileType">{{ $dataTypeContent->{$row->field} }}</div>

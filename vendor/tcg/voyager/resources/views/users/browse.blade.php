@@ -41,15 +41,21 @@
                                     </td>
                                     <td>{{$data->role->display_name}}</td>
                                     <td class="no-sort no-click">
+                                      @if(Voyager::check('delete_'.$dataType->name))
                                         <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
                                             <i class="voyager-trash"></i> Устгах
                                         </div>
+                                        @endif
+                                        @if(Voyager::check('edit_'.$dataType->name))
                                         <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit">
                                             <i class="voyager-edit"></i> Засах
                                         </a>
+                                        @endif
+                                        @if(Voyager::check('read_'.$dataType->name))
                                         <a href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn-sm btn-warning pull-right">
                                             <i class="voyager-eye"></i> Үзэх
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

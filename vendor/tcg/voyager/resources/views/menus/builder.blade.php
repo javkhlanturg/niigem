@@ -25,8 +25,7 @@
                 <div class="panel panel-bordered">
 
                     <div class="panel-heading">
-                        <p class="panel-title" style="color:#777">Drag and drop the menu Items below to re-arrange
-                            them.</p>
+                        <p class="panel-title" style="color:#777">Гараар зөөж цэсний дараалалыг өөрчлөх боломжтой.</p>
                     </div>
 
                     <div class="panel-body" style="padding:30px;">

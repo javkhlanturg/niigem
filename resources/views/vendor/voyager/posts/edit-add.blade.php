@@ -80,7 +80,20 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" class="form-control" name="title" placeholder="Title" value="@if(isset($dataTypeContent->title)){{ $dataTypeContent->title }}@endif">
+                            <input type="text" class="form-control" name="title" placeholder="Гарчиг" value="@if(isset($dataTypeContent->title)){{ $dataTypeContent->title }}@endif">
+                        </div>
+                    </div>
+
+                    <!-- ### EXCERPT ### -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Агуулга <small>мэдээний тухай жижиг тайлбар</small></h3>
+                            <div class="panel-actions">
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                          <textarea class="form-control" name="excerpt">@if (isset($dataTypeContent->excerpt)){{ $dataTypeContent->excerpt }}@endif</textarea>
                         </div>
                     </div>
 
@@ -95,28 +108,12 @@
                         <textarea class="richTextBox" name="body" style="border:0px;">@if(isset($dataTypeContent->body)){{ $dataTypeContent->body }}@endif</textarea>
                     </div><!-- .panel -->
 
-                    <!-- ### EXCERPT ### -->
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Excerpt <small>мэдээний тухай жижиг тайлбар</small></h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                          <textarea class="form-control" name="excerpt">@if (isset($dataTypeContent->excerpt)){{ $dataTypeContent->excerpt }}@endif</textarea>
-                        </div>
-                    </div>
-
                     <!-- ### IMAGE ### -->
                     <div class="panel panel-bordered panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><div class="checkbox"> <label> <input type="checkbox" name="featured" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured){{ 'checked="checked"' }}@endif > Фото мэдээ оруулах  </div> </h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
+                            <h3 class="panel-title"><div class="checkbox"> <label> <input  type="checkbox" id="featured" name="featured" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured){{ 'checked="checked"' }}@endif > Фото мэдээ оруулах  </div> </h3>
                         </div>
-                        <div class="panel-body">
+                        <div id="phototoggle" class="panel-body" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured) @else style="display:none" @endif>
                           <div id="filemanager">
                             <div class="breadcrumb-container">
                                 <ol class="breadcrumb filemanager">
@@ -225,35 +222,11 @@
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" >
                             @if(isset($dataTypeContent->image))
-                                <img src="{{env('STORAGE_PATH', '/storage')}}/{{$dataTypeContent->image}}" style="width:100%" />
+                                <img src="{{$dataTypeContent->image}}" style="width:100%" />
                             @endif
                             <input type="file" name="image">
-                        </div>
-                    </div>
-
-                    <!-- ### SEO CONTENT ### -->
-                    <div class="panel panel-bordered panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-search"></i> SEO Content</h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label for="name">Meta Description</label>
-                                <textarea class="form-control" name="meta_description">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Meta Keywords</label>
-                                <textarea class="form-control" name="meta_keywords">@if(isset($dataTypeContent->meta_keywords)){{ $dataTypeContent->meta_keywords }}@endif</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">SEO Title</label>
-                                <input type="text" class="form-control" name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -279,6 +252,15 @@
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
     <script type="text/javascript">
+
+    $("#featured").on("change", function(){
+        if(this.checked){
+            $("#phototoggle").show(200);
+        }else{
+          $("#phototoggle").hide(200);
+        }
+    });
+
     var manager = new Vue({
       el: '#filemanager',
       data: {
@@ -302,14 +284,14 @@
         <?php $sd = App\PostImage::where('post_id', $dataTypeContent->id)->first();
         ?>
           @if($sd)
-          <?php $nm = explode('/', substr( $sd->public_path, 7 ));
+          <?php $nm = explode('/', $sd->public_path);
           ?>
             @for($i=0; $i < sizeof($nm); $i++)
               @if($nm[$i])
                 manager.folders.push( "{{$nm[$i]}}" );
               @endif
             @endfor
-              getFiles(manager.folders);
+              getFiles( manager.folders );
           @else
               getFiles('/');
           @endif

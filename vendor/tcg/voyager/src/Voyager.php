@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use TCG\Voyager\Models\Permission;
 use TCG\Voyager\Models\Setting;
 use TCG\Voyager\Models\User;
+use App\PermissionRole;
 
 class Voyager
 {
@@ -91,6 +92,18 @@ class Voyager
     public static function routes()
     {
         require __DIR__.'/../routes/voyager.php';
+    }
+
+    public static function check($permission){
+        $exist = Permission::where('key', $permission)->first();
+        if($exist){
+          $_permission = PermissionRole::where('permission_id', $exist->id)->where('role_id', Auth::id())->first();
+          if ($_permission) {
+              return true;
+          }
+        }
+
+        return false;
     }
 
     public static function can($permission)

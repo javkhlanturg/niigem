@@ -32,11 +32,6 @@
                         <button type="button" class="btn btn-default" id="refresh"><i class="voyager-refresh"></i>
                         </button>
                         <div class="btn-group offset-right">
-                            <button type="button" class="btn btn-default" id="move"><i class="voyager-move"></i> Зөөх
-                            </button>
-                            <button type="button" class="btn btn-default" id="rename"><i class="voyager-character"></i>
-                                Нэр өөрчлөх
-                            </button>
                             <button type="button" class="btn btn-default" id="delete"><i class="voyager-trash"></i>
                                 Устгах
                             </button>

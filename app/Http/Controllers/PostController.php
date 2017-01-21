@@ -15,17 +15,7 @@ class PostController extends Controller
   private $filesystem;
 
   /** @var string */
-  private $directory = '';
-
-  public function __construct()
-  {
-      $this->filesystem = config('filesystems.default');
-      if ($this->filesystem === 'local') {
-          $this->directory = 'public';
-      } elseif ($this->filesystem === 's3') {
-          $this->directory = '';
-      }
-  }
+  private $directory = DIRECTORY_SEPARATOR.'media';
 
     public function postList($slug){
         $menu = \TCG\Voyager\Models\MenuItem::where('menu_id', 2)->where('url', "/".$slug)->first();
@@ -85,19 +75,14 @@ class PostController extends Controller
 
     public function sliders(Request $request)
     {
-        $folder = $request->folder;
-        if ($folder == '/') {
-            $folder = '';
-        }
-        $dir = $this->directory.$folder;
+        $dir = $this->directory.$request->folder;
         if($request->input('post_id')){
             $images = PostImage::where('post_id', $request->input('post_id'));
         }else{
           return response()->json([
               'name'          => 'files',
               'type'          => 'folder',
-              'path'          => $dir,
-              'folder'        => $folder,
+              'path'          => $request->folder,
               'items'         => $this->getFileOne($dir),
               'last_modified' => 'asdf',
           ]);
@@ -106,8 +91,7 @@ class PostController extends Controller
         return response()->json([
             'name'          => 'files',
             'type'          => 'folder',
-            'path'          => $dir,
-            'folder'        => $folder,
+            'path'          => $request->folder,
             'items'         => $this->getFiles($dir, $images),
             'last_modified' => 'asdf',
         ]);
@@ -117,30 +101,33 @@ class PostController extends Controller
     {
 
         $files = [];
-        $storageFiles = Storage::files($dir);
+        $fullPath = str_finish(public_path().$dir, DIRECTORY_SEPARATOR);
+        $_files = array_diff(scandir($fullPath), array('.', '..'));
         $storageFolders = Storage::directories($dir);
 
-        foreach ($storageFiles as $file) {
+        foreach ($_files as $file) {
           $filename = strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file;
           $check = starts_with($filename, 'thumb');
           if(!$check){
+            if(file_exists($fullPath.$file) and mime_content_type($fullPath.$file) !== 'directory'){
             $temp_image = clone $images;
             $temp = $temp_image->where('file_name',$filename);
               $files[] = [
                   'name'          => $filename,
                   'checked'       => sizeof($temp->first())>0,
-                  'type'          => Storage::mimeType($file),
-                  'path'          => Storage::disk(config('filesystem.default'))->url($file),
-                  'size'          => Storage::size($file),
-                  'last_modified' => Storage::lastModified($file),
+                  'type'          => mime_content_type($fullPath.$file),
+                  'path'          => str_finish($dir, DIRECTORY_SEPARATOR).$file,
+                  'size'          => filesize($fullPath.$file),
+                  'last_modified' => date("Y.m.d H:i:s.",filemtime($fullPath.$file)),
               ];
 
-
               $temp = null;
+            }
           }
         }
 
-        foreach ($storageFolders as $folder) {
+        foreach ($_files as $folder) {
+          if(file_exists($fullPath.$file) and mime_content_type($fullPath.$folder) === 'directory'){
             $files[] = [
                 'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
                 'type'          => 'folder',
@@ -148,6 +135,7 @@ class PostController extends Controller
                 'items'         => '',
                 'last_modified' => '',
             ];
+          }
         }
 
         return $files;
@@ -177,13 +165,15 @@ class PostController extends Controller
         }
 
         foreach ($storageFolders as $folder) {
+          if(file_exists($fullPath.$file) and mime_content_type($fullPath.$folder) === 'directory'){
             $files[] = [
                 'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
                 'type'          => 'folder',
                 'path'          => Storage::disk(config('filesystem.default'))->url($folder),
                 'items'         => '',
-                'last_modified' => '',
+                'last_modified' => date("Y.m.d H:i:s.",filemtime($fullPath.$folder))
             ];
+          }
         }
 
         return $files;

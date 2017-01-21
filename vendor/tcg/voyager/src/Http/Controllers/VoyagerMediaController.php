@@ -16,17 +16,7 @@ class VoyagerMediaController extends Controller
     private $filesystem;
 
     /** @var string */
-    private $directory = '';
-
-    public function __construct()
-    {
-        $this->filesystem = config('filesystems.default');
-        if ($this->filesystem === 'local') {
-            $this->directory = 'public';
-        } elseif ($this->filesystem === 's3') {
-            $this->directory = '';
-        }
-    }
+    private $directory = DIRECTORY_SEPARATOR.'media';
 
     public function index()
     {
@@ -37,17 +27,12 @@ class VoyagerMediaController extends Controller
 
     public function files(Request $request)
     {
-        $folder = $request->folder;
-        if ($folder == '/') {
-            $folder = '';
-        }
-        $dir = $this->directory.$folder;
+        $dir = $request->input('folder');
 
         return response()->json([
             'name'          => 'files',
             'type'          => 'folder',
             'path'          => $dir,
-            'folder'        => $folder,
             'items'         => $this->getFiles($dir),
             'last_modified' => 'asdf',
         ]);
@@ -55,29 +40,32 @@ class VoyagerMediaController extends Controller
 
     private function getFiles($dir)
     {
-
+        $fullPath = str_finish(public_path().$this->directory.$dir, DIRECTORY_SEPARATOR);
         $files = [];
-        $storageFiles = Storage::files($dir);
-        $storageFolders = Storage::directories($dir);
+        $_files = array_diff(scandir($fullPath), array('.', '..'));
+        if(sizeof($_files) > 0){
+          foreach ($_files as $file) {
+            if(file_exists($fullPath.$file) and mime_content_type($fullPath.$file) !== 'directory'){
+              $files[] = [
+                  'name'          => strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file,
+                  'type'          => mime_content_type($fullPath.$file),
+                  'path'          => str_finish($this->directory.$dir, DIRECTORY_SEPARATOR).$file,
+                  'size'          => filesize($fullPath.$file),
+                  'last_modified' => date("Y.m.d H:i:s.",filemtime($fullPath.$file)),
+              ];
+            }
+          }
 
-        foreach ($storageFiles as $file) {
-            $files[] = [
-                'name'          => strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file,
-                'type'          => Storage::mimeType($file),
-                'path'          => Storage::disk(config('filesystem.default'))->url($file),
-                'size'          => Storage::size($file),
-                'last_modified' => Storage::lastModified($file),
-            ];
-        }
-
-        foreach ($storageFolders as $folder) {
-            $files[] = [
-                'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
-                'type'          => 'folder',
-                'path'          => Storage::disk(config('filesystem.default'))->url($folder),
-                'items'         => '',
-                'last_modified' => '',
-            ];
+          foreach ($_files as $folder) {
+            if(file_exists($fullPath.$file) and mime_content_type($fullPath.$folder) === 'directory'){
+              $files[] = [
+                  'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
+                  'type'          => 'folder',
+                  'items'         => '',
+                  'last_modified' => date("Y.m.d H:i:s.",filemtime($fullPath.$folder)),
+              ];
+            }
+          }
         }
 
         return $files;
@@ -87,18 +75,15 @@ class VoyagerMediaController extends Controller
 
     public function new_folder(Request $request)
     {
-        $new_folder = $request->new_folder;
+        $new_folder = str_finish(public_path().$this->directory, DIRECTORY_SEPARATOR).$request->new_folder ;
         $success = false;
         $error = '';
 
-        if (Storage::exists($new_folder)) {
-            $error = 'Sorry that folder already exists, please delete that folder if you wish to re-create it';
-        } else {
-            if (Storage::makeDirectory($new_folder)) {
-                $success = true;
-            } else {
-                $error = 'Sorry something seems to have gone wrong with creating the directory, please check your permissions';
-            }
+        if (!is_dir( $new_folder) ) {
+            mkdir( $new_folder, 0755, true);
+            $success = true;
+        }else{
+            $error = 'Хавтас үүссэн байна.';
         }
 
         return compact('success', 'error');
@@ -108,6 +93,7 @@ class VoyagerMediaController extends Controller
 
     public function delete_file_folder(Request $request)
     {
+
         $folderLocation = $request->folder_location;
         $fileFolder = $request->file_folder;
         $type = $request->type;
@@ -117,22 +103,37 @@ class VoyagerMediaController extends Controller
         if (is_array($folderLocation)) {
             $folderLocation = rtrim(implode('/', $folderLocation), '/');
         }
-
-        $location = "{$this->directory}/{$folderLocation}";
-        $fileFolder = "{$location}/{$fileFolder}";
-
+        $location = str_finish($this->directory .DIRECTORY_SEPARATOR. $folderLocation, DIRECTORY_SEPARATOR);
+        $fileFolder = public_path().$location.$fileFolder;
         if ($type == 'folder') {
-            if (!Storage::deleteDirectory($fileFolder)) {
-                $error = 'Sorry something seems to have gone wrong when deleting this folder, please check your permissions';
-                $success = false;
+            if(!is_dir( $fileFolder )){
+              $error = $request->file_folder.' нэртэй хавтас үүсээгүй байна';
+              $success = false;
+            }else{
+                $this->rrmdir($fileFolder);
             }
-        } elseif (!Storage::delete($fileFolder)) {
+        } elseif (!unlink($fileFolder)) {
             $error = 'Sorry something seems to have gone wrong deleting this file, please check your permissions';
             $success = false;
         }
 
         return compact('success', 'error');
     }
+
+    public function rrmdir($dir) {
+       if (is_dir($dir)) {
+         $objects = scandir($dir);
+         foreach ($objects as $object) {
+           if ($object !== "." && $object !== "..") {
+              if (is_dir($dir."/".$object)){
+                $this->rrmdir($dir."/".$object);
+              }else{unlink($dir."/".$object);}
+           }
+         }
+         reset($objects);
+         rmdir($dir);
+       }
+     }
 
     // GET ALL DIRECTORIES Working with Laravel 5.3
 
@@ -226,7 +227,9 @@ class VoyagerMediaController extends Controller
             if ($validator->passes()) {
               $path = $this->uploadImage($file,  $request->upload_path);
             }else{
-                $path = $request->file->store($request->upload_path);
+              $avarta =$request->file;
+              $file_name = $avarta->getClientOriginalName();
+              $avarta->move(public_path() .$this->directory.$request->upload_path, $file_name);
             }
             $success = true;
             $message = 'Файл хадгалагдлаа!';
@@ -242,27 +245,25 @@ class VoyagerMediaController extends Controller
 
     public function uploadImage($file, $path)
     {
-          $filename = Str::random(20);
+          $filename = Str::random(20).'.'.$file->getClientOriginalExtension();
           $watermark = public_path()."/assets/images/watermark.png";
-          $fullPath = $path."/".$filename.'.'.$file->getClientOriginalExtension();
+          $fullPath = str_finish($path, "/").$filename;
           $resize_width = 800;
           $resize_height = null;
           $uploadSuccess = Image::make($file);
           $bigImage = $uploadSuccess->resize($resize_width, $resize_height, function ($constraint) {
               $constraint->aspectRatio();
-          });
+          })->encode($file->getClientOriginalExtension(), 75);
           $bigImage->insert($watermark, 'bottom-right', null, null, 220, 80);
-          $image = $bigImage->encode($file->getClientOriginalExtension(), 75);
-              //$image->save($destinationPath . $fileUniqueName, 100);
-          Storage::put( $fullPath, (string) $image, 'public' );
+          $bigImage->save( str_finish( public_path().$this->directory.$path, '/').$filename, 100 );
 
           //-------------- thumb image -------------
-          $thumb_image = $uploadSuccess->resize(250, null, function ($constraint) {
+          $thumb_image = $uploadSuccess->resize(200, null, function ($constraint) {
               $constraint->aspectRatio();
-          });
-          $t_image = $thumb_image->encode($file->getClientOriginalExtension(), 75);
-              //$image->save($destinationPath . $fileUniqueName, 100);
-          Storage::put($path."/"."thumb-".$filename.'.'.$file->getClientOriginalExtension(), (string) $t_image, 'public');
+          })->encode($file->getClientOriginalExtension(), 75);
+          //$image->save($destinationPath . $fileUniqueName, 100);
+          //          Storage::put($path."/"."thumb-".$filename.'.'.$file->getClientOriginalExtension(), (string) $t_image, 'public');
+          $thumb_image->save( str_finish( public_path() .$this->directory.$path, '/')."thumb-".$filename, 100 );
           //----------------------------------------
           return $fullPath;
       }
