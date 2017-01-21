@@ -119,10 +119,6 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                   {!!Menu::display('site_menu', 'site_menu')!!}
-
-                  <?php /*@foreach($menus as $item)
-                    <li id="menu_{{$item->id}}"><a href="{{$item->url}}" class="category04">{{$item->title}}</a> </li>
-                    @endforeach */ ?>
                 </ul>
             </div>
             <!-- navbar-collapse -->
