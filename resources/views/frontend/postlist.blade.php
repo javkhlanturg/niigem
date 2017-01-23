@@ -22,19 +22,19 @@
             <!--Post list-->
             @foreach($posts as $item)
             <div class="post-style2 wow fadeIn" data-wow-duration="1s">
-                <a href="#"><img src="{{env('STORAGE_PATH', '/storage')}}/{{str_replace('.', '-medium.',$item->image)}}" style="max-width:250px" alt=""></a>
+                <a href="#"><img src="{{str_replace('.', '-medium.',$item->image)}}" style="max-width:250px" alt=""></a>
                 <div class="post-style2-detail">
-                    <h3><a href="{{$menu->url}}/{{$item->id}}" title="">{{$item->title}}</a></h3>
+                    <h3><a href="{{$item->category->slug}}/{{$item->id}}" title="">{{$item->title}}</a></h3>
                     <div class="date">
                         <ul>
                             <li><img src="\assets\images\comment-01.jpg" class="img-responsive" alt=""></li>
-                            <li>By <a title="" href="#"><span>Naeem Khan</span></a> --</li>
+                            <li>Нийтэлсэн <a title="" href="#"><span>{{$item->user['name']}}</span></a> --</li>
                             <li><a title="" href="#">{{date('Y.m.d', strtotime($item->created_at))}}</a> --</li>
-                            <li><a title="" href="#"><span>275 Comments</span></a></li>
+                            <li><a title="" href="#"><span>{{$item->commentCount()}} сэтгэгдэлтэй</span></a></li>
                         </ul>
                     </div>
                     <p>{{$item->excerpt}}</p>
-                    <a href="{{$menu->url}}/{{$item->id}}" class="btn btn-style">Дэлгэрэнгүй</a>
+                    <a href="{{$item->category->slug}}/{{$item->id}}" class="btn btn-style">Дэлгэрэнгүй</a>
                 </div>
             </div>
             @endforeach
@@ -53,7 +53,7 @@
               <?php $footer_banner = App\Banners::where('id', 4)->first(); ?>
                 <div class="banner">
                   <a href="{{$footer_banner->url}}">
-                    <img src="{{env('STORAGE_PATH', '/storage')}}/{{$footer_banner->bannerpath}}" class="img-responsive center-block" alt="">
+                    <img src="{{$footer_banner->bannerpath}}" class="img-responsive center-block" alt="">
                   </a>
                 </div>
             </div>
@@ -64,7 +64,7 @@
 @section('javascript')
 <script>
   $(document).ready(function(){
-    $('#menu_{{$menu->id}}').addClass('menu_active');
+    
   });
 </script>
 @endsection

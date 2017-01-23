@@ -18,7 +18,6 @@ class PostController extends Controller
   private $directory = DIRECTORY_SEPARATOR.'media';
 
     public function postList($slug){
-        $menu = \TCG\Voyager\Models\MenuItem::where('menu_id', 2)->where('url', "/".$slug)->first();
         $category = \TCG\Voyager\Models\Category::where('slug', $slug)->first();
         if(!$category){
           return view('frontend.404');
@@ -33,11 +32,10 @@ class PostController extends Controller
         $posts = Post::where('status', '=', 'PUBLISHED')->where("category_id",'=', $category->id)->orWhereIn('id', $ids)->where('status', '=', 'PUBLISHED')
             ->orderBy('created_at', 'DESC')->paginate(6);
         $newss = Post::orderBy('created_at', 'desc')->limit('3')->get();
-        return view("frontend.postlist", ['posts'=>$posts, 'menu'=>$menu, 'newss'=>$newss]);
+        return view("frontend.postlist", ['posts'=>$posts, 'newss'=>$newss]);
     }
 
     public function post($slug, $postid){
-        $menu = \TCG\Voyager\Models\MenuItem::where('menu_id', 2)->where('url', "/".$slug)->first();
         $category = \TCG\Voyager\Models\Category::where('slug', $slug)->first();
         if(!$category){
           return view('frontend.404');
@@ -55,7 +53,13 @@ class PostController extends Controller
 
         // $reply_comments = Comments::where('postid',$post->id)->where('parent_id',)->get();
         $newss = \TCG\Voyager\Models\Post::orderBy('created_at', 'desc')->limit('3')->get();
-        return view('frontend.viewpost', ['post'=>$post, 'menu'=>$menu, 'comments'=>$comments, 'newss'=>$newss]);
+        return view('frontend.viewpost', ['post'=>$post, 'comments'=>$comments, 'newss'=>$newss]);
+    }
+
+    public function reportList(Request $request, $userid){
+        $posts = Post::where('author_id', $userid)->where('status', 'PUBLISHED')->paginate(6);
+        $newss = Post::orderBy('created_at', 'desc')->limit('3')->get();
+        return view("frontend.postlist", ['posts'=>$posts, 'newss'=>$newss]);
     }
 
     public function get_all_dirs(Request $request)

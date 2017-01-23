@@ -31,7 +31,7 @@
                 <h1>{{$post->title}}</h1>
                 <div class="date">
                         <ul>
-                            <li>Нийтэлсэн: <a title="" href="#"><span>{{$post->user['name']}}</span></a> --</li>
+                            <li>Нийтэлсэн: <a title="" href="/reporter/{{$post->user['id']}}"><span>{{$post->user['name']}}</span></a> --</li>
                             <li><a title="" href="#"> {{ date('Y оны m-р сарын d', strtotime($post->created_at))}} </a> </li>
                         </ul>
                     </div>
@@ -226,9 +226,7 @@ $(function(){
 	</script>
 <script>
   $(document).ready(function(){
-    @if($menu)
-    $('#menu_{{$menu->id}}').addClass('menu_active');
-    @endif
+  
   });
 </script>
 @endsection
