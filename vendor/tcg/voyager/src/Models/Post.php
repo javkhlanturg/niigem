@@ -21,6 +21,10 @@ class Post extends Model
         parent::save();
     }
 
+    public function user(){
+      return $this->hasOne("TCG\Voyager\Models\User", 'id', 'author_id');
+    }
+
     public function author_id()
     {
         return $this->belongsTo(User::class);

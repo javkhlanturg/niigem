@@ -28,21 +28,13 @@
             <!--Post list-->
             <div class="row">
               <article class="content">
-                <div class="post-thumb">
-                    <img src="{{env('STORAGE_PATH', '/storage')}}/{{$post->image}}" class="img-responsive post-image" alt="">
-                    @if(1=== 0)
-                    <div class="social">
+                <h1>{{$post->title}}</h1>
+                <div class="date">
                         <ul>
-                            <li><a href="#" class="facebook"><i class="fa  fa-facebook"></i><span>3987</span> </a></li>
-                            <li><a href="#" class="twitter"><i class="fa  fa-twitter"></i><span>3987</span></a></li>
-                            <li><a href="#" class="google"><i class="fa  fa-google-plus"></i><span>3987</span></a></li>
-                            <li><a href="#" class="flickr"><i class="fa fa-flickr"></i><span>3987</span> </a></li>
+                            <li>Нийтэлсэн: <a title="" href="#"><span>{{$post->user['name']}}</span></a> --</li>
+                            <li><a title="" href="#"> {{ date('Y оны m-р сарын d', strtotime($post->created_at))}} </a> </li>
                         </ul>
                     </div>
-                    @endif
-                    <!-- /.social icon -->
-                </div>
-                <h1>{{$post->title}}</h1>
                 @if( $post->featured )
                 <div id="gallery" style="display:none;">
                   @foreach($post->sliders() as $slide)
