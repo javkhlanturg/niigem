@@ -14,7 +14,7 @@
         @foreach($newss as $news)
         <div class="box-item wow fadeIn" data-wow-duration="1s">
           <div class="img-thumb">
-            <a href="/{{$news->category['slug']}}/{{$news->id}}" rel="bookmark"><img class="entry-thumb" src="{{env('STORAGE_PATH', '/storage')}}/{{str_replace('.', '-small.',$news->image)}}" style="width:90px;height:80px;object-fit: cover;"></a>
+            <a href="/{{$news->category['slug']}}/{{$news->id}}" rel="bookmark"><img class="entry-thumb" src="{{str_replace('.', '-small.',$news->image)}}" style="width:90px;height:80px;object-fit: cover;"></a>
           </div>
           <div class="item-details">
             <h6 class="sub-category-title bg-color-1">
@@ -44,7 +44,7 @@
     <!-- add -->
     <?php $add_banner = App\Banners::where('id', 5)->first(); ?>
     <span class="add-title">- Сурталчилгаа -</span>
-    <a href="{{$add_banner->url}}"><img src="{{env('STORAGE_PATH', '/storage')}}/{{$add_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
+    <a href="{{$add_banner->url}}"><img src="{{$add_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
   </div>
   <!-- comments -->
   <div class="latest-comments-inner">

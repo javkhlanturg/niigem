@@ -128,7 +128,7 @@ abstract class Controller extends BaseController
                     $file = $request->file($row->field);
                     $filename = Str::random(20);
 
-                    $path = str_finish(DIRECTORY_SEPARATOR.$slug.DIRECTORY_SEPARATOR.date('F').date('Y'), '/');
+                    $path = str_finish(DIRECTORY_SEPARATOR."media".DIRECTORY_SEPARATOR.$slug.DIRECTORY_SEPARATOR.date('F').date('Y'), '/');
                     $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
 
                     if (!is_dir(public_path().$path)) {
