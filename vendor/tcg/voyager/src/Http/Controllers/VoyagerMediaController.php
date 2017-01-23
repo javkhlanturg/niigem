@@ -254,11 +254,12 @@ class VoyagerMediaController extends Controller
           $bigImage = $uploadSuccess->resize($resize_width, $resize_height, function ($constraint) {
               $constraint->aspectRatio();
           })->encode($file->getClientOriginalExtension(), 75);
-          $bigImage->insert($watermark, 'bottom-right', null, null, 220, 80);
+          $bigImage->insert($watermark, 'bottom-right', 5, 5);
           $bigImage->save( str_finish( public_path().$this->directory.$path, '/').$filename, 100 );
 
           //-------------- thumb image -------------
-          $thumb_image = $uploadSuccess->resize(200, null, function ($constraint) {
+          $tmb = Image::make($file);
+          $thumb_image = $tmb->resize(null, 50, function ($constraint) {
               $constraint->aspectRatio();
           })->encode($file->getClientOriginalExtension(), 75);
           //$image->save($destinationPath . $fileUniqueName, 100);
