@@ -1,50 +1,6 @@
 @extends('layouts.app')
 @section('css')
-<style type="text/css" media="screen">
-	.hide {
-		display:none;
-	}
 
-	.poll-results {
-		background:#fff;
-		color:#000;
-		padding:20px;
-	}
-
-	.poll-option {
-		margin:10px 0;
-	}
-
-	.poll-result {
-		margin:10px 0;
-	}
-
-	.result-box {
-		background:#e1e1e1;
-		border:solid 1px #c1c1c1;
-		height:20px;
-		overflow:hidden;
-	}
-
-	.result-bg {
-		height:30px;
-		width:0;
-	}
-
-	.result-bg-fill {
-		background:rgb(134, 170, 218);
-		height:30px;
-		width:0;
-	}
-
-	.poll-results.animate .result-bg-fill {
-		width:100%;
-		-webkit-transition: width 500ms ease-out 500ms;
-	  -moz-transition: width 500ms ease-out 500ms;
-	  -o-transition: width 500ms ease-out 500ms;
-	  transition: width 500ms ease-out 500ms;
-	}
-</style>
 @endsection
 @section('content')
 <div class="container">
@@ -64,15 +20,11 @@
               </div>
           @endforeach
       @else
-          <form method="post">
+          <form action="{{'addPoll'}}" method="post">
               {{ csrf_field() }}
               @foreach ($question->pollAnswers as $answer)
                   <p>
-                      <button type="submit"
-                              formaction="{{ route('polls.answers.votes.store', $answer) }}"
-                              class="btn btn-default btn-block"
-                              style="white-space: normal;"
-                      >{{ $answer->text }}</button>
+                      <button type="submit" class="btn btn-default btn-block" style="white-space: normal;">{{ $answer->text }}</button>
                   </p>
               @endforeach
           </form>
