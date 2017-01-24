@@ -14,6 +14,7 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 Route::get('/polls','PollController@index');
+Route::get('/reporter/{userid}', 'PostController@reportList');
 Route::post('/submit_poll','PollController@doPoll');
 Route::post('/comment','CommentController@addComment')->name('addComment');
 Route::post('/replycomment','CommentController@replyComment')->name('replyComment');

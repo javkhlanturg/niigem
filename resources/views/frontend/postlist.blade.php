@@ -24,7 +24,7 @@
             <div class="post-style2 wow fadeIn" data-wow-duration="1s">
                 <a href="#"><img src="{{str_replace('.', '-medium.',$item->image)}}" style="max-width:250px" alt=""></a>
                 <div class="post-style2-detail">
-                    <h3><a href="{{$item->category->slug}}/{{$item->id}}" title="">{{$item->title}}</a></h3>
+                    <h3><a href="/{{$item->category->slug}}/{{$item->id}}" title="">{{$item->title}}</a></h3>
                     <div class="date">
                         <ul>
                             <li><img src="\assets\images\comment-01.jpg" class="img-responsive" alt=""></li>
@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                     <p>{{$item->excerpt}}</p>
-                    <a href="{{$item->category->slug}}/{{$item->id}}" class="btn btn-style">Дэлгэрэнгүй</a>
+                    <a href="/{{$item->category->slug}}/{{$item->id}}" class="btn btn-style">Дэлгэрэнгүй</a>
                 </div>
             </div>
             @endforeach
@@ -50,12 +50,14 @@
                 {{ $posts->links() }}
             </div>
             <div class="col-sm-12">
-              <?php $footer_banner = App\Banners::where('id', 4)->first(); ?>
+              <?php $footer_banner = App\Banners::where('banner_position', 'footer_banner')->first(); ?>
+              @if(isset($footer_banner->url))
                 <div class="banner">
                   <a href="{{$footer_banner->url}}">
                     <img src="{{$footer_banner->bannerpath}}" class="img-responsive center-block" alt="">
                   </a>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -64,7 +66,7 @@
 @section('javascript')
 <script>
   $(document).ready(function(){
-    
+
   });
 </script>
 @endsection
