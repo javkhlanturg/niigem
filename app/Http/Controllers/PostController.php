@@ -53,7 +53,7 @@ class PostController extends Controller
     }
 
     public function reportList(Request $request, $userid){
-        $posts = Post::where('author_id', $userid)->where('status', 'PUBLISHED')->paginate(6);
+        $posts = Post::where('author_id', $userid)->where('status', 'PUBLISHED')->orderBy('created_at', 'desc')->paginate(6);
         return view("frontend.postlist", ['posts'=>$posts]);
     }
 
@@ -143,39 +143,42 @@ class PostController extends Controller
     private function getFileOne($dir)
     {
 
-        $files = [];
-        $storageFiles = Storage::files($dir);
-        $storageFolders = Storage::directories($dir);
+      $files = [];
+      $fullPath = str_finish(public_path().$dir, DIRECTORY_SEPARATOR);
+      $_files = array_diff(scandir($fullPath), array('.', '..'));
 
-        foreach ($storageFiles as $file) {
-          $filename = strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file;
-          $check = starts_with($filename, 'thumb');
-          if(!$check){
+      foreach ($_files as $file) {
+        $filename = strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file;
+        $check = starts_with($filename, 'thumb');
+        if(!$check){
+          if(file_exists($fullPath.$file) and mime_content_type($fullPath.$file) !== 'directory'){
             $files[] = [
-                'name'          => strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file,
+                'name'          => $filename,
                 'checked'       => false,
-                'type'          => Storage::mimeType($file),
-                'path'          => Storage::disk(config('filesystem.default'))->url($file),
-                'size'          => Storage::size($file),
-                'last_modified' => Storage::lastModified($file),
+                'type'          => mime_content_type($fullPath.$file),
+                'path'          => str_finish($dir, DIRECTORY_SEPARATOR).$file,
+                'size'          => filesize($fullPath.$file),
+                'last_modified' => date("Y.m.d H:i:s.",filemtime($fullPath.$file)),
             ];
-          }
 
-        }
-
-        foreach ($storageFolders as $folder) {
-          if(file_exists($fullPath.$file) and mime_content_type($fullPath.$folder) === 'directory'){
-            $files[] = [
-                'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
-                'type'          => 'folder',
-                'path'          => Storage::disk(config('filesystem.default'))->url($folder),
-                'items'         => '',
-                'last_modified' => date("Y.m.d H:i:s.",filemtime($fullPath.$folder))
-            ];
+            $temp = null;
           }
         }
+      }
 
-        return $files;
+      foreach ($_files as $folder) {
+        if(file_exists($fullPath.$file) and mime_content_type($fullPath.$folder) === 'directory'){
+          $files[] = [
+              'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
+              'type'          => 'folder',
+              'path'          => Storage::disk(config('filesystem.default'))->url($folder),
+              'items'         => '',
+              'last_modified' => '',
+          ];
+        }
+      }
+
+      return $files;
     }
 
 

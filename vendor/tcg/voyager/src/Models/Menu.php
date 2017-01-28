@@ -91,11 +91,11 @@ class Menu extends Model
           if ($children_menu_items->count() > 0) {
               if($parent === 0){
                 $output .= '<li class="dropdown">
-                            <a href="'.$item->url.'" class="dropdown-toggle category04" data-toggle="dropdown">'.$item->title.' <span class="pe-7s-angle-down"></span></a>
+                            <a href="'.$item->url.'" class="dropdown-toggle category04" data-toggle="dropdown">'.Str::upper($item->title).' <span class="pe-7s-angle-down"></span></a>
                               <ul class="dropdown-menu menu-slide">';
               }else{
                 $output .= '<li class="dropdown-submenu">
-                            <a href="'.$item->url.'">'.$item->title.'</a>
+                            <a href="'.$item->url.'">'.Str::upper($item->title).'</a>
                               <ul class="dropdown-menu zoomIn">';
               }
 
@@ -104,9 +104,9 @@ class Menu extends Model
               $output .= '</li>';
           }else{
             if($parent === 0){
-              $output .= '<li><a href="'.$item->url.'" class="category04">'.$item->title.'</a></li>';
+              $output .= '<li><a href="'.$item->url.'" class="category04">'.Str::upper($item->title).'</a></li>';
             }else{
-              $output .= '<li><a href="'.$item->url.'">'.$item->title.'</a></li>';
+              $output .= '<li><a href="'.$item->url.'">'.Str::upper($item->title).'</a></li>';
             }
           }
 

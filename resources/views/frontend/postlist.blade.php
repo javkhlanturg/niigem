@@ -24,9 +24,9 @@
             <div class="post-style2 wow fadeIn" data-wow-duration="1s">
                 <a href="#">
                   @if($item->image and file_exists(public_path().$item->image))
-                  <img src="{{str_replace('.', '-small.',$item->image)}}" style="width:200px" alt="">
+                  <img src="{{str_replace('.', '-medium.',$item->image)}}" style="width:200px;height: 180px;object-fit: cover;" alt="">
                   @else
-                  <img src="/assets/images/placeholder.png" style="max-width:200px" alt="">
+                  <img src="/assets/images/placeholder.png" style="max-width:200px;height: 180px;object-fit: cover;" alt="">
                   @endif
                 </a>
                 <div class="post-style2-detail" style="width:100%">
@@ -37,9 +37,9 @@
                               @if($item->user['avatar'])
                               <img src="{{$item->user['avatar']}}" class="img-responsive" alt=""></li>
                               @else
-                                <img src="/assets/images/avatar.jpg" class="img-responsive" alt="">
+                                <img src="/assets/images/avatar.jpg" class="img-responsive" alt=""></li>
                               @endif
-                            <li style="font-family:'Lato', sans-serif;">Нийтэлсэн <a title="" href="#"><span>{{$item->user['name']}}</span></a> --</li>
+                            <li style="font-family:'Lato', sans-serif;">Нийтэлсэн <a title="" href="/reporter/{{$item->user['id']}}"><span>{{$item->user['name']}}</span></a> --</li>
                             <li><a title="" href="#">{{date('Y.m.d', strtotime($item->created_at))}}</a> --</li>
                             <li><a title="" href="#"><span>{{$item->commentCount()}} сэтгэгдэлтэй</span></a></li>
                         </ul>

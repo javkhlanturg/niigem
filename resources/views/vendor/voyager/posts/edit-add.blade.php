@@ -233,7 +233,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary pull-right">
-                @if(isset($dataTypeContent->id)){{ 'Мэдээ хадгалах' }}@else<?= '<i class="icon wb-plus-circle"></i> Мэдээ бүртгэх'; ?>@endif
+                @if(isset($dataTypeContent->id)){{ 'Мэдээ хадгалах' }}@else<?= '<i class="icon wb-plus-circle"></i> Мэдээ нэмэх'; ?>@endif
             </button>
         </form>
 

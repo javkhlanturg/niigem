@@ -32,6 +32,12 @@
                 {{$post->plusView()}}
                 <div class="date">
                         <ul>
+                          <li>
+                            @if($post->user['avatar'])
+                            <img src="{{$post->user['avatar']}}" class="img-responsive" alt=""></li>
+                            @else
+                              <img src="/assets/images/avatar.jpg" class="img-responsive" alt=""></li>
+                            @endif
                             <li>Нийтэлсэн: <a title="" href="/reporter/{{$post->user['id']}}"><span>{{$post->user['name']}}</span></a> --</li>
                             <li><a title="" href="#"> {{ date('Y оны m-р сарын d', strtotime($post->created_at))}} </a> </li>
                         </ul>

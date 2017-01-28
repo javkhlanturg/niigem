@@ -32,31 +32,30 @@ class VoyagerController extends Controller
         $slug = $request->input('type_slug');
         $file = $request->file('image');
         $filename = Str::random(20);
-        $fullPath = $slug.'/'.date('F').date('Y').'/'.$filename.'.'.$file->getClientOriginalExtension();
-
+        $path = str_finish(DIRECTORY_SEPARATOR."media".DIRECTORY_SEPARATOR.$slug.DIRECTORY_SEPARATOR.date('F').date('Y'), '/');
+        $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
+        if (!is_dir(public_path().$path)) {
+            mkdir(public_path().$path, 0755, true);
+        }
         $ext = $file->guessClientExtension();
 
         if (in_array($ext, ['jpeg', 'jpg', 'png', 'gif'])) {
-            $image = Image::make($file)
-                ->resize($resizeWidth, $resizeHeight, function (Constraint $constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
-                ->encode($file->getClientOriginalExtension(), 75);
+          $image = Image::make($file)->resize($resizeWidth, $resizeHeight,
+              function (Constraint $constraint) {
+                  $constraint->aspectRatio();
+                  $constraint->upsize();
+              })->encode($file->getClientOriginalExtension(), 75);
+          $image->save(public_path().$fullPath, 100);
 
             // move uploaded file from temp to uploads directory
-            if (Storage::put(config('voyager.storage.subfolder').$fullPath, (string) $image, 'public')) {
-                $status = 'Image successfully uploaded!';
+                $status = 'Зураг амжилттай хуулагдлаа!';
                 $fullFilename = $fullPath;
-            } else {
-                $status = 'Upload Fail: Unknown error occurred!';
-            }
         } else {
-            $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
+            $status = "Upload Fail: Зургийн төрөл 'jpeg', 'jpg', 'png', 'gif' байх боломжтой";
         }
 
         // echo out script that TinyMCE can handE:\react\niigem\niigem\vendor\tcg\voyager\src\Http\Controllers\VoyagerController.phple and update the image in the editor
-        return "<script> parent.setImageValue('".Voyager::image($fullFilename)."'); </script>";
+        return "<script> parent.setImageValue('".$fullFilename."'); </script>";
     }
 
     public function profile()

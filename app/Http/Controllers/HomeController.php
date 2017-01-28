@@ -57,7 +57,7 @@ class HomeController extends Controller
     $temp = $someclass_elements->item(0)->nodeValue;
     $description = $description_load->item(0)->nodeValue;
 
-    $html = '<li><a href="#"> Улаанбаатар: </a> <span class="color-1"> '.$temp.' &#8451; </span> <img src="'."http://tsag-agaar.gov.mn".$img[1]->getAttribute("src").'" style="width: 16px;"></li>';
+    $html = '<li><span style="color:#2d3038">Улаанбаатар: </span><span class="color-1"> '.$temp.' &#8451; </span> <img src="'."http://tsag-agaar.gov.mn".$img[1]->getAttribute("src").'" style="width: 16px;"></li>';
 
     return response()->json(array('html'=>$html));
     // Convert JSON to PHP object
