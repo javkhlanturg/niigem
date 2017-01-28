@@ -31,8 +31,7 @@ class PostController extends Controller
         }
         $posts = Post::where('status', '=', 'PUBLISHED')->where("category_id",'=', $category->id)->orWhereIn('id', $ids)->where('status', '=', 'PUBLISHED')
             ->orderBy('created_at', 'DESC')->paginate(6);
-        $newss = Post::orderBy('created_at', 'desc')->limit('3')->get();
-        return view("frontend.postlist", ['posts'=>$posts, 'newss'=>$newss]);
+        return view("frontend.postlist", ['posts'=>$posts]);
     }
 
     public function post($slug, $postid){
@@ -50,16 +49,13 @@ class PostController extends Controller
             $c->replies = DB::table('comments')->where('parent_id', $c->id)->get();
           }
         }
-
-        // $reply_comments = Comments::where('postid',$post->id)->where('parent_id',)->get();
-        $newss = \TCG\Voyager\Models\Post::orderBy('created_at', 'desc')->limit('3')->get();
-        return view('frontend.viewpost', ['post'=>$post, 'comments'=>$comments, 'newss'=>$newss]);
+        return view('frontend.viewpost', ['post'=>$post, 'comments'=>$comments]);
     }
 
     public function reportList(Request $request, $userid){
         $posts = Post::where('author_id', $userid)->where('status', 'PUBLISHED')->paginate(6);
-        $newss = Post::orderBy('created_at', 'desc')->limit('3')->get();
-        return view("frontend.postlist", ['posts'=>$posts, 'newss'=>$newss]);
+        $newss =$this->lastNews();
+        return view("frontend.postlist", ['posts'=>$posts]);
     }
 
     public function get_all_dirs(Request $request)

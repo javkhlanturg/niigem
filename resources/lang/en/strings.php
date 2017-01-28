@@ -13,4 +13,5 @@ return [
     'categories' => 'категори',
     'menus' => 'цэс',
     'builder' => 'угсарах',
+    'settings' => 'тохиргоо',
 ];

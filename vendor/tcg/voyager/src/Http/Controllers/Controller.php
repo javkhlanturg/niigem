@@ -140,7 +140,7 @@ abstract class Controller extends BaseController
                         $resize_width = $options->resize->width;
                         $resize_height = $options->resize->height;
                     } else {
-                        $resize_width = 1000;
+                        $resize_width = Image::make($file)->width();
                         $resize_height = null;
                     }
                     $image = Image::make($file)->resize($resize_width, $resize_height,

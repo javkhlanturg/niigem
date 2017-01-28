@@ -21,20 +21,14 @@
         <div class="container">
             <div class="top_header_icon">
                 <span class="top_header_icon_wrap">
-                        <a target="_blank" href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
-                    </span>
+                      <a target="_blank" href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </span>
                 <span class="top_header_icon_wrap">
                         <a target="_blank" href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
                     </span>
                 <span class="top_header_icon_wrap">
                         <a target="_blank" href="#" title="Google"><i class="fa fa-google-plus"></i></a>
-                    </span>
-                <span class="top_header_icon_wrap">
-                        <a target="_blank" href="#" title="Vimeo"><i class="fa fa-vimeo"></i></a>
-                    </span>
-                <span class="top_header_icon_wrap">
-                        <a target="_blank" href="#" title="Pintereset"><i class="fa fa-pinterest-p"></i></a>
-                    </span>
+                  </span>
             </div>
             <div id="showLeft" class="nav-icon">
                 <span></span>
@@ -50,28 +44,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-md-3">
-                  <div class="top_header_icon">
+                  <div class="top_header_icon pull-left">
+                    @if(Voyager::setting('twitter'))
                       <span class="top_header_icon_wrap">
-                              <a target="_blank" href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                              <a target="_blank" href="{{Voyager::setting('twitter')}}" title="Twitter"><i class="fa fa-twitter"></i></a>
                           </span>
+                    @endif
+                    @if(Voyager::setting('facebook'))
                       <span class="top_header_icon_wrap">
-                              <a target="_blank" href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
+                              <a target="_blank" href="{{Voyager::setting('facebook')}}" title="Facebook"><i class="fa fa-facebook"></i></a>
                           </span>
+                    @endif
+                    @if(Voyager::setting('googleplus'))
                       <span class="top_header_icon_wrap">
-                              <a target="_blank" href="#" title="Google"><i class="fa fa-google-plus"></i></a>
+                              <a target="_blank" href="{{Voyager::setting('googleplus')}}" title="Google"><i class="fa fa-google-plus"></i></a>
                           </span>
-                      <span class="top_header_icon_wrap">
-                              <a target="_blank" href="#" title="Vimeo"><i class="fa fa-vimeo"></i></a>
-                          </span>
-                      <span class="top_header_icon_wrap">
-                              <a target="_blank" href="#" title="Pintereset"><i class="fa fa-pinterest-p"></i></a>
-                          </span>
+                    @endif
                   </div>
                 </div>
                 <!--breaking news-->
-                <div class="col-sm-8 col-md-7">
-                    <div class="newsticker-inner">
-                      <?php /* ?>
+                <div class="col-sm-8 col-md-6">
+                    <div class="newsticker-inner" style="padding-right:0px">
+
                         <ul class="newsticker" style="float:right;">
                           <?php  $usd = Swap\Laravel\Facades\Swap::latest('USD/MNT');?>
                           <?php  $euro = Swap\Laravel\Facades\Swap::latest('EUR/MNT');?>
@@ -80,16 +74,22 @@
                           <?php  $krw = Swap\Laravel\Facades\Swap::latest('KRW/MNT');?>
                           <?php  $rub = Swap\Laravel\Facades\Swap::latest('RUB/MNT');?>
                           <?php  $cny = Swap\Laravel\Facades\Swap::latest('CNY/MNT');?>
-                            <li><span class="color-1"><img src="/../assets/flag/usd.png" style="width: 16px;"/> USD:</span><a href="#"><?php echo number_format($usd->getValue()); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/eur.png" style="width: 16px;"/> UER:</span><a href="#"><?php echo number_format($euro->getValue()); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/cny.png" style="width: 16px;"/> CNY:</span><a href="#"><?php echo number_format($cny->getValue()); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/gbp.png" style="width: 16px;"/> GBP:</span><a href="#"><?php echo number_format($gbp->getValue()); ?></a></li>
-                              <li><span class="color-1"><img src="/../assets/flag/JPE.png" style="width: 16px;"/> JPE:</span><a href="#"><?php echo number_format($jpy->getValue()); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 16px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?></a></li>
-                            <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 16px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?></a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/usd.png" style="width: 16px;"/> USD:</span><a href="#"><?php echo number_format($usd->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/eur.png" style="width: 16px;"/> UER:</span><a href="#"><?php echo number_format($euro->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/cny.png" style="width: 16px;"/> CNY:</span><a href="#"><?php echo number_format($cny->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/gbp.png" style="width: 16px;"/> GBP:</span><a href="#"><?php echo number_format($gbp->getValue()); ?> ₮</a></li>
+                              <li><span class="color-1"><img src="/../assets/flag/JPE.png" style="width: 16px;"/> JPE:</span><a href="#"><?php echo number_format($jpy->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 16px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 16px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?> ₮</a></li>
                         </ul>
-                        <?php */ ?>
                     </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="newsticker-inner pull-right" style="padding-right:0px">
+                      <ul id="weathers">
+                          <li><i class="fa fa-spinner fa-spin"></i></li>
+                      </ul>
+                  </div>
                 </div>
             </div>
         </div>
@@ -101,13 +101,13 @@
                     <div class="header-logo">
                         <!-- logo -->
                         <a href="/">
-                            <img style="height:60px" class="td-retina-data img-responsive" src="{{$logo->bannerpath}}" alt="">
+                            <img class="td-retina-data img-responsive" src="{{$logo->bannerpath}}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-xs-8 col-md-8 col-sm-8 hidden-xs">
                     <div class="header-banner">
-                        <a href="{{$top_banner->url}}"><img style="height:60px" class="td-retina img-responsive" src="{{$top_banner->bannerpath}}" alt=""></a>
+                        <a href="{{$top_banner->url}}"><img class="td-retina img-responsive" src="{{$top_banner->bannerpath}}" alt=""></a>
                     </div>
                 </div>
             </div>

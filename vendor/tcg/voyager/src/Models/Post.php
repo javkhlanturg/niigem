@@ -44,4 +44,9 @@ class Post extends Model
     {
         return $this->hasMany("App\PostImage", 'post_id', 'id')->get();
     }
+
+    public function plusView(){
+      $this->viewcount = $this->viewcount+1;
+      $this->update();
+    }
 }

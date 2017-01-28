@@ -29,6 +29,7 @@
             <div class="row">
               <article class="content">
                 <h1>{{$post->title}}</h1>
+                {{$post->plusView()}}
                 <div class="date">
                         <ul>
                             <li>Нийтэлсэн: <a title="" href="/reporter/{{$post->user['id']}}"><span>{{$post->user['name']}}</span></a> --</li>
@@ -226,7 +227,7 @@ $(function(){
 	</script>
 <script>
   $(document).ready(function(){
-  
+
   });
 </script>
 @endsection

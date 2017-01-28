@@ -41,7 +41,7 @@
     <?php $logo = App\Banners::where('id', 3)->first(); ?>
     @include('frontend.header', ['menus'=>$menus,'top_banner'=>$banner_top, 'logo'=>$logo])
     @yield('content')
-    @include('frontend.footer')
+    @include('frontend.footer', ['logo'=>$logo])
 
     <script type="text/javascript" src="\assets\js\jquery.min.js"></script>
     <script type="text/javascript" src="\assets\js\bootstrap.min.js"></script>
@@ -73,6 +73,15 @@
               location.href = $a.attr('href');
           }
       }
+    });
+
+    $.post("/action/home",{ action:'weather', _token:"{{ csrf_token() }}" }, function(data){
+         $('#weathers').html(data.html);
+    });
+
+    $.post("/action/home",{ action:'actionews', _token:"{{ csrf_token() }}" }, function(data){
+         $('#topnews').html(data.topnews);
+         $('#mostviewed').html(data.mostviewed);
     });
   });
     </script>
