@@ -54,7 +54,6 @@ class PostController extends Controller
 
     public function reportList(Request $request, $userid){
         $posts = Post::where('author_id', $userid)->where('status', 'PUBLISHED')->paginate(6);
-        $newss =$this->lastNews();
         return view("frontend.postlist", ['posts'=>$posts]);
     }
 

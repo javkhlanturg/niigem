@@ -12,7 +12,7 @@
             <div class="post-wrapper post-grid-1 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                  <img class="entry-thumb" src="{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                  <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -21,7 +21,7 @@
                 <div class="post-editor-date">
                   <!-- post date -->
                   <div class="post-date">
-                    <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
+                    <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                   </div>
                   <!-- post comment -->
                   <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
@@ -34,7 +34,7 @@
             <div class="post-wrapper post-grid-2 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                  <img class="entry-thumb" src="{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                  <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -43,7 +43,7 @@
                 <div class="post-editor-date">
                   <!-- post date -->
                   <div class="post-date">
-                    <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
+                    <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                   </div>
                   <!-- post comment -->
                   <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
@@ -71,7 +71,7 @@
                   <div class="post-editor-date">
                     <!-- post date -->
                     <div class="post-date">
-                      <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
+                      <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                     </div>
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
@@ -91,7 +91,7 @@
               <div class="post-wrapper post-grid-4 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                    <img class="entry-thumb" src="{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                    <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -100,7 +100,7 @@
                   <div class="post-editor-date">
                     <!-- post date -->
                     <div class="post-date">
-                      <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
+                      <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                     </div>
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
@@ -116,7 +116,7 @@
               <div class="post-wrapper post-grid-5 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                    <img class="entry-thumb" src="{{str_replace('.', '-medium.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                    <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -125,7 +125,7 @@
                   <div class="post-editor-date">
                     <!-- post date -->
                     <div class="post-date">
-                      <i class="pe-7s-clock"></i> {{ date('M d, Y', strtotime($top_new->created_at)) }}
+                      <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                     </div>
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
@@ -158,7 +158,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$tur->category['slug']}}/{{$tur->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-medium.',$tur->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$tur->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
                   </div>
@@ -166,7 +166,7 @@
                     <h4><a href="/{{$tur->category['slug']}}/{{$tur->id}}">{{$tur->title}}</a></h4>
                     <div class="date">
                       <ul>
-                        <li><a title="" href="#">{{ date('M d, Y', strtotime($tur->created_at)) }}</a></li>
+                        <li><a title="" href="#">{{ date('Y.m.d', strtotime($tur->created_at)) }}</a></li>
                       </ul>
                     </div>
                   </div>
@@ -187,7 +187,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$zasag->category['slug']}}/{{$zasag->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-medium.',$zasag->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$zasag->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
                   </div>
@@ -195,7 +195,7 @@
                     <h4><a href="/{{$zasag->category['slug']}}/{{$zasag->id}}">{{$zasag->title}}</a></h4>
                     <div class="date">
                       <ul>
-                        <li><a title="" href="#">{{ date('M d, Y', strtotime($zasag->created_at)) }}</a></li>
+                        <li><a title="" href="#">{{ date('Y.m.d', strtotime($zasag->created_at)) }}</a></li>
                       </ul>
                     </div>
                   </div>
@@ -216,7 +216,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$del->category['slug']}}/{{$del->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-medium.',$del->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$del->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
                   </div>
@@ -224,7 +224,7 @@
                     <h4><a href="/{{$del->category['slug']}}/{{$del->id}}">{{$del->title}}</a></h4>
                     <div class="date">
                       <ul>
-                        <li><a title="" href="#">{{ date('M d, Y', strtotime($del->created_at)) }}</a></li>
+                        <li><a title="" href="#">{{ date('Y.m.d', strtotime($del->created_at)) }}</a></li>
                       </ul>
                     </div>
                   </div>
@@ -251,7 +251,7 @@
 
                       <a href="/{{$zasag->category['slug']}}/{{$video->id}}" class="video-img-icon">
                         <i class="fa fa-play"></i>
-                        <img class="img-responsive" src="{{str_replace('.', '-medium.',$video->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="img-responsive" src="{{str_replace('.', '-small.',$video->image)}}" style="width:214px;height:126px;object-fit: cover;">
                       </a>
                     </div>
 

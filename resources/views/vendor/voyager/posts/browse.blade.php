@@ -23,7 +23,7 @@
                             <thead>
                                 <tr>
                                     @foreach($dataType->browseRows as $rows)
-                                    <th>{{ $rows->field }}</th>
+                                    <th>{{ $rows->display_name }}</th>
                                     @endforeach
                                     <th class="actions">Үйлдлүүд</th>
                                 </tr>
@@ -95,7 +95,7 @@
     {{-- DataTables --}}
     <script>
         $(document).ready(function() {
-            $('#dataTable').DataTable({ "order": [] });
+            $('#dataTable').DataTable({ "order": [2, 'desc'] });
         });
 
         $('td').on('click', '.delete', function(e) {
