@@ -4,51 +4,57 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use App\PollQuestion;
+use App\PollAnswer;
+use Illuminate\Cookie\CookieJar;
+use Illuminate\Routing\Redirector;
 
 class PollController extends Controller
 {
+  private $app;
+
+    /**
+     * @var \Illuminate\Http\Request
+     */
+    private $request;
+
+    public function __construct(Application $app, Request $request)
+    {
+        $this->app = $app;
+        $this->request = $request;
+    }
 
     public function index()
    {
-       return view('frontend.poll');
+     $path = $this->app->storagePath().DIRECTORY_SEPARATOR.'poll'.DIRECTORY_SEPARATOR.'disabled';
+
+       $question = PollQuestion::latest()->first();
+
+       $pollCookie = $this->request->cookie('poll');
+       $votedPolls = $pollCookie ? explode(',', $pollCookie) : [];
+
+
+       return view('frontend.poll')
+       ->with([
+           'voted' => $question && in_array($question->id, $votedPolls),
+           'pollDisabled' => file_exists($path),
+           'question' => $question,
+       ]);
    }
 
-   public function doPoll()
-   {
-   if ( ! $pollId = \Input::get('poll_id', FALSE) )
-   {
-     return FALSE;
-   }
+   public function store(PollAnswer $answer, Request $request, Redirector $redirector, CookieJar $cookies)
+  {
 
-   $rules = array(
-           'poll_id' => 'required',
-           'answer' => 'required',
-       );
+      $pollCookie = $request->cookie('poll');
+      $votedPolls = $pollCookie ? explode(',', $pollCookie) : [];
 
-   $validator = \Validator::make(
-       \Input::all(),
-       $rules
-   );
+      if (!in_array($answer->pollQuestion->id, $votedPolls)) {
+          $answer->increment('votes');
+          $votedPolls[] = $answer->pollQuestion->id;
+      }
 
-   if ( ! $validator->fails() )
-   {
-     $poll = Poll::findOrFail($pollId);
-
-     for ($i=1; $i <= 3; $i++) {
-       if ( \Input::get('answer') == $poll->{'answer'.$i} )
-       {
-         $poll->{'answer'.$i.'_count'}++;
-         $poll->save();
-         break;
-       }
-     }
-
-     if (\Request::ajax())
-     {
-         die(1);
-     }
-   }
-
-   return \Redirect::to(\Input::get('return'));
-   }
+      return $redirector->back()->withCookie($cookies->forever('poll', implode(',', $votedPolls)));
+  }
 }
