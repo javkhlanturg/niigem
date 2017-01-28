@@ -28,20 +28,4 @@
     <span class="add-title">- Сурталчилгаа -</span>
     <a href="{{$add_banner->url}}"><img src="{{$add_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
   </div>
-  <!-- comments -->
-  <div class="latest-comments-inner">
-    <?php $comments = App\Comments::orderBy('created_at', 'desc')->limit(3)->get(); ?>
-    <h3 class="category-headding ">Сүүлийн сэтгэгдэлүүд</h3>
-    <div class="headding-border"></div>
-    <!-- latest comment post -->
-    @foreach($comments as $comment)
-    <div class="post-style2 latest-com">
-      <img src="\assets\images\avatar.jpg" alt="">
-      <div class="latest-com-detail">
-        <h5>{{$comment->username}}</h5>
-        <p>{{str_limit($comment->comment, 20)}} </p>
-      </div>
-    </div>
-    @endforeach
-  </div>
 </div>

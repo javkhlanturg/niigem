@@ -97,7 +97,7 @@ class Voyager
     public static function check($permission){
         $exist = Permission::where('key', $permission)->first();
         if($exist){
-          $_permission = PermissionRole::where('permission_id', $exist->id)->where('role_id', Auth::id())->first();
+          $_permission = PermissionRole::where('permission_id', $exist->id)->where('role_id', Auth::user()->role_id)->first();
           if ($_permission) {
               return true;
           }

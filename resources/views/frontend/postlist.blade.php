@@ -27,13 +27,18 @@
                     <h3><a href="/{{$item->category->slug}}/{{$item->id}}" title="">{{$item->title}}</a></h3>
                     <div class="date">
                         <ul>
-                            <li><img src="\assets\images\comment-01.jpg" class="img-responsive" alt=""></li>
-                            <li>Нийтэлсэн <a title="" href="#"><span>{{$item->user['name']}}</span></a> --</li>
+                            <li>
+                              @if($item->user['avatar'])
+                              <img src="{{$item->user['avatar']}}" class="img-responsive" alt=""></li>
+                              @else
+                                <img src="/assets/images/avatar.jpg" class="img-responsive" alt="">
+                              @endif
+                            <li style="font-family:'Lato', sans-serif;">Нийтэлсэн <a title="" href="#"><span>{{$item->user['name']}}</span></a> --</li>
                             <li><a title="" href="#">{{date('Y.m.d', strtotime($item->created_at))}}</a> --</li>
                             <li><a title="" href="#"><span>{{$item->commentCount()}} сэтгэгдэлтэй</span></a></li>
                         </ul>
                     </div>
-                    <p>{{$item->excerpt}}</p>
+                    <p>{{str_limit($item->excerpt, 100)}}</p>
                     <a href="/{{$item->category->slug}}/{{$item->id}}" class="btn btn-style">Дэлгэрэнгүй</a>
                 </div>
             </div>
