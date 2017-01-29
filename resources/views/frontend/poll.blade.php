@@ -9,7 +9,7 @@
           <div id="poll-container">
 
             @unless($pollDisabled || !$question)
-      <h1>Poll</h1>
+      <h1>Санал асуулга</h1>
       <p>{{ $question->text }}</p>
       @if($voted)
           @foreach ($question->pollAnswers as $answer)
@@ -24,9 +24,10 @@
               {{ csrf_field() }}
               @foreach ($question->pollAnswers as $answer)
                   <p>
-                      <button type="submit" class="btn btn-default btn-block" style="white-space: normal;">{{ $answer->text }}</button>
+                      <input name="poll_box_answer" id="poll_box_answer4147" type="radio" value="4147"> {{ $answer->text }}
                   </p>
               @endforeach
+              <button type="submit" class="btn btn-default btn-block" style="white-space: normal;">Санал өгөх</button>
           </form>
       @endif
   @endunless
