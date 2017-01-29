@@ -16,7 +16,7 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/polls','PollController@index');
 Route::post('/action/home','HomeController@action');
 Route::get('/reporter/{userid}', 'PostController@reportList');
-Route::post('/submit_poll','PollController@doPoll');
+Route::post('/submit_poll','PollController@store')->name('addPoll');
 Route::post('/comment','CommentController@addComment')->name('addComment');
 Route::post('/replycomment','CommentController@replyComment')->name('replyComment');
 Route::get('/','HomeController@index');

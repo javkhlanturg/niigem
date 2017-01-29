@@ -47,14 +47,13 @@ class PollController extends Controller
    public function store(PollAnswer $answer, Request $request, Redirector $redirector, CookieJar $cookies)
   {
 
-      $pollCookie = $request->cookie('poll');
-      $votedPolls = $pollCookie ? explode(',', $pollCookie) : [];
-
-      if (!in_array($answer->pollQuestion->id, $votedPolls)) {
-          $answer->increment('votes');
-          $votedPolls[] = $answer->pollQuestion->id;
-      }
-
-      return $redirector->back()->withCookie($cookies->forever('poll', implode(',', $votedPolls)));
+      $id = $request->input('id');
+      $answer = $request->input('answer');
+      $poll = PollAnswer::where('poll_question_id',$id)->where('id',$answer)->first();
+      if($poll){
+      $poll->votes = $poll->votes + 1;
+    }
+      $poll->save();
+      return back();
   }
 }

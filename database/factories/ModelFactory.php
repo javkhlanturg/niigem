@@ -1,5 +1,7 @@
 <?php
 
+use App\PollQuestion;
+use App\PollAnswer;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,13 +13,17 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
-
+$factory->define(PollQuestion::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'text' => $faker->text,
+    ];
+});
+
+$factory->define(PollAnswer::class, function (Faker\Generator $faker) {
+    return [
+        'text'             => $faker->text,
+        'poll_question_id' => function () {
+            return factory(PollQuestion::class)->create()->id;
+        },
     ];
 });

@@ -19,7 +19,7 @@ class PollQuestion extends Model
 
     public function pollAnswers()
     {
-        return $this->hasMany(PollAnswer::class);
+        return $this->hasMany('App\PollAnswer','poll_question_id','id');
     }
 
     public function getVotesAttribute()
