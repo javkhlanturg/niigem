@@ -44,22 +44,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-md-3">
-                  <div class="top_header_icon pull-left">
-                    @if(Voyager::setting('twitter'))
-                      <span class="top_header_icon_wrap">
-                              <a target="_blank" href="{{Voyager::setting('twitter')}}" title="Twitter"><i class="fa fa-twitter"></i></a>
-                          </span>
-                    @endif
-                    @if(Voyager::setting('facebook'))
-                      <span class="top_header_icon_wrap">
-                              <a target="_blank" href="{{Voyager::setting('facebook')}}" title="Facebook"><i class="fa fa-facebook"></i></a>
-                          </span>
-                    @endif
-                    @if(Voyager::setting('googleplus'))
-                      <span class="top_header_icon_wrap">
-                              <a target="_blank" href="{{Voyager::setting('googleplus')}}" title="Google"><i class="fa fa-google-plus"></i></a>
-                          </span>
-                    @endif
+                  <div class="newsticker-inner" style="padding-right:0px">
+                    <ul id="weathers">
+                        <li><i class="fa fa-spinner fa-spin"></i></li>
+                    </ul>
                   </div>
                 </div>
                 <!--breaking news-->
@@ -81,9 +69,6 @@
                               <li><span class="color-1"><img src="/../assets/flag/JPE.png" style="width: 19px;"/> JPE:</span><a href="#"><?php echo number_format($jpy->getValue()); ?> ₮</a></li>
                             <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 19px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?> ₮</a></li>
                             <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 19px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?> ₮</a></li>
-                        </ul>
-                        <ul id="weathers" style="float:right;margin-right:30px">
-                            <li><i class="fa fa-spinner fa-spin"></i></li>
                         </ul>
                     </div>
                 </div>
