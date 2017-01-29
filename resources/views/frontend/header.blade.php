@@ -66,7 +66,22 @@
                 <div class="col-sm-8 col-md-9">
                     <div class="newsticker-inner" style="padding-right:0px">
 
-                        
+                        <ul class="newsticker" style="float:right;">
+                          <?php  $usd = Swap\Laravel\Facades\Swap::latest('USD/MNT');?>
+                          <?php  $euro = Swap\Laravel\Facades\Swap::latest('EUR/MNT');?>
+                          <?php  $gbp = Swap\Laravel\Facades\Swap::latest('GBP/MNT');?>
+                          <?php  $jpy = Swap\Laravel\Facades\Swap::latest('JPY/MNT');?>
+                          <?php  $krw = Swap\Laravel\Facades\Swap::latest('KRW/MNT');?>
+                          <?php  $rub = Swap\Laravel\Facades\Swap::latest('RUB/MNT');?>
+                          <?php  $cny = Swap\Laravel\Facades\Swap::latest('CNY/MNT');?>
+                            <li><span class="color-1"><img src="/../assets/flag/usd.png" style="width: 19px;"/> USD:</span><a href="#"><?php echo number_format($usd->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/eur.png" style="width: 19px;"/> UER:</span><a href="#"><?php echo number_format($euro->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/cny.png" style="width: 19px;"/> CNY:</span><a href="#"><?php echo number_format($cny->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/gbp.png" style="width: 19px;"/> GBP:</span><a href="#"><?php echo number_format($gbp->getValue()); ?> ₮</a></li>
+                              <li><span class="color-1"><img src="/../assets/flag/JPE.png" style="width: 19px;"/> JPE:</span><a href="#"><?php echo number_format($jpy->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/krw.png" style="width: 19px;"/> KRW:</span><a href="#"><?php echo number_format($krw->getValue()); ?> ₮</a></li>
+                            <li><span class="color-1"><img src="/../assets/flag/rub.png" style="width: 19px;"/> RUB:</span><a href="#"><?php echo number_format($rub->getValue()); ?> ₮</a></li>
+                        </ul>
                         <ul id="weathers" style="float:right;margin-right:30px">
                             <li><i class="fa fa-spinner fa-spin"></i></li>
                         </ul>
