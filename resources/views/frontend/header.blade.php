@@ -40,7 +40,7 @@
     </div>
     <!-- Mobile Menu End -->
     <!-- top header -->
-    <div class="top_header hidden-xs">
+    <!-- <div class="top_header hidden-xs">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-md-3">
@@ -62,7 +62,7 @@
                     @endif
                   </div>
                 </div>
-                <!--breaking news-->
+
                 <div class="col-sm-8 col-md-9">
                     <div class="newsticker-inner" style="padding-right:0px">
 
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="top_banner_wrap">
         <div class="container">
             <div class="row">

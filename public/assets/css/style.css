@@ -1372,8 +1372,7 @@ header {
 }
 
 .post-author-comment {
-    float: right;
-    margin: 0;
+    margin-left: 5px;
 }
 
 .post-editor-date .post-author-comment i,
@@ -1711,7 +1710,7 @@ header {
 .weekly-news-inner .post-author-comment,
 .headding-news .post-author-comment {
     float: none;
-    margin: 7px 0px 0px 10px;
+    margin: 7px 0px 0px 2px;
 }
 
 .weekly-news-inner .post-editor-date .post-author-comment i,
@@ -2419,7 +2418,7 @@ footer ul li a:hover {
 .date ul li a,
 .date ul li {
     color: rgb(130, 130, 130);
-    font-family: Lato;
+    font-family: 'Lato', sans-serif;
     letter-spacing: 0.7px;
     transition: all 0.4s ease 0s;
     display: inline-block;
@@ -2459,7 +2458,7 @@ article p {
 
 .content,
 .sidebar {
-    margin-top: 50px;
+    margin-top: -22px;
 }
 
 .td-category {

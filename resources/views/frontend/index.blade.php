@@ -16,7 +16,7 @@
                 </a>
               </div>
               <div class="post-info">
-                <span class="color-3">Мэдээ </span>
+                <span class="color-3"> </span>
                 <h3 class="post-title post-title-size"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark"> {{$top_new->title}} </a></h3>
                 <div class="post-editor-date">
                   <!-- post date -->
@@ -26,7 +26,7 @@
                   <!-- post comment -->
                   <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                   <!-- read more -->
-                  <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
+
                 </div>
               </div>
             </div>
@@ -38,7 +38,7 @@
                 </a>
               </div>
               <div class="post-info">
-                <span class="color-5">Мэдээ</span>
+                <span class="color-5"></span>
                 <h3 class="post-title post-title-size"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}} </a></h3>
                 <div class="post-editor-date">
                   <!-- post date -->
@@ -48,7 +48,7 @@
                   <!-- post comment -->
                   <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                   <!-- read more -->
-                  <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
+
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
                   </a>
                 </div>
                 <div class="post-info">
-                  <span class="color-4">Мэдээ</span>
+                  <span class="color-4"></span>
                   <h3 class="post-title"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}} </a></h3>
                   <div class="post-editor-date">
                     <!-- post date -->
@@ -76,7 +76,7 @@
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-                    <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
+
                   </div>
                 </div>
               </div>
@@ -95,7 +95,7 @@
                   </a>
                 </div>
                 <div class="post-info">
-                  <span class="color-1">Мэдээ</span>
+                  <span class="color-1"></span>
                   <h3 class="post-title post-title-size"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}}</a></h3>
                   <div class="post-editor-date">
                     <!-- post date -->
@@ -105,7 +105,7 @@
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-                    <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
+
                   </div>
                 </div>
               </div>
@@ -120,7 +120,7 @@
                   </a>
                 </div>
                 <div class="post-info">
-                  <span class="color-2">Мэдээ</span>
+                  <span class="color-2"></span>
                   <h3 class="post-title post-title-size"><a href="/{{$top_new->category['slug']}}/{{$top_new->id}}" rel="bookmark">{{$top_new->title}} </a></h3>
                   <div class="post-editor-date">
                     <!-- post date -->
@@ -130,7 +130,7 @@
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-                    <a class="readmore pull-right" href="/{{$top_new->category['slug']}}/{{$top_new->id}}"><i class="pe-7s-angle-right"></i></a>
+
                   </div>
                 </div>
               </div>

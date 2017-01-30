@@ -55,6 +55,13 @@
     <script type="text/javascript" src="/assets/js/jquery-ui.js"></script>
     <script type="text/javascript" src="/assets/js/form-classie.js"></script>
     <script type="text/javascript" src="/assets/js/custom.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.slimscroll.min.js"></script>
+      <script type="text/javascript">
+    	$('.scrolled').slimScroll({
+    	  height: '400px'
+    	});
+      </script>
     @yield('javascript')
     <script>
     $(document).ready(function(){
@@ -75,9 +82,9 @@
       }
     });
 
-    $.post("/action/home",{ action:'weather', _token:"{{ csrf_token() }}" }, function(data){
-         $('#weathers').html(data.html);
-    });
+    // $.post("/action/home",{ action:'weather', _token:"{{ csrf_token() }}" }, function(data){
+    //      $('#weathers').html(data.html);
+    // });
 
     $.post("/action/home",{ action:'actionews', _token:"{{ csrf_token() }}" }, function(data){
          $('#topnews').html(data.topnews);

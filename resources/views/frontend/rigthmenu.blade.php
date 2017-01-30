@@ -1,7 +1,4 @@
 <div class="col-md-4 col-sm-4 left-padding">
-
-
-
   <div class="tab-inner">
     <ul class="tabs">
       <li><a href="#">ШИНЭ</a></li>
@@ -9,7 +6,7 @@
     </ul>
     <hr>
     <!-- tabs -->
-    <div class="tab_content">
+    <div class="tab_content scrolled" style="height:400px; overflow:auto">
       <div class="tab-item-inner" id="topnews">
 
       </div>

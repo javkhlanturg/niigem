@@ -28,17 +28,19 @@
             <!--Post list-->
             <div class="row">
               <article class="content">
-                <h1>{{$post->title}}</h1>
+                <h3>{{$post->title}}</h3>
                 {{$post->plusView()}}
+
                 <div class="date">
+
+                  @if($post->user['avatar'])
+                  <img src="{{$post->user['avatar']}}" class="img-responsive" alt="" style="float:left; height: 25px;  width: 25px;  border-radius: 50%;  margin-right: 6px;margin-top: -4px;">
+                  @else
+                  <img src="/assets/images/avatar.jpg" class="img-responsive" alt="">
+                  @endif
+
                         <ul>
-                          <li>
-                            @if($post->user['avatar'])
-                            <img src="{{$post->user['avatar']}}" class="img-responsive" alt=""></li>
-                            @else
-                              <img src="/assets/images/avatar.jpg" class="img-responsive" alt=""></li>
-                            @endif
-                            <li>Нийтэлсэн: <a title="" href="/reporter/{{$post->user['id']}}"><span>{{$post->user['name']}}</span></a> --</li>
+                            <li>Нийтэлсэн: <a title="" href="/reporter/{{$post->user['id']}}"><span>{{$post->user['name']}}</span></a> - </li>
                             <li><a title="" href="#"> {{ date('Y оны m-р сарын d', strtotime($post->created_at))}} </a> </li>
                         </ul>
                     </div>
@@ -53,24 +55,57 @@
                 </div>
                 @endif
                 {!! $post->body !!}
-                <div class="social" style="float:right"><div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-share-button" data-href="http://niigem.net/" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fniigem.net%2F&amp;src=sdkpreparse">Share</a></div>
-<iframe
-  src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&via=twitterdev&related=twitterapi%2Ctwitter&text=custom%20share%20text&hashtags=example%2Cdemo"
-  width="100"
-  height="28"
-  title="Twitter Tweet Button"
-  style="border: 0; overflow: hidden;">
-</iframe>
-</div>
+
               </article>
+              <div class="social" style="float:right">
+                <div data-easyshare data-easyshare-url="http://www.niigem.net/">
+                  <!-- Total -->
+                  <button data-easyshare-button="total">
+                    <span>Total</span>
+                  </button>
+                  <span data-easyshare-total-count>0</span>
+
+                  <!-- Twitter -->
+                  <button data-easyshare-button="twitter" data-easyshare-tweet-text="{{$post->title}}" style="margin-right:15px;">
+                    <span class="fa fa-twitter"></span>
+                    <span>Tweet</span>
+                  </button>
+
+                  <!-- Facebook -->
+                  <button data-easyshare-button="facebook">
+                    <span class="fa fa-facebook"></span>
+                    <span>Share</span>
+                  </button>
+                  <span data-easyshare-button-count="facebook">0</span>
+
+                  <!-- Google+ -->
+                  <button data-easyshare-button="google">
+                    <span class="fa fa-google-plus"></span>
+                    <span>+1</span>
+                  </button>
+                  <span data-easyshare-button-count="google">0</span>
+
+                  <!-- LinkedIn -->
+                  <button data-easyshare-button="linkedin">
+                    <span class="fa fa-linkedin"></span>
+                  </button>
+                  <span data-easyshare-button-count="linkedin">0</span>
+
+                  <!-- Pinterest -->
+                  <button data-easyshare-button="pinterest">
+                    <span class="fa fa-pinterest-p"></span>
+                  </button>
+                  <span data-easyshare-button-count="pinterest">0</span>
+
+                  <!-- Xing -->
+                  <button data-easyshare-button="xing">
+                    <span class="fa fa-xing"></span>
+                  </button>
+                  <span data-easyshare-button-count="xing">0</span>
+
+                  <div data-easyshare-loader>Loading...</div>
+                </div>
+              </div>
           </div>
           <div class="row">
             <div class="form-area">
@@ -208,6 +243,8 @@
 	<script type='text/javascript' src='/assets/unitegallery/js/ug-carousel.js'></script>
 	<script type='text/javascript' src='/assets/unitegallery/js/ug-api.js'></script>
 
+
+
 	<link rel='stylesheet' href='/assets/unitegallery/css/unite-gallery.css' type='text/css' />
 
 	<script type='text/javascript' src='/assets/unitegallery/themes/default/ug-theme-default.js'></script>
@@ -236,4 +273,30 @@ $(function(){
 
   });
 </script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/dist/jquery.kyco.easyshare.css">
+<script src="/assets/dist/jquery-1.11.3.min.js"></script>
+<script>
+  $.each($('.advanced [data-easyshare-button-count] + [data-easyshare-loader]'), function(i, e) {
+    var el        = $(e);
+    var done      = false;
+    var attr      = el.prev().attr('data-easyshare-button-count')
+    var target    = document.querySelector('.advanced [data-easyshare-button-count="' + attr + '"] + [data-easyshare-loader]');
+    var startDate = new Date().getTime() / 1000;
+    var endDate;
+
+    var observer = new MutationObserver(function(mutations) {
+      if (!done) {
+        done = true;
+        endDate = new Date().getTime() / 1000;
+        el.after('Loaded in roughly ', (endDate - startDate).toFixed(2), 's');
+      }
+    });
+
+    observer.observe(target, {
+      attributes: true
+    });
+  });
+</script>
+<script src="/assets/dist/jquery.kyco.easyshare.js"></script>
 @endsection
