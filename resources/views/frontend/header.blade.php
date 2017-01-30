@@ -66,7 +66,7 @@
                 <div class="col-sm-8 col-md-9">
                     <div class="newsticker-inner" style="padding-right:0px">
 
-                        
+
                         <ul id="weathers" style="float:right;margin-right:30px">
                             <li><i class="fa fa-spinner fa-spin"></i></li>
                         </ul>

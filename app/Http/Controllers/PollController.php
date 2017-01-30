@@ -54,6 +54,7 @@ class PollController extends Controller
       $poll->votes = $poll->votes + 1;
     }
       $poll->save();
+
       return back();
   }
 }

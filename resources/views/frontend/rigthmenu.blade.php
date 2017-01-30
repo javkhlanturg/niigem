@@ -28,4 +28,7 @@
     <span class="add-title">- Сурталчилгаа -</span>
     <a href="{{$add_banner->url}}"><img src="{{$add_banner->bannerpath}}" class="img-responsive center-block" alt=""></a>
   </div>
+  <div class="poll_content">
+
+  </div>
 </div>
