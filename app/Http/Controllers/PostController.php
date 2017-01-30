@@ -33,6 +33,23 @@ class PostController extends Controller
             ->orderBy('created_at', 'DESC')->paginate(6);
         return view("frontend.postlist", ['posts'=>$posts]);
     }
+    public function video(){
+
+      $category = \TCG\Voyager\Models\Category::where('slug', 'video')->first();
+      if(!$category){
+        return view('frontend.404');
+      }
+
+
+      $post_ids = PostCategories::where("cat_id", $category->id)->get();
+      $ids = array();
+      foreach($post_ids as $id){
+        array_push($ids, $id->post_id);
+      }
+      $videos = Post::where('status', '=', 'PUBLISHED')->where("category_id",'=', $category->id)->orWhereIn('id', $ids)->where('status', '=', 'PUBLISHED')
+          ->orderBy('created_at', 'DESC')->paginate(6);
+      return view('frontend.video',['videos'=>$videos]);
+    }
 
     public function post($slug, $postid){
         $category = \TCG\Voyager\Models\Category::where('slug', $slug)->first();
