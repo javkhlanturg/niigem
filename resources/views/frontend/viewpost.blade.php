@@ -29,7 +29,6 @@
     <div class="row">
         <div class="col-sm-8">
             <!--Post list-->
-            <div class="row">
               <article class="content">
                 <h3>{{$post->title}}</h3><br/>
                 {{$post->plusView()}}
@@ -75,16 +74,11 @@
                      data-image="{{$slide->path}}"
                      data-description="">
                  @endforeach
-                </div>
+               </div><br/>
                 @endif
                 {!! $post->body !!}
 
-              </article>
-              <div class="social" style="float:right">
 
-              </div>
-          </div>
-          <div class="row">
             <div class="form-area">
                         <h3 class="category-headding ">Сэтгэгдэл үлдээх</h3>
                         <div class="headding-border"></div>
@@ -112,8 +106,7 @@
                             </div>
                         </form>
                     </div>
-          </div>
-          <div class="row">
+
             <div class="comments-container">
                         <h1>Сэтгэгдэлүүд </h1>
                         <ul id="comments-list" class="comments-list">
@@ -190,7 +183,7 @@
                         </ul>
                     </div>
 
-          </div>
+          </article>
 
         </div>
         @include('frontend.rigthmenu')
