@@ -1,4 +1,11 @@
 @extends('layouts.app')
+@section('meta')
+<meta property="og:url"                content="http://niigem.net/{{$post->category->slug}}/{{$post->id}}" />
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="{{$post->title}}" />
+<meta property="og:description"        content="{{str_limit($post->excerpt, 100)}}" />
+<meta property="og:image"              content="http://niigem.net{{$post->image}}" />
+@endsection
 @section('css')
 <style>
   .menu_active{
@@ -17,12 +24,8 @@
 
 @endsection
 @section('content')
-    <div class="container">
-        <div class="row">
-            &nbsp;
-        </div>
-    </div>
 <div class="container">
+      <div class="row"><br/><br/> </div>
     <div class="row">
         <div class="col-sm-8">
             <!--Post list-->
@@ -43,7 +46,27 @@
                             <li>Нийтэлсэн: <a title="" href="/reporter/{{$post->user['id']}}"><span>{{$post->user['name']}}</span></a> - </li>
                             <li><a title="" href="#"> {{ date('Y оны m-р сарын d', strtotime($post->created_at))}} </a> </li>
                         </ul>
+                        <div style="float:right; text-align:right">
+									<a href="https://www.facebook.com/sharer/sharer.php?u=http://niigem.net/{{$post->category->slug}}/{{$post->id}}" onclick="window.open(this.href, 'mywin',
+													   'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+											   return false;" style="    padding: 0px 15px;
+									   border-radius: 3px;
+									   background-color: #3b5998;
+									   color: #fff; display: inline-block;
+									   margin-top: 5px;"><i class="fa fa-facebook" aria-hidden="true"></i> Нийтэд түгээх</a>
+
+
+									   <a href="http://twitter.com/intent/tweet?text= Олон улсын Монголч эрдэмтэд чуулав http://tuurgatan.mn/c/17&amp;source=webclient" onclick="window.open(this.href, 'mywin',
+													   'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+											   return false;" style="padding: 0px 15px;
+									   border-radius: 3px;
+									   background-color: #1da1f2;
+									   color: #fff;
+									   display: inline-block;
+									   margin-top: 5px;"><i class="fa fa-twitter" aria-hidden="true"></i> Жиргэх</a>
+						</div>
                     </div>
+
                 @if( $post->featured )
                 <div id="gallery" style="display:none;">
                   @foreach($post->sliders() as $slide)
@@ -58,53 +81,7 @@
 
               </article>
               <div class="social" style="float:right">
-                <div data-easyshare data-easyshare-url="http://www.niigem.net/">
-                  <!-- Total -->
-                  <button data-easyshare-button="total">
-                    <span>Total</span>
-                  </button>
-                  <span data-easyshare-total-count>0</span>
 
-                  <!-- Twitter -->
-                  <button data-easyshare-button="twitter" data-easyshare-tweet-text="{{$post->title}}" style="margin-right:15px;">
-                    <span class="fa fa-twitter"></span>
-                    <span>Tweet</span>
-                  </button>
-
-                  <!-- Facebook -->
-                  <button data-easyshare-button="facebook">
-                    <span class="fa fa-facebook"></span>
-                    <span>Share</span>
-                  </button>
-                  <span data-easyshare-button-count="facebook">0</span>
-
-                  <!-- Google+ -->
-                  <button data-easyshare-button="google">
-                    <span class="fa fa-google-plus"></span>
-                    <span>+1</span>
-                  </button>
-                  <span data-easyshare-button-count="google">0</span>
-
-                  <!-- LinkedIn -->
-                  <button data-easyshare-button="linkedin">
-                    <span class="fa fa-linkedin"></span>
-                  </button>
-                  <span data-easyshare-button-count="linkedin">0</span>
-
-                  <!-- Pinterest -->
-                  <button data-easyshare-button="pinterest">
-                    <span class="fa fa-pinterest-p"></span>
-                  </button>
-                  <span data-easyshare-button-count="pinterest">0</span>
-
-                  <!-- Xing -->
-                  <button data-easyshare-button="xing">
-                    <span class="fa fa-xing"></span>
-                  </button>
-                  <span data-easyshare-button-count="xing">0</span>
-
-                  <div data-easyshare-loader>Loading...</div>
-                </div>
               </div>
           </div>
           <div class="row">
@@ -268,35 +245,4 @@ $(function(){
 		});
 
 	</script>
-<script>
-  $(document).ready(function(){
-
-  });
-</script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/assets/dist/jquery.kyco.easyshare.css">
-<script src="/assets/dist/jquery-1.11.3.min.js"></script>
-<script>
-  $.each($('.advanced [data-easyshare-button-count] + [data-easyshare-loader]'), function(i, e) {
-    var el        = $(e);
-    var done      = false;
-    var attr      = el.prev().attr('data-easyshare-button-count')
-    var target    = document.querySelector('.advanced [data-easyshare-button-count="' + attr + '"] + [data-easyshare-loader]');
-    var startDate = new Date().getTime() / 1000;
-    var endDate;
-
-    var observer = new MutationObserver(function(mutations) {
-      if (!done) {
-        done = true;
-        endDate = new Date().getTime() / 1000;
-        el.after('Loaded in roughly ', (endDate - startDate).toFixed(2), 's');
-      }
-    });
-
-    observer.observe(target, {
-      attributes: true
-    });
-  });
-</script>
-<script src="/assets/dist/jquery.kyco.easyshare.js"></script>
 @endsection

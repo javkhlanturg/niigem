@@ -14,6 +14,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
+          @if( Request::segment(1)==='reporter' and isset($posts[0]))
             <h3 style="text-align: center;">НИЙТЭЛСЭН:&nbsp;&nbsp;&nbsp;
               <span style="color:#f60d2b;font-family:'Lato', sans-serif;">
                 @if($posts[0]->user['avatar'])
@@ -23,6 +24,7 @@
                 @endif
                 {{$posts[0]->user['name']}}
               </span> </h3>
+          @endif
         </div>
     </div>
 </div>
