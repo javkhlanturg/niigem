@@ -31,7 +31,7 @@
             <!--Post list-->
             <div class="row">
               <article class="content">
-                <h3>{{$post->title}}</h3>
+                <h3>{{$post->title}}</h3><br/>
                 {{$post->plusView()}}
 
                 <div class="date">
@@ -56,7 +56,7 @@
 									   margin-top: 5px;"><i class="fa fa-facebook" aria-hidden="true"></i> Нийтэд түгээх</a>
 
 
-									   <a href="http://twitter.com/intent/tweet?text= Олон улсын Монголч эрдэмтэд чуулав http://tuurgatan.mn/c/17&amp;source=webclient" onclick="window.open(this.href, 'mywin',
+									   <a href="http://twitter.com/intent/tweet?text= {{$post->title}} http://niigem.net/{{$post->category->slug}}/{{$post->id}}&amp;source=webclient" onclick="window.open(this.href, 'mywin',
 													   'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
 											   return false;" style="padding: 0px 15px;
 									   border-radius: 3px;
