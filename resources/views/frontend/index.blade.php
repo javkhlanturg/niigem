@@ -157,7 +157,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$tur->category['slug']}}/{{$tur->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$tur->image)}}" style="object-fit: cover;">
+                        <img class="img-responsive" height="90" src="{{str_replace('.', '-small.',$tur->image)}}" style="object-fit: cover;max-height:140px">
                       </a>
                     </div>
                   </div>
@@ -186,7 +186,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$zasag->category['slug']}}/{{$zasag->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$zasag->image)}}" style="object-fit: cover;">
+                        <img class="img-responsive" height="90" src="{{str_replace('.', '-small.',$zasag->image)}}" style="object-fit: cover;max-height:140px">
                       </a>
                     </div>
                   </div>
@@ -215,7 +215,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$del->category['slug']}}/{{$del->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$del->image)}}" style="object-fit: cover;">
+                        <img class="img-responsive" height="90" src="{{str_replace('.', '-small.',$del->image)}}" style="object-fit: cover;max-height:140px">
                       </a>
                     </div>
                   </div>
