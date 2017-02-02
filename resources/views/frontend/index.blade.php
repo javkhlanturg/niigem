@@ -12,7 +12,7 @@
             <div class="post-wrapper post-grid-1 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                  <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                  <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -34,7 +34,7 @@
             <div class="post-wrapper post-grid-2 wow fadeIn" data-wow-duration="2s">
               <div class="post-thumb img-zoom-in">
                 <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                  <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                  <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="object-fit: cover;">
                 </a>
               </div>
               <div class="post-info">
@@ -48,7 +48,6 @@
                   <!-- post comment -->
                   <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                   <!-- read more -->
-
                 </div>
               </div>
             </div>
@@ -62,7 +61,7 @@
               <div class="post-wrapper post-grid-3 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                    <img class="entry-thumb-middle" src="{{$top_new->image}}" style="width:519px;height:400px;object-fit: cover;">
+                    <img class="entry-thumb-middle" src="{{$top_new->image}}" style="object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -91,7 +90,7 @@
               <div class="post-wrapper post-grid-4 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                    <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                    <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -116,7 +115,7 @@
               <div class="post-wrapper post-grid-5 wow fadeIn" data-wow-duration="2s">
                 <div class="post-thumb img-zoom-in">
                   <a href="/{{$top_new->category['slug']}}/{{$top_new->id}}">
-                    <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="width:257px;height:199px;object-fit: cover;">
+                    <img class="entry-thumb" src="{{str_replace('.', '-small.',$top_new->image)}}" style="object-fit: cover;">
                   </a>
                 </div>
                 <div class="post-info">
@@ -158,7 +157,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$tur->category['slug']}}/{{$tur->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$tur->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$tur->image)}}" style="object-fit: cover;">
                       </a>
                     </div>
                   </div>
@@ -187,7 +186,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$zasag->category['slug']}}/{{$zasag->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$zasag->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$zasag->image)}}" style="object-fit: cover;">
                       </a>
                     </div>
                   </div>
@@ -216,7 +215,7 @@
                     <!-- image -->
                     <div class="img-thumb">
                       <a href="/{{$del->category['slug']}}/{{$del->id}}">
-                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$del->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="entry-thumb" height="90" src="{{str_replace('.', '-small.',$del->image)}}" style="object-fit: cover;">
                       </a>
                     </div>
                   </div>
@@ -251,7 +250,7 @@
 
                       <a href="/{{$zasag->category['slug']}}/{{$video->id}}" class="video-img-icon">
                         <i class="fa fa-play"></i>
-                        <img class="img-responsive" src="{{str_replace('.', '-small.',$video->image)}}" style="width:214px;height:126px;object-fit: cover;">
+                        <img class="img-responsive" src="{{str_replace('.', '-small.',$video->image)}}" style="object-fit: cover;">
                       </a>
                     </div>
 

@@ -11,11 +11,21 @@
 </style>
 @endsection
 @section('content')
-    <div class="container">
-        <div class="row">
-            &nbsp;
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 style="text-align: center;">НИЙТЭЛСЭН:&nbsp;&nbsp;&nbsp;
+              <span style="color:#f60d2b;font-family:'Lato', sans-serif;">
+                @if($posts[0]->user['avatar'])
+                <img style="display: inherit; height: 25px;width: 25px;border-radius: 50%; object-fit:cover" src="{{$posts[0]->user['avatar']}}" class="img-responsive" alt="">
+                @else
+                  <img style="display: inherit;height: 25px;width: 25px;border-radius: 50%; object-fit:cover"  src="/assets/images/avatar.jpg" class="img-responsive" alt="">
+                @endif
+                {{$posts[0]->user['name']}}
+              </span> </h3>
         </div>
     </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
