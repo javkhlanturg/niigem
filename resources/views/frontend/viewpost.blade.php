@@ -4,7 +4,7 @@
 <meta property="og:type"               content="article" />
 <meta property="og:title"              content="{{$post->title}}" />
 <meta property="og:description"        content="{{str_limit($post->excerpt, 100)}}" />
-<meta property="og:image"              content="http://niigem.net{{$post->image}}" />
+<meta property="og:image"              content="http://niigem.net{{str_replace('.', '-medium.',$post->image)}}" />
 @endsection
 @section('css')
 <style>

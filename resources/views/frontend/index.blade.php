@@ -151,11 +151,11 @@
 
             <div class="row rn_block">
               @foreach($uls_turs as $tur)
-              <div class="col-md-4 col-sm-4 padd">
+              <div class="col-md-4 col-sm-6 col-xs-12 padd">
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="img-thumb">
+                    <div class="post-thumb">
                       <a href="/{{$tur->category['slug']}}/{{$tur->id}}">
                         <img class="img-responsive" height="90" src="{{str_replace('.', '-small.',$tur->image)}}" style="object-fit: cover;max-height:140px">
                       </a>
@@ -180,11 +180,11 @@
             <div class="headding-border"></div>
             <div class="row rn_block">
               @foreach($zasags as $zasag)
-              <div class="col-md-4 col-sm-4 padd">
+              <div class="col-md-4 col-sm-6 col-xs-12 padd">
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="img-thumb">
+                    <div class="post-thumb">
                       <a href="/{{$zasag->category['slug']}}/{{$zasag->id}}">
                         <img class="img-responsive" height="90" src="{{str_replace('.', '-small.',$zasag->image)}}" style="object-fit: cover;max-height:140px">
                       </a>
@@ -209,11 +209,11 @@
             <div class="headding-border"></div>
             <div class="row rn_block">
               @foreach($delhiis as $del)
-              <div class="col-md-4 col-sm-4 padd">
+              <div class="col-md-4 col-sm-6 col-xs-12 padd">
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
-                    <div class="img-thumb">
+                    <div class="post-thumb">
                       <a href="/{{$del->category['slug']}}/{{$del->id}}">
                         <img class="img-responsive" height="90" src="{{str_replace('.', '-small.',$del->image)}}" style="object-fit: cover;max-height:140px">
                       </a>
@@ -242,7 +242,7 @@
             <div class="headding-border"></div>
             <div class="row rn_block">
               @foreach($videos as $video)
-              <div class="col-md-4 col-sm-4 padd">
+              <div class="col-md-4 col-sm-6 col-xs-12 padd">
                 <div class="home2-post">
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                     <!-- image -->
