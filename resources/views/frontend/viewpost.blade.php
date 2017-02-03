@@ -47,15 +47,7 @@
                             <li><a title="" href="#"> {{ date('Y оны m-р сарын d', strtotime($post->created_at))}} </a> </li>
                         </ul>
                         <div style="float:right; text-align:right"><div class="fb-share-button" data-href="http://niigem.net/{{$post->category->slug}}/{{$post->id}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">  </a></div>
-
-									   <a href="http://twitter.com/intent/tweet?text= {{$post->title}} http://niigem.net/{{$post->category->slug}}/{{$post->id}}&amp;source=webclient" onclick="window.open(this.href, 'mywin',
-													   'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
-											   return false;" style="padding: 0px 15px;
-									   border-radius: 3px;
-									   background-color: #1da1f2;
-									   color: #fff;
-									   display: inline-block;
-									   margin-top: 5px;"><i class="fa fa-twitter" aria-hidden="true"></i> Жиргэх</a>
+                        <a href="http://twitter.com/intent/tweet?text= {{$post->title}}  source=webclient"  class="twitter-share-button" data-size="large" data-show-count="false"> </a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 						</div>
                     </div>
 
