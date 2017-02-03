@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('meta')
+<title>Мэдээ, Мэдээллийн Үндэсний портал</title>
+@endsection
 @section('css')
 <style>
   .menu_active{

@@ -1,10 +1,11 @@
 @extends('layouts.app')
 @section('meta')
-<meta property="og:url"                content="http://niigem.net/{{$post->category->slug}}/{{$post->id}}" />
-<meta property="og:type"               content="article" />
-<meta property="og:title"              content="{{$post->title}}" />
-<meta property="og:description"        content="{{str_limit($post->excerpt, 100)}}" />
-<meta property="og:image"              content="http://niigem.net{{str_replace('.', '-medium.',$post->image)}}" />
+<meta property="fb:app_id" content="1835091203437157" />
+<meta property="og:url" content="http://niigem.net/{{$post->category->slug}}/{{$post->id}}" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{$post->title}}" />
+<meta property="og:description" content="{{str_limit($post->excerpt, 100)}}" />
+<meta property="og:image" content="http://niigem.net{{str_replace('.', '-small.',$post->image)}}" />
 @endsection
 @section('css')
 <style>
@@ -45,15 +46,7 @@
                             <li>Нийтэлсэн: <a title="" href="/reporter/{{$post->user['id']}}"><span>{{$post->user['name']}}</span></a> - </li>
                             <li><a title="" href="#"> {{ date('Y оны m-р сарын d', strtotime($post->created_at))}} </a> </li>
                         </ul>
-                        <div style="float:right; text-align:right">
-									<a href="https://www.facebook.com/sharer/sharer.php?u=http://niigem.net/{{$post->category->slug}}/{{$post->id}}" onclick="window.open(this.href, 'mywin',
-													   'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
-											   return false;" style="    padding: 0px 15px;
-									   border-radius: 3px;
-									   background-color: #3b5998;
-									   color: #fff; display: inline-block;
-									   margin-top: 5px;"><i class="fa fa-facebook" aria-hidden="true"></i> Нийтэд түгээх</a>
-
+                        <div style="float:right; text-align:right"><div class="fb-share-button" data-href="http://niigem.net/{{$post->category->slug}}/{{$post->id}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">  </a></div>
 
 									   <a href="http://twitter.com/intent/tweet?text= {{$post->title}} http://niigem.net/{{$post->category->slug}}/{{$post->id}}&amp;source=webclient" onclick="window.open(this.href, 'mywin',
 													   'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
@@ -213,12 +206,18 @@
 	<script type='text/javascript' src='/assets/unitegallery/js/ug-carousel.js'></script>
 	<script type='text/javascript' src='/assets/unitegallery/js/ug-api.js'></script>
 
-
-
 	<link rel='stylesheet' href='/assets/unitegallery/css/unite-gallery.css' type='text/css' />
 
 	<script type='text/javascript' src='/assets/unitegallery/themes/default/ug-theme-default.js'></script>
-	<link rel='stylesheet' 		  href='/assets/unitegallery/themes/default/ug-theme-default.css' type='text/css' />
+	<link rel='stylesheet' href='/assets/unitegallery/themes/default/ug-theme-default.css' type='text/css' />
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/mn_MN/sdk.js#xfbml=1&version=v2.8&appId=1835091203437157";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <script>
 $(function(){
     $(".reply_btn").click(function () {
