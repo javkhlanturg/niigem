@@ -50,6 +50,23 @@ class PostController extends Controller
           ->orderBy('created_at', 'DESC')->paginate(6);
       return view('frontend.video',['videos'=>$videos]);
     }
+    public function photo(){
+
+      $category = \TCG\Voyager\Models\Category::where('slug', 'photo')->first();
+      if(!$category){
+        return view('frontend.404');
+      }
+
+
+      $post_ids = PostCategories::where("cat_id", $category->id)->get();
+      $ids = array();
+      foreach($post_ids as $id){
+        array_push($ids, $id->post_id);
+      }
+      $photos = Post::where('status', '=', 'PUBLISHED')->where("category_id",'=', $category->id)->orWhereIn('id', $ids)->where('status', '=', 'PUBLISHED')
+          ->orderBy('created_at', 'DESC')->paginate(6);
+      return view('frontend.photo',['photos'=>$photos]);
+    }
 
     public function post($slug, $postid){
         $category = \TCG\Voyager\Models\Category::where('slug', $slug)->first();
