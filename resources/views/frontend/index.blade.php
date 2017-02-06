@@ -23,10 +23,11 @@
                   <div class="post-date">
                     <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                   </div>
+                  @if($top_new->showcomment)
                   <!-- post comment -->
                   <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                   <!-- read more -->
-
+                  @endif
                 </div>
               </div>
             </div>
@@ -45,9 +46,11 @@
                   <div class="post-date">
                     <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                   </div>
+                  @if($top_new->showcomment)
                   <!-- post comment -->
                   <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                   <!-- read more -->
+                  @endif
                 </div>
               </div>
             </div>
@@ -72,9 +75,11 @@
                     <div class="post-date">
                       <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                     </div>
+                    @if($top_new->showcomment)
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
+                    @endif
 
                   </div>
                 </div>
@@ -101,10 +106,11 @@
                     <div class="post-date">
                       <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                     </div>
+                    @if($top_new->showcomment)
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-
+                    @endif
                   </div>
                 </div>
               </div>
@@ -126,10 +132,11 @@
                     <div class="post-date">
                       <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($top_new->created_at)) }}
                     </div>
+                    @if($top_new->showcomment)
                     <!-- post comment -->
                     <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$top_new->commentCount()}} </div>
                     <!-- read more -->
-
+                    @endif
                   </div>
                 </div>
               </div>
