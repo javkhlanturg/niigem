@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Swap;
 use \TCG\Voyager\Models\Post;
+use App\PollQuestion;
+use App\PollAnswer;
 
 class HomeController extends Controller
 {
+
   public function index(){
     $top_news = \TCG\Voyager\Models\Post::where('category_id', '10')->orderBy('created_at', 'desc')->get();
     $uls_turs =  \TCG\Voyager\Models\Post::where('category_id', '4')->orderBy('created_at', 'desc')->limit('3')->get();
@@ -27,6 +30,18 @@ class HomeController extends Controller
     ->with('videos',$videos)
     ->with('newss',$newss);
   }
+  public function store(Request $request)
+ {
+     $id = $request->input('id');
+     $answer = $request->input('answer');
+     $poll = PollAnswer::where('poll_question_id',$id)->where('id',$answer)->first();
+     if($poll){
+     $poll->votes = $poll->votes + 1;
+   }
+     $poll->save();
+
+     return back();
+ }
 
   public function action(Request $request){
     switch ($request->input('action')) {
@@ -37,6 +52,15 @@ class HomeController extends Controller
         # code...
         break;
     }
+  }
+  public function actionNews(){
+    $topnews = Post::where('status', 'PUBLISHED')->orderBy('created_at', 'desc')->limit('15')->get();
+    $topnews_html = view('frontend.actionitem', ['posts'=>$topnews])->render();
+    $mostviewed = Post::where('status', 'PUBLISHED')->orderBy('viewcount', 'desc')->limit('15')->get();
+    $mostviewed_html = view('frontend.actionitem', ['posts'=>$mostviewed])->render();
+    $question = PollQuestion::latest()->first();
+    $question_html = view('frontend.poll', ['question'=>$question])->render();
+    return response()->json(array('mostviewed'=>$mostviewed_html, 'topnews'=>$topnews_html,'question'=>$question_html));
   }
 
   public function callWeather($request){
@@ -69,13 +93,8 @@ class HomeController extends Controller
      //<li><span class="color-1"><img src="/../assets/flag/usd.png" style='height: 16px;'/> USD:</span>УБ: ".$weather." </li>
   }
 
-  public function actionNews(){
-    $topnews = Post::where('status', 'PUBLISHED')->orderBy('created_at', 'desc')->limit('4')->get();
-    $topnews_html = view('frontend.actionitem', ['posts'=>$topnews])->render();
-    $mostviewed = Post::where('status', 'PUBLISHED')->orderBy('viewcount', 'desc')->limit('4')->get();
-    $mostviewed_html = view('frontend.actionitem', ['posts'=>$mostviewed])->render();
-    return response()->json(array('mostviewed'=>$mostviewed_html, 'topnews'=>$topnews_html));
-  }
+
+
 
   function object2array($object) { return @json_decode(@json_encode($object),1); }
 

@@ -13,12 +13,11 @@
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-Route::get('/polls','PollController@index');
 Route::get('/video','PostController@video');
 Route::get('/photo','PostController@photo');
 Route::post('/action/home','HomeController@action');
 Route::get('/reporter/{userid}', 'PostController@reportList');
-Route::post('/submit_poll','PollController@store')->name('addPoll');
+Route::post('/submit_poll','HomeController@store')->name('addPoll');
 Route::post('/comment','CommentController@addComment')->name('addComment');
 Route::post('/replycomment','CommentController@replyComment')->name('replyComment');
 Route::get('/','HomeController@index');

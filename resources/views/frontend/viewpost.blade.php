@@ -64,36 +64,28 @@
                 {!! $post->body !!}
 
 
-            <div class="form-area">
-                        <h3 class="category-headding ">Сэтгэгдэл үлдээх</h3>
-                        <div class="headding-border"></div>
-                        <form action="{{route('addComment')}}" method="post">
-                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          <input type="hidden" name="postid" value="{{ $post->id }}">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span class="input">
-                                            <input class="input_field" type="text" name="username" id="input-1">
-                                            <label class="input_label" for="input-1">
-                                                <span class="input_label_content" data-content="Та энэ хэсэгт нэрээ оруулна уу">Нэр</span>
-                                    </label>
-                                    </span>
-                                </div>
-                                <div class="col-sm-12">
-                                    <span class="input">
-                                            <textarea class="input_field" name="comment" id="message"></textarea>
-                                            <label class="input_label" for="message">
-                                                <span class="input_label_content" data-content="Сэтгэгдэлээ оруулна уу">Сэтгэгдэл</span>
-                                    </label>
-                                    </span>
-                                    <button type="submit" class="btn btn-style">Сэтгэгдэл үлдээх</button>
-                                </div>
-                            </div>
-                        </form>
+                <div class="form-area">
+                  <h3 class="category-headding ">Сэтгэгдэл үлдээх</h3>
+                  <div class="headding-border"></div>
+                  <form action="{{route('addComment')}}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="postid" value="{{ $post->id }}">
+                    <div class="row">
+                      <div class="comment_comment" >
+                      <textarea class="input_field" placeholder="Сэтгэгдлээ энд бичнэ үү" style="float:left;margin-left:25px;width:670px; height: 58px;margin-right:15px;" name="comment" id="message"></textarea>
+                        </div>
+                      <div class="comment_name">
+                          <input class="input_field" type="text" placeholder="Нэрээ энд бичнэ үү" style="float:left;margin-left:25px;width:500px; height: 24px;margin-top: 10px;margin-right:15px; margin-bottom: 15px;" name="username" id="input-1">
+                      </div>
+                      <button type="submit" style="float:right; margin-top:10px;margin-right:15px;color: #FFF;background-color: #f60d2b;
+                        border: 2px solid #f60d2b;">Сэтгэгдэл үлдээх</button>
                     </div>
 
+                  </form>
+                </div>
+
             <div class="comments-container">
-                        <h1>Сэтгэгдэлүүд </h1>
+                        <h4>Сэтгэгдэлүүд </h4>
                         <ul id="comments-list" class="comments-list">
                           @foreach($comments as $comment)
                             <li>
@@ -105,7 +97,12 @@
                                     <!-- Contenedor del Comentario -->
                                     <div class="comment-box">
                                         <div class="comment-head">
+                                          @if($comment->username == NULL)
+                                            <h6 class="comment-name"><a href="#">Зочин</a></h6>
+                                          @else
                                             <h6 class="comment-name"><a href="#">{{$comment->username}}</a></h6>
+                                          @endif
+
                                             <span>{{date('M.d.Y', strtotime($comment->created_at))}}</span>
                                               <i class="reply_btn fa fa-reply"> Хариулах</i>
                                         </div>
@@ -118,24 +115,16 @@
                                           <input type="hidden" name="postid" value="{{ $post->id }}">
                                           <input type="hidden" name="replyid" value="{{ $comment->id }}">
                                             <div class="row">
-                                                <div class="col-sm-6">
-                                                    <span class="input">
-                                                            <input class="input_field" type="text" name="username" id="input-1">
-                                                            <label class="input_label" for="input-1">
-                                                                <span class="input_label_content" data-content="Та энэ хэсэгт нэрээ оруулна уу">Нэр</span>
-                                                    </label>
-                                                    </span>
+                                              <div class="comment_comment" >
+                                              <textarea class="input_field" placeholder="Сэтгэгдлээ энд бичнэ үү" style="float:left;width:516px; height: 58px;margin-right:15px;" name="comment" id="message"></textarea>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <span class="input">
-                                                            <textarea class="input_field" name="comment" id="message"></textarea>
-                                                            <label class="input_label" for="message">
-                                                                <span class="input_label_content" data-content="Сэтгэгдэлээ оруулна уу">Сэтгэгдэл</span>
-                                                    </label>
-                                                    </span>
-                                                    <button type="submit" class="btn btn-style">Сэтгэгдэл үлдээх</button>
-                                                    <button type="button" class="btn btn-style cancel_btn" style="float: right;">хаах</button>
-                                                </div>
+                                              <div class="comment_name">
+                                                  <input class="input_field" type="text" placeholder="Нэрээ энд бичнэ үү" style="float:left;width:280px; height: 24px;margin-top: 10px;margin-right:15px; margin-bottom: 15px;" name="username" id="input-1">
+                                              </div>
+                                              <button type="submit" style="float:right; margin-top:10px; color: #FFF;background-color: #f60d2b;
+                                                border: 2px solid #f60d2b;margin-right:15px;margin-left:10px">Сэтгэгдэл үлдээх</button>
+                                                <button type="button" class="cancel_btn" style="float:right; margin-top:10px; color: #FFF;background-color: #f60d2b;
+                                                  border: 2px solid #f60d2b;">хаах</button>
                                             </div>
                                         </form>
 

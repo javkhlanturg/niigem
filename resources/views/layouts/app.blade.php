@@ -32,6 +32,7 @@
     <style>
     .dropdown:hover{display: block;}
     </style>
+
     @yield('css')
 </head>
 
@@ -89,9 +90,13 @@
     $.post("/action/home",{ action:'actionews', _token:"{{ csrf_token() }}" }, function(data){
          $('#topnews').html(data.topnews);
          $('#mostviewed').html(data.mostviewed);
+         $('#question').html(data.question);
+
     });
+
   });
     </script>
+
 </body>
 
 </html>
