@@ -316,9 +316,9 @@ if it's not present, don't show loader */
 
 .category-headding {
     margin-top: 0px;
-    font-size: 16px;
+    font-size: 13px;
     color: rgb(34, 34, 34);
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-family: 'Lato', sans-serif;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -359,8 +359,6 @@ if it's not present, don't show loader */
     background-color: #f60d2b;
     border: 2px solid #f60d2b;
     border-radius: 30px;
-    font-weight: 700;
-    padding: 8px 25px;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -2661,7 +2659,7 @@ textarea.input_field {
 }
 
 .comments-list {
-    margin-top: 30px;
+    margin-top: 20px;
     position: relative;
 }
 

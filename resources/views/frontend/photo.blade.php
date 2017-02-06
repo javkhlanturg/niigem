@@ -26,8 +26,8 @@
                   <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                       <!-- post image -->
 
-                      <a href="/{{$photo->category->slug}}/{{$photo->id}}">
-
+                      <a href="/{{$photo->category->slug}}/{{$photo->id}}" class="video-img-icon">
+                        <i class="fa fa-picture-o"></i>
                         @if($photo->image and file_exists(public_path().$photo->image))
                         <img src="{{str_replace('.', '-medium.',$photo->image)}}" style="max-width:326px;height: 179px;object-fit: cover;" alt="">
                         @else
@@ -50,8 +50,8 @@
                 <div class="post-style1">
                     <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                         <!-- post image -->
-                        <a href="/{{$photo->category->slug}}/{{$photo->id}}" class="">
-                          
+                        <a href="/{{$photo->category->slug}}/{{$photo->id}}" class="video-img-icon">
+                          <i class="fa fa-picture-o"></i>
                           @if($photo->image and file_exists(public_path().$photo->image))
                           <img src="{{str_replace('.', '-medium.',$photo->image)}}" style="max-width:326px;height: 179px;object-fit: cover;" alt="">
                           @else
