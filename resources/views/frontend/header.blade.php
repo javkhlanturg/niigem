@@ -15,20 +15,32 @@
                         </div>
                         <!-- /input-group -->
                     </li>
+                    {!!Menu::display('site_menu', 'mobile_menu')!!}
                 </ul>
             </div>
         </nav>
         <div class="container">
             <div class="top_header_icon">
+
+
+            @if(Voyager::setting('twitter'))
                 <span class="top_header_icon_wrap">
-                      <a target="_blank" href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                      <a target="_blank" href="{{Voyager::setting('twitter')}}" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </span>
+            @endif
+
+            @if(Voyager::setting('facebook'))
                 <span class="top_header_icon_wrap">
-                        <a target="_blank" href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
-                    </span>
+                      <a target="_blank" href="{{Voyager::setting('facebook')}}" title="Facebook"><i class="fa fa-facebook"></i></a>
+                </span>
+            @endif
+
+            @if(Voyager::setting('googleplus'))
                 <span class="top_header_icon_wrap">
-                        <a target="_blank" href="#" title="Google"><i class="fa fa-google-plus"></i></a>
-                  </span>
+                      <a target="_blank" href="{{Voyager::setting('googleplus')}}" title="Google"><i class="fa fa-google-plus"></i></a>
+                </span>
+            @endif
+            
             </div>
             <div id="showLeft" class="nav-icon">
                 <span></span>

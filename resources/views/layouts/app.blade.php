@@ -58,11 +58,6 @@
     <script type="text/javascript" src="/assets/js/custom.js"></script>
     <script type="text/javascript" src="/assets/js/jquery.slimscroll.js"></script>
     <script type="text/javascript" src="/assets/js/jquery.slimscroll.min.js"></script>
-      <script type="text/javascript">
-    	$('.scrolled').slimScroll({
-    	  height: '400px'
-    	});
-      </script>
     @yield('javascript')
     <script>
     $(document).ready(function(){
@@ -93,6 +88,10 @@
          $('#question').html(data.question);
 
     });
+
+    $('.scrolled').slimScroll({
+          height: '400px'
+        });
 
   });
     </script>

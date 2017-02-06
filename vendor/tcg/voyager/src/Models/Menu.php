@@ -65,10 +65,58 @@ class Menu extends Model
                 return self::buildBootstrapOutput($menuItems, '', $options, request());
             case 'site_menu':
               return self::buildSitemMenu($menuItems, '', $options);
+            case 'mobile_menu':
+              return self::buildMobileMenu($menuItems, '', $options);
         }
 
         return empty($type) ? self::buildOutput($menuItems, '', $options,
             request()) : self::buildCustomOutput($menuItems, $type, $options, request());
+    }
+
+    public static function buildMobileMenu($menuItems, $output, $options, $child = null, $parent = 0){
+      if (!$child) {
+          $parentItems = $menuItems->filter(function ($value, $key) {
+              return $value->parent_id == null;
+          });
+      } else {
+          $parentItems = $menuItems->filter(function ($value, $key) use ($child) {
+              return $value->parent_id == $child;
+          });
+      }
+
+      $parentItems = $parentItems->sortBy('order');
+
+      foreach ($parentItems as $item) {
+          $children_menu_items = $menuItems->filter(function ($value, $key) use ($item) {
+              return $value->parent_id == $item->id;
+          });
+          if ($children_menu_items->count() > 0) {
+              if($parent === 0){
+
+                $output .= '<li>
+                            <a href="#">'.Str::upper($item->title).' <span class="fa arrow"></span></a>
+                              <ul class="nav nav-second-level">';
+              }else{
+                $output .= '<li>
+                            <a href="#">'.Str::upper($item->title).' <span class="fa arrow"></span></a>
+                              <ul class="nav nav-third-level">';
+              }
+
+              $output = self::buildSitemMenu($menuItems, $output, $options, $item->id, $parent+1);
+                $output .= '</ul>';
+              $output .= '</li>';
+          }else{
+            if($parent === 0){
+              $output .= '<li><a href="'.$item->url.'">'.Str::upper($item->title).'</a></li>';
+            }else{
+              $output .= '<li><a href="'.$item->url.'">'.Str::upper($item->title).'</a></li>';
+            }
+          }
+
+      }
+
+      return $output;
+
     }
 
     public static function buildSitemMenu($menuItems, $output, $options, $child = null, $parent = 0){
