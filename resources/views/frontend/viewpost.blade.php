@@ -5,7 +5,8 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content="{{$post->title}}" />
 <meta property="og:description" content="{{str_limit($post->excerpt, 100)}}" />
-<meta property="og:image" content="http://niigem.net{{str_replace('.', '-small.',$post->image)}}" />
+<meta property="og:image" content="http://niigem.net{{str_replace('.', '-medium.',$post->image)}}" />
+<meta property="og:image:url" content="http://niigem.net{{str_replace('.', '-medium.',$post->image)}}" />
 @endsection
 @section('css')
 <style>
@@ -63,7 +64,7 @@
                 @endif
                 {!! $post->body !!}
 
-
+         @if( $post->showcomment )     
             <div class="form-area">
                         <h3 class="category-headding ">Сэтгэгдэл үлдээх</h3>
                         <div class="headding-border"></div>
@@ -167,7 +168,7 @@
                             @endforeach
                         </ul>
                     </div>
-
+          @endif
           </article>
 
         </div>
@@ -211,22 +212,17 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <script>
-$(function(){
+
+  $(function(){
+    @if( $post->showcomment )
     $(".reply_btn").click(function () {
       $(this).parent().parent().children('.reply-form').show();
     });
     $(".cancel_btn").click(function(){
       $(this).parent().parent().hide();
     });
+
+  @endif
+  jQuery("#gallery").unitegallery();
 });
-</script>
-<script type="text/javascript">
-
-		jQuery(document).ready(function(){
-
-			jQuery("#gallery").unitegallery();
-
-		});
-
-	</script>
 @endsection

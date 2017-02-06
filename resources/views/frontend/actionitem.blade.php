@@ -17,7 +17,9 @@
         <i class="pe-7s-clock"></i> {{ date('Y.m.d', strtotime($news->created_at)) }}
       </div>
       <!-- post comment -->
+      @if($news->showcomment)
       <div class="post-author-comment"><i class="pe-7s-comment"></i> {{$news->commentCount()}} </div>
+      @endif
     </div>
   </div>
 </div>

@@ -195,6 +195,12 @@
                                     <option value="DRAFT" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT'){{ 'selected="selected"' }}@endif>драфт</option>
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="name">Сэтгэгдэл</label>
+                                <div class="checkbox"> <label> <input  type="checkbox" id="showcomment" name="showcomment" @if(isset($dataTypeContent->showcomment) && $dataTypeContent->showcomment){{ 'checked="checked"' }}@endif > Сэтгэгдэл үлдээх эсэх  </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="name">Үндсэн категори</label>
                                 <select class="form-control" name="category_id">

@@ -52,8 +52,10 @@
                                 <img src="/assets/images/avatar.jpg" class="img-responsive" alt=""></li>
                               @endif
                             <li style="font-family:'Lato', sans-serif;">Нийтэлсэн <a title="" href="/reporter/{{$item->user['id']}}"><span>{{$item->user['name']}}</span></a> --</li>
-                            <li><a title="" href="#">{{date('Y.m.d', strtotime($item->created_at))}}</a> --</li>
-                            <li><a title="" href="#"><span>{{$item->commentCount()}} сэтгэгдэлтэй</span></a></li>
+                            <li><a title="" href="#">{{date('Y.m.d', strtotime($item->created_at))}}</a></li>
+                            @if($item->showcomment)
+                            <li> -- <a title="" href="#"><span>{{$item->commentCount()}} сэтгэгдэлтэй</span></a></li>
+                            @endif
                         </ul>
                     </div>
                     <p>{{str_limit($item->excerpt, 100)}}</p>
